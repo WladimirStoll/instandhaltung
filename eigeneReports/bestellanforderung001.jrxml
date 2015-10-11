@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report001" language="java" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[select
+ba.id ba_id,
+ba.erstellungsdatum ba_erstellungsdatum,
+ba.status ba_status,
+ba.fk_herstellerLieferant ba_fk_herstellerLieferant ,
+ba.fk_benutzerAbsender ba_fk_benutzerAbsender,
+ba.fk_benutzerAnnehmer ba_fk_benutzerAnnehmer,
+ba.email_ba_empfaenger ba_email_ba_empfaenger,
+pos.id pos_id,
+pos.fk_bestellanforderung pos_fk_bestellanforderung,
+pos.fk_artikel pos_fk_artikel,
+pos.bestellmenge pos_bestellmenge,
+pos.liefertermin pos_liefertermin,
+pos.status pos_status,
+pos.fk_kostenstelle pos_fk_kostenstelle,
+pos.fk_mengeneinheit pos_fk_mengeneinheit,
+pos.fk_katalog pos_fk_katalog,
+pos.lieferantenbestellnummer pos_lieferantenbestellnummer,
+pos.katalogseite pos_katalogseite,
+pos.katalogpreis pos_katalogpreis
+
+from bestellanforderung ba, bestellanforderungsposition pos
+where ba.id = pos.fk_bestellanforderung]]>
+	</queryString>
+	<field name="ba_id" class="java.lang.Long"/>
+	<field name="ba_erstellungsdatum" class="java.sql.Timestamp"/>
+	<field name="ba_status" class="java.lang.String"/>
+	<field name="ba_fk_herstellerLieferant" class="java.lang.Long"/>
+	<field name="ba_fk_benutzerAbsender" class="java.lang.Long"/>
+	<field name="ba_fk_benutzerAnnehmer" class="java.lang.Long"/>
+	<field name="ba_email_ba_empfaenger" class="java.lang.String"/>
+	<field name="pos_id" class="java.lang.Long"/>
+	<field name="pos_fk_bestellanforderung" class="java.lang.Long"/>
+	<field name="pos_fk_artikel" class="java.lang.Long"/>
+	<field name="pos_bestellmenge" class="java.lang.Long"/>
+	<field name="pos_liefertermin" class="java.lang.Long"/>
+	<field name="pos_status" class="java.lang.String"/>
+	<field name="pos_fk_kostenstelle" class="java.lang.Long"/>
+	<field name="pos_fk_mengeneinheit" class="java.lang.Long"/>
+	<field name="pos_fk_katalog" class="java.lang.Long"/>
+	<field name="pos_lieferantenbestellnummer" class="java.lang.String"/>
+	<field name="pos_katalogseite" class="java.lang.String"/>
+	<field name="pos_katalogpreis" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="92" y="17" width="351" height="43"/>
+				<textElement>
+					<font size="24"/>
+				</textElement>
+				<text><![CDATA[Report]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="100" height="23"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{ba_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="100" y="0" width="100" height="24"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{ba_status}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="555" height="1"/>
+			</line>
+			<textField>
+				<reportElement x="200" y="0" width="303" height="24"/>
+				<textElement/>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[$F{ba_erstellungsdatum}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

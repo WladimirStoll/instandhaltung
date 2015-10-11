@@ -1,0 +1,14 @@
+hostname=localhost
+port=3306
+dbname=lager
+user=lager
+password=lager
+dbtreiber=com.mysql.jdbc.Driver
+characterEncoding=utf-8
+autoReconnect=false
+zeroDateTimeBehavior=convertToNull
+lagerEmailSuperUser=_eugen_schmidt3@freenet.de
+
+lizenzSatz=Ja, ich bin FC Bayern-Fan!!!
+lizenzSatz_=Ja, ich hasse Fußball!
+lizenzSatz_=

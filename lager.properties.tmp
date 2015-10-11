@@ -1,0 +1,27 @@
+hostname=localhost
+hostname_PROD=192.168.19.131
+hostname_home=192.168.0.193
+hostname_dyndns=lagerkeg.dyndns-server.com
+hostname_WS=192.168.0.100
+hostname_localhost=localhost
+port=3306
+dbname=lager
+user=lager
+password=lager
+dbtreiber=com.mysql.jdbc.Driver
+characterEncoding=utf-8
+autoReconnect=false
+zeroDateTimeBehavior=convertToNull
+
+lagerEmailSuperUser=eugen_schmidt3@freenet.de
+lagerEmailSuperUser_thurner=thurner@ke-ag.de
+lagerEmailSuperUser_wlad=wladimir.stoll@gmx.de
+lagerKegGmxPassword=lagereugen
+lagerKegGmxUser=lagerkeg@gmx.de
+mail_mail_smtp_host=mail.gmx.net
+mail_mail_smtp_port=25
+mail_mail_smtp_auth=true
+mail_session_transport=smtp
+
+lizenzSatz=Ja, ich bin FC Bayern-Fan!!!
+lizenzSatz_=

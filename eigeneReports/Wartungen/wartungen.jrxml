@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="wartungen" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="220"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="bericht_id" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["378"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="termin_von" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["01.01.1904"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="termin_bis" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["10.10.2099"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="title" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["Wartungen"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="user" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["Musteruser"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="druckdatum" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["28.08.2011"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bemerkung" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["keine Bemerkung"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+
+beschreibung,
+fk_bericht_id,
+id,
+baugruppe,
+baugruppe_uebergeordnet,
+status, mitarbeiter,
+artikel,
+termin_soll,
+termin_ist,
+art_typ
+
+from bericht_wartung
+
+where bericht_wartung.fk_bericht_id = cast('$P!{bericht_id}' as UNSIGNED INTEGER)
+
+order by termin_ist, termin_soll]]>
+	</queryString>
+	<field name="beschreibung" class="java.lang.String"/>
+	<field name="fk_bericht_id" class="java.lang.Long"/>
+	<field name="id" class="java.lang.Long"/>
+	<field name="baugruppe" class="java.lang.String"/>
+	<field name="baugruppe_uebergeordnet" class="java.lang.String"/>
+	<field name="status" class="java.lang.String"/>
+	<field name="mitarbeiter" class="java.lang.String"/>
+	<field name="artikel" class="java.lang.String"/>
+	<field name="termin_soll" class="java.sql.Timestamp"/>
+	<field name="termin_ist" class="java.sql.Timestamp"/>
+	<field name="art_typ" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="59" splitType="Stretch">
+			<textField>
+				<reportElement x="176" y="0" width="438" height="28"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{title}.toString()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="38" width="232" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Von-Bis:"+ $P{termin_von} + "-" + $P{termin_bis}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="232" y="38" width="400" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Druck-ID:" + $P{bericht_id} + ", Benutzer:" +$P{user}+  ", Druckdatum:"+$P{druckdatum}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="7" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="21" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="126" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Art / Typ / Beschreibung]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="1" width="92" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Baugruppe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="249" y="1" width="112" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Übergeord. Baugruppe]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="374" y="0" width="72" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Status]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="446" y="0" width="89" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Mitarbeiter / Firma]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="545" y="0" width="135" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Artikel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="680" y="0" width="61" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Termin Soll]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="741" y="0" width="61" height="20"/>
+				<textElement>
+					<font isBold="true" isUnderline="false"/>
+				</textElement>
+				<text><![CDATA[Termin Ist]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="126" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{art_typ} + "/\n" + $F{beschreibung}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="140" y="0" width="92" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{baugruppe}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="249" y="0" width="112" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{baugruppe_uebergeordnet}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="374" y="0" width="72" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{status}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="446" y="0" width="89" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{mitarbeiter}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="545" y="0" width="125" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{artikel}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd.MM.yyyy" isBlankWhenNull="true">
+				<reportElement x="680" y="0" width="61" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[( $F{status}.equals("Offen") ? $F{termin_soll}  : null )]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd.MM.yyyy" isBlankWhenNull="true">
+				<reportElement x="741" y="0" width="61" height="20"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression class="java.sql.Timestamp"><![CDATA[( !$F{status}.equals("Offen") ? $F{termin_ist}  : null )]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="0" width="796" height="1"/>
+				<graphicElement>
+					<pen lineStyle="Dotted"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="4" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="4" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="17" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="796" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Ende der Liste " + $P{title}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
