@@ -1,0 +1,321 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="InventurListe01" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="title" class="java.lang.String" isForPrompting="false">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+		<defaultValueExpression><![CDATA["Inventurliste"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bericht_id" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["88"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="user" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["Benutzer unbekannt"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="druckdatum" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["01.01.1900"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="bemerkung" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["..."]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mit_mengen" class="java.lang.String">
+		<parameterDescription><![CDATA[Mengen-Feld wird in abhängkeit von diesem Parameter entweder gedruckt (wenn J) oder nicht gedruckt (wenn "N")]]></parameterDescription>
+		<defaultValueExpression><![CDATA[new String("J")]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+  h.id as halle_id,
+  h.nummer as halle_nummer,
+  h.fk_bericht_id as halle_fk_bericht_id,
+  h.name as halle_name,
+
+  z.fk_bericht_id as z_fk_bericht_id,
+  z.id as z_id,
+  z.nummer as z_nummer,
+  z.fk_halle as z_fk_halle,
+  z.fk_etage as z_fk_etage,
+  z.fk_abteilung as z_fk_abteilung,
+
+  s.fk_bericht_id as s_fk_bericht_id,
+  s.id as s_id,
+  s.nummer as s_nummer,
+  s.fk_zeile as s_fk_zeile,
+
+  e.fk_bericht_id as e_fk_bericht_id,
+  e.id as e_id,
+  e.nummer as e_nummer,
+  e.fk_saeule as e_fk_saeule,
+
+  pos.fk_bericht_id as pos_fk_bericht_id,
+  pos.id as pos_id,
+  pos.nummer as pos_nummer,
+  pos.fk_ebene as pos_fk_ebene,
+
+  etage.fk_bericht_id as etage_fk_bericht_id ,
+  etage.id as etage_id ,
+  etage.name as etage_name ,
+  etage.fk_halle as etage_fk_halle ,
+
+  bp.fk_bericht_id as bp_fk_bericht_id,
+  bp.id as bp_id,
+  bp.fk_artikel as bp_fk_artikel,
+  bp.fk_position as bp_fk_position,
+  bp.menge as bp_menge,
+  bp.artikel_bezeichnung as bp_artikel_bezeichnung,
+  bp.artikel_typ as bp_artikel_typ,
+  bp.artikel_keg_nr as bp_artikel_keg_nr,
+  bp.artikel_mindestbestand as bp_artikel_mindestbestand,
+  bp.artikel_fk_mengeneinheit as bp_artikel_fk_mengeneinheit,
+  bp.artikel_fk_hersteller as bp_artikel_fk_hersteller,
+  bp.hersteller_name as bp_hersteller_name,
+  bp.mengeneinheit_name as bp_mengeneinheit_name
+
+
+FROM bericht b
+  left join bericht_inventur_halle h
+  on b.id = h.fk_bericht_id
+
+  left join bericht_inventur_zeile z
+  on b.id = z.fk_bericht_id and z.fk_halle = h.id
+
+  left join bericht_inventur_saeule s
+  on b.id = s.fk_bericht_id and s.fk_zeile = z.id
+
+  left join bericht_inventur_ebene e
+  on b.id = e.fk_bericht_id and e.fk_saeule = s.id
+
+  left join bericht_inventur_position pos
+  on b.id = pos.fk_bericht_id and pos.fk_ebene = e.id
+
+  left join bericht_inventur_bestandspackstueck bp
+  on b.id = bp.fk_bericht_id and bp.fk_position = pos.id
+
+  left outer join bericht_inventur_etage etage
+  on b.id = etage.fk_bericht_id and etage.fk_halle = h.id
+
+
+
+where b.id = cast('$P!{bericht_id}' as UNSIGNED INTEGER)
+and pos.id is not null
+order by halle_name, z_nummer, s_nummer, e_nummer, pos_nummer, bp_artikel_typ]]>
+	</queryString>
+	<field name="halle_id" class="java.lang.Long"/>
+	<field name="halle_nummer" class="java.lang.Long"/>
+	<field name="halle_fk_bericht_id" class="java.lang.Long"/>
+	<field name="halle_name" class="java.lang.String"/>
+	<field name="z_fk_bericht_id" class="java.lang.Long"/>
+	<field name="z_id" class="java.lang.Long"/>
+	<field name="z_nummer" class="java.lang.Long"/>
+	<field name="z_fk_halle" class="java.lang.Long"/>
+	<field name="z_fk_etage" class="java.lang.Long"/>
+	<field name="z_fk_abteilung" class="java.lang.Long"/>
+	<field name="s_fk_bericht_id" class="java.lang.Long"/>
+	<field name="s_id" class="java.lang.Long"/>
+	<field name="s_nummer" class="java.lang.Long"/>
+	<field name="s_fk_zeile" class="java.lang.Long"/>
+	<field name="e_fk_bericht_id" class="java.lang.Long"/>
+	<field name="e_id" class="java.lang.Long"/>
+	<field name="e_nummer" class="java.lang.Long"/>
+	<field name="e_fk_saeule" class="java.lang.Long"/>
+	<field name="pos_fk_bericht_id" class="java.lang.Long"/>
+	<field name="pos_id" class="java.lang.Long"/>
+	<field name="pos_nummer" class="java.lang.Long"/>
+	<field name="pos_fk_ebene" class="java.lang.Long"/>
+	<field name="etage_fk_bericht_id" class="java.lang.Long"/>
+	<field name="etage_id" class="java.lang.Long"/>
+	<field name="etage_name" class="java.lang.String"/>
+	<field name="etage_fk_halle" class="java.lang.Long"/>
+	<field name="bp_fk_bericht_id" class="java.lang.Long"/>
+	<field name="bp_id" class="java.lang.Long"/>
+	<field name="bp_fk_artikel" class="java.lang.Long"/>
+	<field name="bp_fk_position" class="java.lang.Long"/>
+	<field name="bp_menge" class="java.lang.Long"/>
+	<field name="bp_artikel_bezeichnung" class="java.lang.String"/>
+	<field name="bp_artikel_typ" class="java.lang.String"/>
+	<field name="bp_artikel_keg_nr" class="java.lang.Long"/>
+	<field name="bp_artikel_mindestbestand" class="java.lang.Long"/>
+	<field name="bp_artikel_fk_mengeneinheit" class="java.lang.Long"/>
+	<field name="bp_artikel_fk_hersteller" class="java.lang.Long"/>
+	<field name="bp_hersteller_name" class="java.lang.String"/>
+	<field name="bp_mengeneinheit_name" class="java.lang.String"/>
+	<group name="halle_id">
+		<groupExpression><![CDATA[$F{halle_id}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="29" splitType="Stretch">
+			<printWhenExpression><![CDATA[true]]></printWhenExpression>
+			<textField>
+				<reportElement x="67" y="0" width="438" height="28"/>
+				<textElement textAlignment="Center">
+					<font size="18"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{title}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<printWhenExpression><![CDATA[true]]></printWhenExpression>
+			<textField>
+				<reportElement x="71" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{druckdatum}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Druckdatum:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="0" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Bericht-ID:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="261" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{bericht_id}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="631" y="0" width="71" height="20"/>
+				<textElement/>
+				<text><![CDATA[Benutzer:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="702" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$P{user}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="26" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="171" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Lagerort Z-S-E-P]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="369" y="1" width="243" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Artikelbezeichnung  /  Typ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="622" y="1" width="57" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hersteller]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="683" y="2" width="22" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MB]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="715" y="1" width="33" height="20"/>
+				<textElement textAlignment="Right">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Menge]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="796" height="1"/>
+			</line>
+			<staticText>
+				<reportElement x="759" y="1" width="37" height="20"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Einheit]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="171" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{halle_name}+" " + $F{halle_nummer}+"-"+$F{z_nummer}.toString()+"-"+$F{s_nummer}.toString()+"-"+$F{e_nummer}.toString()+"-"+$F{pos_nummer}.toString()+"-"+$F{bp_artikel_keg_nr}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="369" y="0" width="243" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[( $F{bp_artikel_typ}!=null ? $F{bp_artikel_bezeichnung}.toString() +" / "+ $F{bp_artikel_typ} : "" )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="683" y="0" width="22" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[$F{bp_artikel_mindestbestand}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="622" y="0" width="57" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bp_hersteller_name}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="715" y="0" width="33" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.Long"><![CDATA[( (!$P{mit_mengen}.equals("N")) ? $F{bp_menge} : null )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="759" y="0" width="37" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[$F{bp_mengeneinheit_name}]]></textFieldExpression>
+			</textField>
+			<elementGroup/>
+			<componentElement>
+				<reportElement x="171" y="0" width="190" height="15"/>
+				<jr:Code39 xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" textPosition="none">
+					<jr:codeExpression><![CDATA[$F{halle_nummer}+"-"+$F{z_nummer}+"-"+$F{s_nummer}+"-"+$F{e_nummer}+"-"+$F{pos_nummer}+"-"+$F{bp_artikel_keg_nr}]]></jr:codeExpression>
+				</jr:Code39>
+			</componentElement>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="5" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="679" y="1" width="80" height="15"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression class="java.lang.String"><![CDATA["Seite "+$V{PAGE_NUMBER}+" von "]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="759" y="1" width="40" height="15"/>
+				<textElement/>
+				<textFieldExpression class="java.lang.String"><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="15"/>
+				<textElement/>
+				<text><![CDATA[Unterschrift]]></text>
+			</staticText>
+			<line>
+				<reportElement x="111" y="13" width="132" height="1"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="16" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="796" height="15"/>
+				<textElement textAlignment="Center">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["Ende der Liste " + $P{title}.toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

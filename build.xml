@@ -1,0 +1,431 @@
+<project name="Lager" default="main" basedir=".">
+    <description>
+        Lager
+    </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="src"/>
+  <property name="bin" location="bin"/>
+  <property name="build" location="build"/>
+  <property name="dist"  location="dist"/>
+  <property name="lib"  location="lib"/>
+  <!-- property name="jre_lib"  location="../../../../../../../../../Programme/Java/jdk1.6.0_26/jre/lib/"/ -->
+  <property name="jre_lib"      location="../../../../../../../../../Lager/jdk1.7.0_55/jre/lib/"/>
+  <property name="signed"  location="${dist}"/>
+
+
+  	<path id="base.path.fremd.soft">
+		  <!-- hole jar's in der lib-Director -->
+	      <fileset dir="lib">
+          <!--include name="**/*.jar"/-->
+         	<include name="**/iText/*.jar"/>
+         	<include name="**/jasperReports/*.jar"/>
+         	<include name="**/javamail-1.4.3/*.jar"/>
+         	<include name="**/javamail-1.4.3/lib/*.jar"/>
+          	<include name="**/jemmy.jar"/>
+	        <include name="**/mail.jar"/>
+          	<include name="**/mysql-connector-java-5.1.10-bin.jar"/>
+          	<include name="**/looks/*.jar"/>
+        	<include name="**/junit/junit.jar"/>
+	      </fileset>
+    </path>
+	
+	  <target name="main" depends="make_distribution,signed_auto,verteilen_tomcat">
+	  </target>	
+	 
+	  <target name="make_distribution" depends="clean,compile"
+	        description="generate the distribution" >
+	    <!-- Create the distribution directory -->
+	    <mkdir dir="${dist}/lib"/>
+
+	    <!-- Put everything in ${build} into the lager-${DSTAMP}.jar file -->
+	    <jar jarfile="${dist}/lib/lager-${DSTAMP}.jar" basedir="${build}"/>
+	    <jar jarfile="${dist}/lib/lager.jar" basedir="${build}"/>
+	  	
+	  	<copy file="index.html" tofile="${dist}/index.html"/>
+	  	<copy file="l.html" tofile="${dist}/l.html"/>
+	  	<copy file="index.jnlp" tofile="${dist}/index.jnlp"/>
+	  	<copy file="lager.properties" tofile="${dist}/lager.properties"/>
+
+	    <mkdir dir="${dist}/lib/iText/"/>
+	  	<copy todir="${dist}/lib/iText/">
+	  	    <fileset dir="lib/iText/"/>
+	  	</copy>
+	  	
+		<mkdir dir="${dist}/lib/jasperReports/"/>
+		<copy todir="${dist}/lib/jasperReports/">
+		    <fileset dir="lib/jasperReports/"/>
+		</copy>
+
+		<mkdir dir="${dist}/lib/javamail-1.4.3/"/>
+		<copy todir="${dist}/lib/javamail-1.4.3/">
+		    <fileset dir="lib/javamail-1.4.3/"/>
+		</copy>
+		  	
+		<mkdir dir="${dist}/lib/jemmy/"/>
+		<copy todir="${dist}/lib/jemmy/">
+		    <fileset dir="lib/jemmy/"/>
+		</copy>
+	  	
+		<mkdir dir="${dist}/lib/junit/"/>
+		<copy todir="${dist}/lib/junit/">
+		    <fileset dir="lib/junit/"/>
+		</copy>
+	  	
+		<mkdir dir="${dist}/lib/mysql-connector-java-5.1.10/"/>
+		<copy todir="${dist}/lib/mysql-connector-java-5.1.10/">
+		    <fileset dir="lib/mysql-connector-java-5.1.10"/>
+		</copy>
+	  	
+		<mkdir dir="${dist}/lib/looks/"/>
+		<copy todir="${dist}/lib/looks/">
+		    <fileset dir="${lib}/looks/"/>
+		</copy>
+	  	
+		<mkdir dir="${dist}/lib/barcode4j-2.1.0/build/"/>
+		<copy todir="${dist}/lib/barcode4j-2.1.0/build/">
+		    <fileset dir="${lib}/barcode4j-2.1.0/build/"/>
+		</copy>
+	  	
+		<mkdir dir="${dist}/lib/barcode4j-2.1.0/lib/"/>
+		<copy todir="${dist}/lib/barcode4j-2.1.0/lib/">
+		    <fileset dir="${lib}/barcode4j-2.1.0/lib/"/>
+		</copy>
+		<mkdir dir="${dist}/lib/barcode4j-2.1.0/lib/build-tools/"/>
+		<copy todir="${dist}/lib/barcode4j-2.1.0/lib/build-tools/">
+		    <fileset dir="${lib}/barcode4j-2.1.0/lib/build-tools/"/>
+		</copy>
+		<mkdir dir="${dist}/lib/barcode4j-2.1.0/lib/fop/"/>
+		<copy todir="${dist}/lib/barcode4j-2.1.0/lib/fop/">
+		    <fileset dir="${lib}/barcode4j-2.1.0/lib/fop/"/>
+		</copy>
+		<mkdir dir="${dist}/lib/barcode4j-2.1.0/lib/fop-0.20.5/"/>
+		<copy todir="${dist}/lib/barcode4j-2.1.0/lib/fop-0.20.5/">
+		    <fileset dir="${lib}/barcode4j-2.1.0/lib/fop-0.20.5/"/>
+		</copy>
+	  	
+		<mkdir dir="${dist}/eigeneReports/InventurListen/"/>
+		<copy todir="${dist}/eigeneReports/InventurListen/">
+		    <fileset dir="${lib}/../eigeneReports/InventurListen/"/>
+		</copy>
+		<mkdir dir="${dist}/eigeneReports/Mindestbestand/"/>
+		<copy todir="${dist}/eigeneReports/Mindestbestand/">
+		    <fileset dir="${lib}/../eigeneReports/Mindestbestand/"/>
+		</copy>
+		<mkdir dir="${dist}/eigeneReports/Wartungen/"/>
+		<copy todir="${dist}/eigeneReports/Wartungen/">
+		    <fileset dir="${lib}/../eigeneReports/Wartungen/"/>
+		</copy>
+
+	  	<!--
+	  	
+		<mkdir dir="${dist}/lib/jre_lib/"/>
+		<copy todir="${dist}/lib/jre_lib/">
+		    <fileset dir="${jre_lib}/">
+	    		<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+	  	
+		<mkdir dir="${dist}/lib/jre_lib/ext/"/>
+		<copy todir="${dist}/lib/jre_lib/ext/">
+		    <fileset dir="${jre_lib}/ext/">
+	    		<include name="**/*.jar"/>
+			</fileset>
+		</copy>
+		
+		-->
+
+	  </target>
+	
+	<target name = "verteilen_tomcat">
+   	    <property name="tomcat_lib" location="../../../../../../../../../Lager/Java/tomcat/apache-tomcat-7.0.29/webapps/lager"/>
+   	    <!--property name="tomcat_lib" location="../../../../../../../../../Program Files/Java/tomcat/apache-tomcat-7.0.29/webapps/lager"/ -->
+   	    <!--Alexander PC property name="tomcat_lib" location="../../../../../../../../../Program Files/Java/tomcat/apache-tomcat-7.0.29/webapps/lager"/ -->
+   	    <!--Wladimir PC property name="tomcat_lib" location="../../../../../../../../../Programme/Java/tools/tomcat/apache-tomcat-6.0.20/webapps/lager"/ -->
+	  	<!--Kopiere die gesamte Anwendung zu dem Tomcat -->
+	    <delete dir="${tomcat_lib}"  failonerror="false" />
+	  	<copy todir="${tomcat_lib}">
+	  	    <fileset dir="${dist}"/>
+	  	</copy>
+	</target>
+	
+	<target name = "verteilen_xampp">
+	  	<!--Kopiere die gesamte Anwendung zu dem AppServer -->
+	  	<copy todir="../../../../../../../../../xampp/htdocs/lager">
+	  	    <fileset dir="${dist}"/>
+	  	</copy>
+	  	
+	</target>
+	
+	
+  <target name="init">
+    <!-- Create the time stamp -->
+    <tstamp/>
+    <!-- Create the build directory structure used by compile -->
+    <mkdir dir="${build}"/>
+  </target>
+
+  <target name="compile" depends="init" description="compile the source " >
+  	
+ 	
+    <!-- Compile the java code from ${src} into ${build} -->
+    <javac srcdir="${src}" destdir="${build}" >
+    	<classpath refid="base.path.fremd.soft"/>
+  	</javac>
+  	
+  	<!--Bilder kopieren-->
+  	<copy todir="${build}/de/keag/lager/core/main/images/">
+	    <fileset dir="${src}/de/keag/lager/core/main/images/" includes="*.png" />
+	    <fileset dir="${src}/de/keag/lager/core/main/images/" includes="*.jpg" />
+  	</copy>
+  	
+  	<!--Bilder kopieren, fremdsoftware-->
+  	<copy todir="${build}/com/toedter/calendar/images/">
+	    <fileset dir="${src}/com/toedter/calendar/images/" includes="*.gif" />
+	    <fileset dir="${src}/com/toedter/calendar/images/" includes="*.png" />
+	    <fileset dir="${src}/com/toedter/calendar/images/" includes="*.jpg" />
+  	</copy>
+  	
+  </target>
+	
+	
+	
+  <target name="compileManuell"
+        description="compile the source " >
+    <!-- Compile the java code from ${src} into ${bin} -->
+    <javac srcdir="src/de/keag/lager/core/main" destdir="src/de/keag/lager/core/main"/>
+  </target>
+	
+
+
+  <target name="clean"
+        description="clean up" >
+    <!-- Delete the ${build} and ${dist} directory trees -->
+    <delete dir="${build}"  failonerror="false" />
+    <delete dir="${dist}" failonerror="false" />
+
+  	<!-- Create the distribution directory -->
+    <mkdir dir="${build}"/>
+    <mkdir dir="${dist}"/>
+    <mkdir dir="${dist}/lib/"/>
+  	
+  </target>
+
+	
+	<target name="generate_certificate_create_1" >
+			<exec executable="cmd"	
+				dir="${src}">
+			    <arg value="/c"/>
+			    <arg value="cert_create1.bat"/>
+			    <arg value="-p"/>
+			</exec>
+		
+	</target>
+	
+	<target name="generate_certificate_create_2">
+			<exec executable="cmd"	
+				dir="${src}">
+			    <arg value="/c"/>
+			    <arg value="cert_create2.bat"/>
+			    <arg value="-p"/>
+			</exec>
+	</target>	
+	
+	<target name="signed_only_false_output">
+		
+		<signjar 
+					destDir="${signed}/lib/jasperReports/"
+				    alias="MyLager" 
+					keystore="${dist}/lib/lager.keystore"
+					keypass="lager2"
+				    storepass="lager3"
+				    preservelastmodified="false">
+				  <path>
+				    <fileset dir="${dist}/lib/jasperReports/" includes="jasperreports-3.7.2.jar" />
+				  </path>
+				  <flattenmapper />
+				</signjar>
+		
+	</target>
+	
+	<target name="signed_only">
+		
+		<signjar 
+		    alias="MyLager" 
+			keypass="lager2lager2lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="true">
+		  <path>
+		    <fileset dir="${dist}/lib" includes="**/*.jar" />
+		  </path>
+		</signjar>
+		
+	</target>
+	
+	
+	<target name="signed_only_old">
+		<!-- http://download.oracle.com/javase/6/docs/technotes/guides/javaws/developersguide/development.html#signing -->
+		
+		<signjar 
+			destDir="${signed}/lib/"
+		    alias="MyLager" 
+			keypass="lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="false">
+		  <path>
+		    <fileset dir="${dist}/lib" includes="lager.jar" />
+		  </path>
+		  <flattenmapper />
+		</signjar>
+		
+		<signjar 
+			destDir="${signed}/lib/javamail-1.4.3/"
+		    alias="MyLager" 
+			keypass="lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="false">
+		  <path>
+		    <fileset dir="${dist}/lib/javamail-1.4.3/" includes="*.jar" />
+		  </path>
+		  <flattenmapper />
+		</signjar>
+		
+		<signjar 
+			destDir="${signed}/lib/javamail-1.4.3/lib/"
+		    alias="MyLager" 
+			keypass="lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="false">
+		  <path>
+		    <fileset dir="${dist}/lib/javamail-1.4.3/lib/" includes="*.jar" />
+		  </path>
+		  <flattenmapper />
+		</signjar>
+	
+		<signjar 
+			destDir="${signed}/lib/mysql-connector-java-5.1.10/"
+		    alias="MyLager" 
+			keypass="lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="false">
+		  <path>
+		    <fileset dir="${dist}/lib/mysql-connector-java-5.1.10/" includes="*.jar" />
+		  </path>
+		  <flattenmapper />
+		</signjar>
+	
+		<signjar 
+			destDir="${signed}/lib/jemmy/"
+		    alias="MyLager" 
+			keypass="lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="false">
+		  <path>
+		    <fileset dir="${dist}/lib/jemmy/" includes="*.jar" />
+		  </path>
+		  <flattenmapper />
+		</signjar>
+	
+		<signjar 
+			destDir="${signed}/lib/junit/"
+		    alias="MyLager" 
+			keypass="lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="false">
+		  <path>
+		    <fileset dir="${dist}/lib/junit/" includes="*.jar" />
+		  </path>
+		  <flattenmapper />
+		</signjar>
+	
+		<signjar 
+			destDir="${signed}/lib/iText/"
+		    alias="MyLager" 
+			keypass="lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="false">
+		  <path>
+		    <fileset dir="${dist}/lib/iText/" includes="*.jar" />
+		  </path>
+		  <flattenmapper />
+		</signjar>
+	
+		<signjar 
+			destDir="${signed}/lib/jasperReports/"
+		    alias="MyLager" 
+			keypass="lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="false">
+		  <path>
+		    <fileset dir="${dist}/lib/jasperReports/" includes="*.jar" />
+		  </path>
+		  <flattenmapper />
+		</signjar>
+		
+			<signjar 
+				destDir="${signed}/lib/jasperReports/"
+			    alias="MyLager" 
+				keypass="lager2"
+				keystore="${dist}/lib/lager.keystore"
+			    storepass="lager3"
+			    preservelastmodified="false">
+			  <path>
+			    <fileset dir="${dist}/lib/jasperReports/" includes="jasperreports-3.7.2.jar" />
+			  </path>
+			  <flattenmapper />
+			</signjar>
+	
+		<signjar 
+			destDir="${signed}/lib/looks/"
+		    alias="MyLager" 
+			keypass="lager2"
+			keystore="${dist}/lib/lager.keystore"
+		    storepass="lager3"
+		    preservelastmodified="false">
+		  <path>
+		    <fileset dir="${dist}/lib/looks/" includes="looks-1.2.2.jar" />
+		    <fileset dir="${dist}/lib/looks/" includes="*.jar" />
+		  </path>
+		  <flattenmapper />
+		</signjar>
+	
+		
+	</target>
+	
+	<target name="signed_auto" depends="generate_certificate_create_2,signed_only">
+	</target>
+
+	<target name="generate_certificate_list_bat_show_inhalt">
+			<exec executable="cmd"	
+				dir="${src}">
+			    <arg value="/c"/>
+			    <arg value="cert_list.bat"/>
+			    <arg value="-p"/>
+			</exec>
+	</target>
+	
+	
+	
+	<target name="generate_certificate_FALSCH" >
+			<exec executable="keytool.exe"	
+				dir="C:\Programme\Java\jdk1.6.0_26\bin\">
+				<arg value="-v"/>
+				<arg value="-genkey"/>
+				<arg value="-alias myLager"/>
+				<arg value='-keystore lager'/>
+				<arg value='-dname CN=Stoll' />
+				<arg value="-keypass lager2"/>
+				<arg value="-storepass lager3"/>
+			</exec>
+	</target>
+	
+	
+</project>

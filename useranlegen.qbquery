@@ -1,0 +1,3 @@
+﻿drop user 'lager';
+CREATE USER 'lager'@'localhost' IDENTIFIED BY 'lager';
+GRANT ALL ON lager.* TO 'lager'@'localhost' IDENTIFIED BY 'lager';

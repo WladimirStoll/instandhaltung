@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<eclipse-userlibraries version="2">
+    <library name="barcode4j-2.1.0" systemlibrary="false">
+        <archive path="/Lager/lib/barcode4j-2.1.0/build/barcode4j.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/build/barcode4j-xgc.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/build/barcode4j-fop-ext-0.20.5.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/build/barcode4j-fop-ext-0.20.5-complete.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/build/barcode4j-fop-ext.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/build/barcode4j-fop-ext-complete.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/build/barcode4j-light.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/build/resource-jars/barcode4j-xgc-resources.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/build/resource-jars/barcode4j-fop-ext-resources.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/xml-apis-1.3.04.jar" source="C:/ATA2_1_XP/ATA2_3_160/Daten/Eigene Dateien/aktuell/Job/Java/eclipse_workspace/Lager/lib/barcode4j-2.1.0/lib/xml-apis-1.3.04.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/avalon-framework-4.2.0.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/commons-cli-1.0.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/jdom-1.0.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/serializer-2.7.0.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/servlet-2.2.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/xalan-2.7.0.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/build-tools/commons-io-1.4.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/build-tools/bcel-5.3-SNAPSHOT.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/build-tools/ch.jm.osgi.util.bundle-1.0.0.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/fop/xmlgraphics-commons-1.4.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/fop/batik-all-1.7.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/fop/fop-0.95.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/fop-0.20.5/fop-0.20.5.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/fop-0.20.5/batik.jar"/>
+        <archive path="/Lager/lib/barcode4j-2.1.0/lib/xml-apis-ext-1.3.04.jar"/>
+    </library>
+</eclipse-userlibraries>
