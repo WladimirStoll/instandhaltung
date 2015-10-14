@@ -1,10 +1,206 @@
-Sep 24, 2015 6:01:56 PM de.keag.lager.core.main.LagerProperties <init>
-SCHWERWIEGEND: Verbindung zu lager.property über lokale File
-Sep 24, 2015 6:01:56 PM de.keag.lager.core.main.LagerProperties <init>
-SCHWERWIEGEND: Before load from java.io.BufferedReader@48fa3b39
-Sep 24, 2015 6:01:56 PM de.keag.lager.core.main.LagerProperties <init>
-SCHWERWIEGEND: After load from java.io.BufferedReader@48fa3b39
-Sep 24, 2015 6:01:56 PM de.keag.lager.core.main.LagerProperties <init>
-SCHWERWIEGEND: After close from java.io.BufferedReader@48fa3b39
-Sep 24, 2015 6:02:00 PM de.keag.lager.panels.frame.login.LoginView$4 actionPerformed
-SCHWERWIEGEND: Anmeldung:lager
+Okt 14, 2015 6:29:14 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: Verbindung zu lager.property über lokale File
+Okt 14, 2015 6:29:14 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: Before load from java.io.BufferedReader@9e9c826
+Okt 14, 2015 6:29:14 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: After load from java.io.BufferedReader@9e9c826
+Okt 14, 2015 6:29:14 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: After close from java.io.BufferedReader@9e9c826
+Okt 14, 2015 6:29:28 PM de.keag.lager.panels.frame.login.LoginView$4 actionPerformed
+Schwerwiegend: Anmeldung:lager
+Okt 14, 2015 6:29:49 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+Schwerwiegend:  Nicht implemnentiert! 
+Okt 14, 2015 6:29:55 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+Schwerwiegend:  Nicht implemnentiert! 
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: java.sql.SQLException: Column 'deletedrecord' not found.
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: java.sql.SQLException: Column 'deletedrecord' not found.
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1055)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:1055)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:956)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:956)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:926)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.SQLError.createSQLException(SQLError.java:926)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.ResultSetImpl.findColumn(ResultSetImpl.java:1144)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.ResultSetImpl.findColumn(ResultSetImpl.java:1144)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.ResultSetImpl.getString(ResultSetImpl.java:5549)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at com.mysql.jdbc.ResultSetImpl.getString(ResultSetImpl.java:5549)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.db.BaugruppeBeanDB.erzeugeBeanAusResultSet(BaugruppeBeanDB.java:172)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.db.BaugruppeBeanDB.erzeugeBeanAusResultSet(BaugruppeBeanDB.java:172)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.db.BaugruppeBeanDB.sucheKinderBaugruppenBeansAnhandId(BaugruppeBeanDB.java:542)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.db.BaugruppeBeanDB.sucheKinderBaugruppenBeansAnhandId(BaugruppeBeanDB.java:542)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.panels.frame.baugruppe.pane.BaugruppeModel.selectKnoten(BaugruppeModel.java:118)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.panels.frame.baugruppe.pane.BaugruppeModel.selectKnoten(BaugruppeModel.java:118)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.core.PaneController.setGewaehlteZeile(PaneController.java:137)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.core.PaneController.setGewaehlteZeile(PaneController.java:137)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.core.SuchController.suchen(SuchController.java:64)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.core.SuchController.suchen(SuchController.java:64)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView$1.actionPerformed(BaugruppeSuchPaneView.java:163)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView$1.actionPerformed(BaugruppeSuchPaneView.java:163)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.AbstractButton.fireActionPerformed(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.AbstractButton$Handler.actionPerformed(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.DefaultButtonModel.fireActionPerformed(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.DefaultButtonModel.setPressed(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.plaf.basic.BasicButtonListener.mouseReleased(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.processMouseEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.processMouseEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.JComponent.processMouseEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at javax.swing.JComponent.processMouseEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.processEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.processEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Container.processEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Container.processEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Container.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Container.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.dispatchEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.dispatchEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.LightweightDispatcher.retargetMouseEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.LightweightDispatcher.processMouseEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.LightweightDispatcher.dispatchEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Container.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Container.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Window.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Window.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.dispatchEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.Component.dispatchEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue.dispatchEventImpl(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue.access$200(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue.access$200(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue$3.run(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue$3.run(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue$3.run(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue$3.run(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.AccessController.doPrivileged(Native Method)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.AccessController.doPrivileged(Native Method)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue$4.run(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue$4.run(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue$4.run(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue$4.run(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.AccessController.doPrivileged(Native Method)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.AccessController.doPrivileged(Native Method)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.security.ProtectionDomain$1.doIntersectionPrivilege(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventQueue.dispatchEvent(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpOneEventForFilters(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpEventsForFilter(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpEventsForHierarchy(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.pumpEvents(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.run(Unknown Source)
+Okt 14, 2015 6:29:56 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+Schwerwiegend: 	at java.awt.EventDispatchThread.run(Unknown Source)

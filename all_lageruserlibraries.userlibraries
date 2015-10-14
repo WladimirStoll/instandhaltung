@@ -1,39 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <eclipse-userlibraries version="2">
-    <library name="barcode4j-2.1.0" systemlibrary="false">
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/build/barcode4j-xgc.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/build/barcode4j.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/build/barcode4j-fop-ext-0.20.5.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/build/barcode4j-fop-ext-0.20.5-complete.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/build/barcode4j-fop-ext.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/build/barcode4j-fop-ext-complete.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/build/barcode4j-light.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/lib/xml-apis-ext-1.3.04.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/lib/avalon-framework-4.2.0.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/lib/commons-cli-1.0.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/lib/jdom-1.0.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/lib/serializer-2.7.0.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/lib/servlet-2.2.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/lib/xalan-2.7.0.jar"/>
-        <archive path="/Lager3_PC/lib/barcode4j-2.1.0/lib/xml-apis-1.3.04.jar"/>
-    </library>
     <library name="iText-2.1.5" systemlibrary="false">
-        <archive path="/Lager3_PC/lib/iText/iText-2.1.5.jar"/>
-    </library>
-    <library name="iText-5.0.2" systemlibrary="false">
-        <archive path="/Lager3_PC/lib/iText/iText-5.0.2.jar"/>
+        <archive path="/Lager4/lib/iText/iText-2.1.5.jar"/>
     </library>
     <library name="jasperReportForLager" systemlibrary="false">
-        <archive path="/Lager3_PC/lib/jasperReports/jasperreports-3.7.2.jar"/>
-        <archive path="/Lager3_PC/lib/jasperReports/commons-beanutils-1.8.0.jar"/>
-        <archive path="/Lager3_PC/lib/jasperReports/commons-collections-2.1.1.jar"/>
-        <archive path="/Lager3_PC/lib/jasperReports/commons-digester-1.7.jar"/>
-        <archive path="/Lager3_PC/lib/jasperReports/commons-logging-1.0.4.jar"/>
+        <archive path="/Lager4/lib/jasperReports/commons-beanutils-1.8.0.jar"/>
+        <archive path="/Lager4/lib/jasperReports/commons-collections-2.1.1.jar"/>
+        <archive path="/Lager4/lib/jasperReports/commons-digester-1.7.jar"/>
+        <archive path="/Lager4/lib/jasperReports/commons-logging-1.0.4.jar"/>
+        <archive path="/Lager4/lib/jasperReports/jasperreports-3.7.2.jar"/>
     </library>
     <library name="javamail-1.4.3" systemlibrary="false">
-        <archive path="/Lager3_PC/lib/javamail-1.4.3/mail.jar"/>
+        <archive path="/Lager4/lib/javamail-1.4.3/lib/dsn.jar"/>
+        <archive path="/Lager4/lib/javamail-1.4.3/lib/imap.jar"/>
+        <archive path="/Lager4/lib/javamail-1.4.3/lib/mailapi.jar"/>
+        <archive path="/Lager4/lib/javamail-1.4.3/lib/pop3.jar"/>
+        <archive path="/Lager4/lib/javamail-1.4.3/lib/smtp.jar"/>
+        <archive path="/Lager4/lib/javamail-1.4.3/mail.jar"/>
     </library>
     <library name="jemmy" systemlibrary="false">
-        <archive path="/Lager3_PC/lib/jemmy/jemmy.jar"/>
+        <archive path="/Lager4/lib/jemmy/jemmy.jar"/>
+    </library>
+    <library name="JUnit 3" systemlibrary="false">
+        <archive path="/Lager4/lib/junit/junit.jar"/>
     </library>
 </eclipse-userlibraries>

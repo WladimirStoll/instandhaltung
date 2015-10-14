@@ -7,14 +7,10 @@
 			<attribute name="javadoc_location" value="jar:platform:/resource/Lager/lib/mysql-connector-java-5.1.10/mysql-connector-java-5.1.10-bin.jar!/"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jasperReportForLager">
-		<attributes>
-			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Lager/lib/jasperReports"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javamail-1.4.3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/iText-2.1.5"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jasperReportForLager"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javamail-1.4.3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/jemmy"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/JUnit 3"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
