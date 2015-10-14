@@ -81,7 +81,7 @@
         <!--jar href="lib/jre_lib/ext/sunjce_provider.jar"/ -->
         <!--jar href="lib/jre_lib/ext/sunmscapi.jar"/ -->
         <!--jar href="lib/jre_lib/ext/sunpkcs11.jar"/ -->
-        <!--jar href="lager.properties"/ -->
+        <!--jar href="lager.properties"/  -->
         
     </resources>
     
