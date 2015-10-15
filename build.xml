@@ -168,7 +168,7 @@
   	
  	
     <!-- Compile the java code from ${src} into ${build} -->
-    <javac srcdir="${src}" destdir="${build}" >
+    <javac encoding="UTF-8" srcdir="${src}" destdir="${build}" >
     	<classpath refid="base.path.fremd.soft"/>
   	</javac>
   	

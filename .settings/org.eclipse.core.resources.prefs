@@ -3,3 +3,4 @@ encoding//lib/mysql-connector-java-5.1.10/README=ISO-8859-1
 encoding//src/de/keag/lager/panels/frame/artikel/ArtikelBean.java=UTF-8
 encoding/<project>=UTF-8
 encoding/lager.properties=UTF-8
+separateDerivedEncodings=true
