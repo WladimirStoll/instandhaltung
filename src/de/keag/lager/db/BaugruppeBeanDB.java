@@ -498,7 +498,7 @@ public class BaugruppeBeanDB extends BeanDB {
 
 	private String getSucheAlleBaugruppenBeansAnhandNameSQL() {
 		if(sucheAlleBaugruppenBeansAnhandNameSQL==null){
-			sucheAlleBaugruppenBeansAnhandNameSQL = "SELECT id, name, fk_baugruppe, fk_halle  FROM baugruppe b where name like ? ";
+			sucheAlleBaugruppenBeansAnhandNameSQL = "SELECT id, name, fk_baugruppe, fk_halle, deletedrecord  FROM baugruppe b where name like ? ";
 		}
 		return sucheAlleBaugruppenBeansAnhandNameSQL;
 	}
@@ -517,7 +517,7 @@ public class BaugruppeBeanDB extends BeanDB {
 
 	private String getSucheKinderBaugruppenBeansAnhandIdSQL() {
 		if(sucheKinderBaugruppenBeansAnhandIdSQL==null){
-			sucheKinderBaugruppenBeansAnhandIdSQL = "SELECT id, name, fk_baugruppe, fk_halle FROM baugruppe b where fk_baugruppe = ? order by name";
+			sucheKinderBaugruppenBeansAnhandIdSQL = "SELECT id, name, fk_baugruppe, fk_halle, deletedrecord FROM baugruppe b where fk_baugruppe = ? order by name";
 		}
 		return sucheKinderBaugruppenBeansAnhandIdSQL;
 	}
