@@ -128,8 +128,9 @@ public class BaugruppeBeanDB extends BeanDB {
 	protected String getDeleteSQL() {
 		if(deleteSQL==null){
 			deleteSQL = "delete from baugruppe " +
-					" where id = ? " + 
-					" and deletedrecord <> 'J' "
+					" where id = ? " 
+					 
+					// + " and deletedrecord <> 'J' "
 					;
 		}
 		return deleteSQL;
