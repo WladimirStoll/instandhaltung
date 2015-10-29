@@ -96,8 +96,8 @@ public class BaugruppeBeanDB extends BeanDB {
 					" name = ?, " +
 					" fk_baugruppe = ?, " +
 					" fk_halle = ? " +
-					" where id = ? " + 
-					" and deletedrecord <> 'J' "
+					" where id = ? "  
+//					+ " and deletedrecord <> 'J' "
 					;
 		}
 		return updateSQL;
