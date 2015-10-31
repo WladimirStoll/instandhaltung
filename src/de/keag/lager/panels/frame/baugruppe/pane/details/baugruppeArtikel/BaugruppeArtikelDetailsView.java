@@ -48,6 +48,7 @@ import de.keag.lager.core.fehler.Log;
 import de.keag.lager.core.fehler.MengenEinheitBeanDbLagerException;
 import de.keag.lager.core.formatter.LagerEmptyNumberFormatter;
 import de.keag.lager.core.formatter.LagerFormate;
+import de.keag.lager.db.connection.BeanDBStatus;
 import de.keag.lager.panels.frame.artikel.ArtikelBean;
 import de.keag.lager.panels.frame.baugruppe.model.BaugruppeArtikelBean;
 
@@ -258,7 +259,7 @@ public class BaugruppeArtikelDetailsView extends DetailsView implements Property
 				Log.log().finest("BaugruppeArtikelDeatialsView:ZeichneDich:Text:"+ getJTextFieldEingebauteMenge().getText()+ "=" +baugruppeArtikelBean.getEingebauteMenge().toString());
 				Log.log().finest("BaugruppeArtikelDeatialsView:ZeichneDich:Value neu"+ getJTextFieldEingebauteMenge().getValue());
 				
-				setEnabled(true);
+				setEnabledByBean(true,baugruppeArtikelBean);
 				
 				//kostenstelle anzeigen
 //				if (benutzerArtikelBean.getArtikel()!=null){
@@ -381,15 +382,33 @@ public class BaugruppeArtikelDetailsView extends DetailsView implements Property
 	@Override
 	public void setEnabled (boolean enabled){
 		super.setEnabled(enabled);
+//		getJTextFieldEingebauteMenge().setEditable(enabled);
+//		getJButtonMatchCodeArtikel().setEnabled(enabled);
+//		
+//		getJTextBestellnummerKEG().setEditable(false);
+//		getJTextArtikelBezeichnung().setEditable(false);
+//		getJTextArtikelTyp().setEditable(false);
+//		getJTextArtikelHersteller().setEditable(false);
+		
+	}
+	
+	public void setEnabledByBean (boolean enabled, BaugruppeArtikelBean baugruppeArtikelBean){
+		super.setEnabled(enabled);
 		getJTextFieldEingebauteMenge().setEditable(enabled);
-		getJButtonMatchCodeArtikel().setEnabled(enabled);
+		getJButtonMatchCodeArtikel().setEnabled(enabled);//Fehler bei Eugen(Änderungsbutton ist nur bei der Neuerfassung erlaubt!)
+		
+		
+		boolean istNeu = baugruppeArtikelBean.getBeanDBStatus() == BeanDBStatus.INSERT;
+//		boolean istLeer = getJTextBestellnummerKEG().getText().trim().equals("0");
+ 
+		getJButtonMatchCodeArtikel().setEnabled(istNeu);//Fehler bei Eugen(Änderungsbutton ist nur bei der Neuerfassung erlaubt!)
 		
 		getJTextBestellnummerKEG().setEditable(false);
 		getJTextArtikelBezeichnung().setEditable(false);
 		getJTextArtikelTyp().setEditable(false);
 		getJTextArtikelHersteller().setEditable(false);
 		
-	}
+	}	
 
 //	/**
 //	 * This method initializes jButtonMatchCodeArtikel	
@@ -603,6 +622,8 @@ public class BaugruppeArtikelDetailsView extends DetailsView implements Property
 		}
 		return jTextFieldEingebauteMenge;
 	}
+
+
 
 	
 }  //  @jve:decl-index=0:visual-constraint="49,1"
