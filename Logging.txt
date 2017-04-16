@@ -48,3 +48,14 @@ Okt 31, 2015 5:58:29 PM de.keag.lager.panels.frame.baugruppe.pane.suche.Baugrupp
 SCHWERWIEGEND:  Nicht implemnentiert! 
 Okt 31, 2015 5:58:33 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
 SCHWERWIEGEND:  Nicht implemnentiert! 
+=======
+Apr 14, 2017 10:55:04 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: Verbindung zu lager.property über lokale File
+Apr 14, 2017 10:55:04 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: Before load from java.io.BufferedReader@1ee4e327
+Apr 14, 2017 10:55:04 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: After load from java.io.BufferedReader@1ee4e327
+Apr 14, 2017 10:55:04 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: After close from java.io.BufferedReader@1ee4e327
+Apr 14, 2017 10:56:10 PM de.keag.lager.panels.frame.login.LoginView$4 actionPerformed
+Schwerwiegend: Anmeldung:lager

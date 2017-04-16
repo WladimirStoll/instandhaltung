@@ -7,12 +7,12 @@
 <!--      codebase="http://192.168.19.131:8080/lager/" Produktion -->
 <!--      http://docs.oracle.com/javase/6/docs/technotes/guides/jweb/applet/codebase_determination.html -->
 <jnlp spec="1.0+"
-      codebase="http://172.21.20.33:8080/lager/"
+      codebase="http://172.21.1.21:8080/lager/"
 	  version="1.0"
       href="index.jnlp">
     <information>
         <title>Instandhaltung</title>
-        <vendor>Weitergabe unter GNU GENERAL PUBLIC LICENSE(GPLv2)</vendor>
+        <vendor>Weitergabe unter GNU GENERAL PUBLIC LICENSE(GPLv2).</vendor>
     </information>
     
 	<security>

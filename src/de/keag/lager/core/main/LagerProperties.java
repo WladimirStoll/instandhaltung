@@ -53,7 +53,8 @@ public class LagerProperties extends Properties { //Konfiguration zu der gesamte
 //	public static	String userEingabeHost = "192.168.19.131"; //Produktion Eugen Arbeitspc
 //	public static String userEingabeHost = "192.168.0.195"; //Laptop
 //	public static String userEingabeHost = "192.168.0.193"; //Alexanders PC
-	public static String userEingabeHost = "172.21.20.33"; //Alexanders PC
+//	public static String userEingabeHost = "172.21.20.33"; //alt produktion am 14.04.2017
+	public static String userEingabeHost = "172.21.1.21"; //alt produktion am 14.04.2017
 //	public static String userEingabeHost = "192.168.1.5"; //Alexanders PC
 //	public static String userEingabeHost = "192.168.0.100"; //Wladimirs PC
 //	public static String userEingabeHost = "127.0.0.1"; //Entwicklung, oder wenn das Programm auf dem gleichen Rechner startet.
@@ -81,7 +82,8 @@ public class LagerProperties extends Properties { //Konfiguration zu der gesamte
 					Log.log().severe(eUrl.getMessage());
 					Log.log().severe("Keine Verbindung zu  lager.property auf  dem "+userEingabeHost + ". Es wird versucht, von vordefinierten Adressen zu starten.");
 					try{
-						URL lagerPropertiesUrl = new URL("http://172.21.20.33:8080/lager/lager.properties");
+//						URL lagerPropertiesUrl = new URL("http://172.21.20.33:8080/lager/lager.properties"); alt produktion am 14.04.2017
+						URL lagerPropertiesUrl = new URL("http://172.21.1.21:8080/lager/lager.properties");
 						br =  new BufferedReader(new InputStreamReader(lagerPropertiesUrl.openStream()));
 						Log.log().severe("Verbindung zu lager.property auf " + lagerPropertiesUrl.toString());
 					}catch (Exception ekeag) {
