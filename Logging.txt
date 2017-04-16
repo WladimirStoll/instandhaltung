@@ -1,10 +1,50 @@
-Okt 15, 2015 8:55:21 PM de.keag.lager.core.main.LagerProperties <init>
-Schwerwiegend: Verbindung zu lager.property über lokale File
-Okt 15, 2015 8:55:21 PM de.keag.lager.core.main.LagerProperties <init>
-Schwerwiegend: Before load from java.io.BufferedReader@9e9c826
-Okt 15, 2015 8:55:21 PM de.keag.lager.core.main.LagerProperties <init>
-Schwerwiegend: After load from java.io.BufferedReader@9e9c826
-Okt 15, 2015 8:55:21 PM de.keag.lager.core.main.LagerProperties <init>
-Schwerwiegend: After close from java.io.BufferedReader@9e9c826
-Okt 15, 2015 8:55:29 PM de.keag.lager.panels.frame.login.LoginView$4 actionPerformed
-Schwerwiegend: Anmeldung:lager
+Okt 31, 2015 5:51:58 PM de.keag.lager.core.main.LagerProperties <init>
+SCHWERWIEGEND: Verbindung zu lager.property über lokale File
+Okt 31, 2015 5:51:58 PM de.keag.lager.core.main.LagerProperties <init>
+SCHWERWIEGEND: Before load from java.io.BufferedReader@759e008
+Okt 31, 2015 5:51:58 PM de.keag.lager.core.main.LagerProperties <init>
+SCHWERWIEGEND: After load from java.io.BufferedReader@759e008
+Okt 31, 2015 5:51:58 PM de.keag.lager.core.main.LagerProperties <init>
+SCHWERWIEGEND: After close from java.io.BufferedReader@759e008
+Okt 31, 2015 5:52:02 PM de.keag.lager.panels.frame.login.LoginView$4 actionPerformed
+SCHWERWIEGEND: Anmeldung:lager
+Okt 31, 2015 5:52:09 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:52:10 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:52:34 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:53:05 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:53:07 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:53:08 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:53:18 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:53:20 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:53:21 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:53:45 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:55:45 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:57:32 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+SCHWERWIEGEND: ausgewaehlterKnotenIstGeandert nach
+Okt 31, 2015 5:57:32 PM de.keag.lager.core.fehler.LagerSystemOutDbPrintStream localLog
+SCHWERWIEGEND: ausgewaehlterKnotenIstGeandert nach
+Okt 31, 2015 5:57:37 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:57:54 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:58:04 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:58:07 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:58:21 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:58:29 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
+Okt 31, 2015 5:58:33 PM de.keag.lager.panels.frame.baugruppe.pane.suche.BaugruppeSuchPaneView zeichneDich
+SCHWERWIEGEND:  Nicht implemnentiert! 
