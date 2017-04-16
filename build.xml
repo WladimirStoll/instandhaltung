@@ -39,8 +39,33 @@
 	    <mkdir dir="${dist}/lib"/>
 
 	    <!-- Put everything in ${build} into the lager-${DSTAMP}.jar file -->
-	    <jar jarfile="${dist}/lib/lager-${DSTAMP}.jar" basedir="${build}"/>
-	    <jar jarfile="${dist}/lib/lager.jar" basedir="${build}"/>
+	    <jar jarfile="${dist}/lib/lager-${DSTAMP}.jar" basedir="${build}">
+    		<manifest>
+		      <!-- If this is an Applet or Web Start application, include
+        		   the proper attributes from http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/index.html -->
+      			<attribute name="Permissions" value="all-permissions"/>
+      			<attribute name="Codebase" value="*"/>
+      			<!-- Who is building this jar? -->
+      			<attribute name="Built-By" value="Wladimir Stoll"/>
+      			<!-- Information about the program itself -->
+      			<attribute name="Implementation-Title" value="Instandhaltung"/>
+      			<attribute name="Implementation-Version" value="v20170416"/>
+    		</manifest>
+  		</jar>
+	    <jar jarfile="${dist}/lib/lager.jar" basedir="${build}">
+    		<manifest>
+		      <!-- If this is an Applet or Web Start application, include
+        		   the proper attributes from http://docs.oracle.com/javase/7/docs/technotes/guides/jweb/index.html -->
+      			<attribute name="Permissions" value="all-permissions"/>
+      			<attribute name="Codebase" value="*"/>
+      			<!-- Who is building this jar? -->
+      			<attribute name="Built-By" value="Wladimir Stoll"/>
+      			<!-- Information about the program itself -->
+      			<attribute name="Implementation-Title" value="Instandhaltung"/>
+      			<attribute name="Implementation-Version" value="v20170416"/>
+    		</manifest>
+  		</jar>
+	    		
 	  	
 	  	<copy file="index.html" tofile="${dist}/index.html"/>
 	  	<copy file="l.html" tofile="${dist}/l.html"/>
