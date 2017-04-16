@@ -9,7 +9,8 @@
   <property name="dist"  location="dist"/>
   <property name="lib"  location="lib"/>
   <!-- property name="jre_lib"  location="../../../../../../../../../Programme/Java/jdk1.6.0_26/jre/lib/"/ -->
-  <property name="jre_lib"      location="../../../../../../../../../Lager/jdk1.7.0_55/jre/lib/"/>
+  <!-- property name="jre_lib"      location="../../../../../../../../../Lager/jdk1.7.0_55/jre/lib/"/-->
+  <property name="jre_lib"      location="../../../../../../../../../Java/jdk1.7.0_55/jre/lib/"/>
   <property name="signed"  location="${dist}"/>
 
 

@@ -9,10 +9,7 @@ autoReconnect_org=false
 zeroDateTimeBehavior_org=convertToNull
 lagerEmailSuperUser_org=_eugen_schmidt3@freenet.de
 
-hostname=172.21.1.21
-hostname_alt_am2017.04.14=172.21.20.33
-hostname_neu_am2017.04.14=172.21.10.1
-hostname_production_20151024=172.21.20.33
+hostname=172.21.20.33
 hostname_mylaptop=192.168.0.195
 hostname_localhost=localhost
 hostname_PROD=192.168.19.131
@@ -29,8 +26,8 @@ characterEncoding=utf-8
 autoReconnect=false
 zeroDateTimeBehavior=convertToNull
 
-lagerEmailSuperUser_t=thurner@ke-ag.de
-lagerEmailSuperUser=wladimir.stoll@gmx.de
+lagerEmailSuperUser=thurner@ke-ag.de
+lagerEmailSuperUser_w=wladimir.stoll@gmx.de
 lagerEmailSuperUser_eugen=eugen_schmidt3@freenet.de
 lagerEmailSuperUser_thurner_DEFAULT=wladimir.stoll@gmx.de
 lagerEmailSuperUser_thurner_DEFAULT=thurner@ke-ag.de

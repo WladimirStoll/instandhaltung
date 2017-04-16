@@ -1,10 +1,10 @@
-Okt 15, 2015 8:55:21 PM de.keag.lager.core.main.LagerProperties <init>
+Apr 14, 2017 10:55:04 PM de.keag.lager.core.main.LagerProperties <init>
 Schwerwiegend: Verbindung zu lager.property über lokale File
-Okt 15, 2015 8:55:21 PM de.keag.lager.core.main.LagerProperties <init>
-Schwerwiegend: Before load from java.io.BufferedReader@9e9c826
-Okt 15, 2015 8:55:21 PM de.keag.lager.core.main.LagerProperties <init>
-Schwerwiegend: After load from java.io.BufferedReader@9e9c826
-Okt 15, 2015 8:55:21 PM de.keag.lager.core.main.LagerProperties <init>
-Schwerwiegend: After close from java.io.BufferedReader@9e9c826
-Okt 15, 2015 8:55:29 PM de.keag.lager.panels.frame.login.LoginView$4 actionPerformed
+Apr 14, 2017 10:55:04 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: Before load from java.io.BufferedReader@1ee4e327
+Apr 14, 2017 10:55:04 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: After load from java.io.BufferedReader@1ee4e327
+Apr 14, 2017 10:55:04 PM de.keag.lager.core.main.LagerProperties <init>
+Schwerwiegend: After close from java.io.BufferedReader@1ee4e327
+Apr 14, 2017 10:56:10 PM de.keag.lager.panels.frame.login.LoginView$4 actionPerformed
 Schwerwiegend: Anmeldung:lager
