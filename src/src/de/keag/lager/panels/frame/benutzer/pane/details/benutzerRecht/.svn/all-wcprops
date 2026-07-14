@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/details/benutzerRecht
+END
+IBenutzerZugriffsrechtDetailsBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/details/benutzerRecht/IBenutzerZugriffsrechtDetailsBeobachter.java
+END
+BenutzerZugriffsrechtDetailsView.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/details/benutzerRecht/BenutzerZugriffsrechtDetailsView.java
+END
+BenutzerZugriffsrechtDetailsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/details/benutzerRecht/BenutzerZugriffsrechtDetailsController.java
+END

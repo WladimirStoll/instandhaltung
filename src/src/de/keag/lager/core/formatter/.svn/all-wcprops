@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/lager3/!svn/ver/21/Lager/src/de/keag/lager/core/formatter
+END
+LagerStringFormatter.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/lager3/!svn/ver/21/Lager/src/de/keag/lager/core/formatter/LagerStringFormatter.java
+END
+LagerEmptyNumberFormatter.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/formatter/LagerEmptyNumberFormatter.java
+END
+LagerFormate.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/formatter/LagerFormate.java
+END
+MyHtmlFormatter.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/formatter/MyHtmlFormatter.java
+END

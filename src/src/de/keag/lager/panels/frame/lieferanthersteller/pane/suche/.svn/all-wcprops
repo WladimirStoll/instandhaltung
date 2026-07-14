@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/lieferanthersteller/pane/suche
+END
+ILhSuchPaneBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 117
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/lieferanthersteller/pane/suche/ILhSuchPaneBeobachter.java
+END
+LhSuchPaneView.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/lieferanthersteller/pane/suche/LhSuchPaneView.java
+END
+LhSuchController.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/lieferanthersteller/pane/suche/LhSuchController.java
+END

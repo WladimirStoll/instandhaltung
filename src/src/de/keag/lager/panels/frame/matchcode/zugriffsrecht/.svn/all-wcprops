@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/zugriffsrecht
+END
+IZugriffsrechtMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/zugriffsrecht/IZugriffsrechtMCModel.java
+END
+ZugriffsrechtMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/zugriffsrecht/ZugriffsrechtMCView.java
+END
+IZugriffsrechtMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/zugriffsrecht/IZugriffsrechtMCAnforderer.java
+END
+ZugriffsrechtMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/zugriffsrecht/ZugriffsrechtMCModel.java
+END
+ZugriffsrechtMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/zugriffsrecht/ZugriffsrechtMCController.java
+END
+IZugriffsrechtMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/zugriffsrecht/IZugriffsrechtMCBeobachter.java
+END

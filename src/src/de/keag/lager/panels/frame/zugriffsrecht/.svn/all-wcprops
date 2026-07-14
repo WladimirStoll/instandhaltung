@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/zugriffsrecht
+END
+Zugriffsrechtpruefung.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/zugriffsrecht/Zugriffsrechtpruefung.java
+END
+ZugriffsrechtBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/zugriffsrecht/ZugriffsrechtBean.java
+END
+ZugriffsrechtBeanDbLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/zugriffsrecht/ZugriffsrechtBeanDbLagerException.java
+END
+ZugriffsrechtSuchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/zugriffsrecht/ZugriffsrechtSuchBean.java
+END

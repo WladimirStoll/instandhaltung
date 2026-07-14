@@ -1,0 +1,171 @@
+10
+
+dir
+96
+https://computer/svn/lager3/Lager/src/de/keag/lager/panels/frame
+https://computer/svn/lager3
+
+
+
+2011-01-28T23:35:43.796875Z
+95
+wladimir
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1111b72d-7746-cd43-92ef-af30569ea1d7
+
+mengenEinheit
+dir
+
+MainFrame.java
+file
+
+
+
+
+2010-10-15T22:05:55.598125Z
+dcbeba32e3e980ea468b0e633df176a2
+2010-09-17T14:07:33.453125Z
+3
+wladimir
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+2111
+
+bericht
+dir
+
+bestandspackstueck
+dir
+
+katalog
+dir
+
+halle
+dir
+
+etage
+dir
+
+bestellanforderung
+dir
+
+zugriffsrecht
+dir
+
+email
+dir
+
+matchcode
+dir
+
+baugruppe
+dir
+
+artikel
+dir
+
+lieferantenBestellnummer
+dir
+
+MainFrameBeispiel.java
+file
+
+
+
+
+2010-10-15T22:05:55.613750Z
+468ecf8bb6d0809c57e3544357cee0b8
+2010-09-17T14:07:33.453125Z
+3
+wladimir
+has-props
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+7101
+
+benutzer
+dir
+
+entnahme
+dir
+
+lieferanthersteller
+dir
+
+bestellung
+dir
+
+menu
+dir
+
+position
+dir
+
+login
+dir
+
+zeile
+dir
+
+abteilung
+dir
+
+kostenstelle
+dir
+
+ebene
+dir
+
+saeule
+dir
+

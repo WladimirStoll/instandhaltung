@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/halle/pane/details/etage
+END
+EtageDetailsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/lager3/!svn/ver/46/Lager/src/de/keag/lager/panels/frame/halle/pane/details/etage/EtageDetailsController.java
+END
+IEtageDetailsBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/lager3/!svn/ver/27/Lager/src/de/keag/lager/panels/frame/halle/pane/details/etage/IEtageDetailsBeobachter.java
+END
+EtageDetailsView.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/halle/pane/details/etage/EtageDetailsView.java
+END

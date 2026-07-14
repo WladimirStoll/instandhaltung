@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/lager3/!svn/ver/70/Lager/src/de/keag/lager/panels/frame/matchcode/baugruppe
+END
+IBaugruppeMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/baugruppe/IBaugruppeMCBeobachter.java
+END
+IBaugruppeMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/baugruppe/IBaugruppeMCModel.java
+END
+BaugruppeMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/lager3/!svn/ver/70/Lager/src/de/keag/lager/panels/frame/matchcode/baugruppe/BaugruppeMCView.java
+END
+BaugruppeMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/lager3/!svn/ver/70/Lager/src/de/keag/lager/panels/frame/matchcode/baugruppe/BaugruppeMCModel.java
+END
+IBaugruppeMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/baugruppe/IBaugruppeMCAnforderer.java
+END
+BaugruppeMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/baugruppe/BaugruppeMCController.java
+END

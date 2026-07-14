@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/liste
+END
+BenutzerListPaneController.java
+K 25
+svn:wc:ra_dav:version-url
+V 111
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/liste/BenutzerListPaneController.java
+END
+IBenutzerListPaneBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/liste/IBenutzerListPaneBeobachter.java
+END
+BenutzerListPaneView.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/liste/BenutzerListPaneView.java
+END

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 56
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation
+END
+ValidationMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/ValidationMessage.java
+END
+Validator.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/Validator.java
+END
+Validatable.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/Validatable.java
+END
+ValidationResult.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/ValidationResult.java
+END
+Severity.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/Severity.java
+END
+ValidationResultModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/ValidationResultModel.java
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/package.html
+END

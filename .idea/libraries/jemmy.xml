@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="jemmy">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/Lager4/lib/jemmy/jemmy.jar" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

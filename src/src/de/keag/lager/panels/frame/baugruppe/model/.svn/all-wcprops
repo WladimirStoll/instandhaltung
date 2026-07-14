@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/lager3/!svn/ver/70/Lager/src/de/keag/lager/panels/frame/baugruppe/model
+END
+BaugruppeBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/70/Lager/src/de/keag/lager/panels/frame/baugruppe/model/BaugruppeBean.java
+END
+BaugruppeModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/lager3/!svn/ver/10/Lager/src/de/keag/lager/panels/frame/baugruppe/model/BaugruppeModelKnotenBean.java
+END
+BaugruppeSuchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/lager3/!svn/ver/39/Lager/src/de/keag/lager/panels/frame/baugruppe/model/BaugruppeSuchBean.java
+END
+BaugruppeArtikelBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/lager3/!svn/ver/70/Lager/src/de/keag/lager/panels/frame/baugruppe/model/BaugruppeArtikelBean.java
+END
+BaugruppeArtikelModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/baugruppe/model/BaugruppeArtikelModelKnotenBean.java
+END

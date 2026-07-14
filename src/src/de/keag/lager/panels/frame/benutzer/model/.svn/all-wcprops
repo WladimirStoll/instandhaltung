@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/lager3/!svn/ver/84/Lager/src/de/keag/lager/panels/frame/benutzer/model
+END
+BenutzerAbteilungBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/benutzer/model/BenutzerAbteilungBean.java
+END
+BenutzerAbteilungModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/model/BenutzerAbteilungModelKnotenBean.java
+END
+BenutzerBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/84/Lager/src/de/keag/lager/panels/frame/benutzer/model/BenutzerBean.java
+END
+BenutzerModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/model/BenutzerModelKnotenBean.java
+END
+BenutzerSuchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/model/BenutzerSuchBean.java
+END
+BenutzerZugriffsrechtBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/benutzer/model/BenutzerZugriffsrechtBean.java
+END
+BenutzerZugriffsrechtModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/model/BenutzerZugriffsrechtModelKnotenBean.java
+END

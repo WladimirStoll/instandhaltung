@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/lager3/!svn/ver/10/Lager/src/de/keag/lager/panels/frame/lieferanthersteller/pane/details/lhKatalog
+END
+LhKatalogDetailsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/lager3/!svn/ver/10/Lager/src/de/keag/lager/panels/frame/lieferanthersteller/pane/details/lhKatalog/LhKatalogDetailsController.java
+END
+ILhKatalogDetailsBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/lager3/!svn/ver/10/Lager/src/de/keag/lager/panels/frame/lieferanthersteller/pane/details/lhKatalog/ILhKatalogDetailsBeobachter.java
+END
+LhKatalogDetailsView.java
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/lager3/!svn/ver/10/Lager/src/de/keag/lager/panels/frame/lieferanthersteller/pane/details/lhKatalog/LhKatalogDetailsView.java
+END

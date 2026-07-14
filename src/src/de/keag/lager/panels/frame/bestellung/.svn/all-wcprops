@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/70/Lager/src/de/keag/lager/panels/frame/bestellung
+END
+BestellungStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bestellung/BestellungStatus.java
+END
+BestellungBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/bestellung/BestellungBean.java
+END
+BestellungModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bestellung/BestellungModelKnotenBean.java
+END
+BestellungPosStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bestellung/BestellungPosStatus.java
+END
+BestellungPosBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/bestellung/BestellungPosBean.java
+END
+BestellungPosModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bestellung/BestellungPosModelKnotenBean.java
+END
+BestellungSuchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bestellung/BestellungSuchBean.java
+END

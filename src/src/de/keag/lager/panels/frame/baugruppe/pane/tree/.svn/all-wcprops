@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/lager3/!svn/ver/43/Lager/src/de/keag/lager/panels/frame/baugruppe/pane/tree
+END
+BaugruppeTreePaneController.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/baugruppe/pane/tree/BaugruppeTreePaneController.java
+END
+IBaugruppeTreePaneBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/baugruppe/pane/tree/IBaugruppeTreePaneBeobachter.java
+END
+BaugruppeTreePaneView.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/43/Lager/src/de/keag/lager/panels/frame/baugruppe/pane/tree/BaugruppeTreePaneView.java
+END

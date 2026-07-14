@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/dialog
+END
+JFehlerDialogWechselView.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/dialog/JFehlerDialogWechselView.java
+END
+JFehlerDialogWechselModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/dialog/JFehlerDialogWechselModel.java
+END
+JFehlerDialogWechselController.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/dialog/JFehlerDialogWechselController.java
+END

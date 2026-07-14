@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/formatter
+END
+EmptyDateFormatter.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/formatter/EmptyDateFormatter.java
+END
+EmptyNumberFormatter.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/formatter/EmptyNumberFormatter.java
+END
+RelativeDateFormatter.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/formatter/RelativeDateFormatter.java
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/formatter/package.html
+END

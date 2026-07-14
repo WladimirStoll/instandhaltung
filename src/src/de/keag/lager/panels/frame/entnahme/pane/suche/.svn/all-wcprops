@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/lager3/!svn/ver/39/Lager/src/de/keag/lager/panels/frame/entnahme/pane/suche
+END
+EntnahmeSuchController.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/entnahme/pane/suche/EntnahmeSuchController.java
+END
+EntnahmeSuchView.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/lager3/!svn/ver/19/Lager/src/de/keag/lager/panels/frame/entnahme/pane/suche/EntnahmeSuchView.java
+END
+IEntnahmeSuchPaneBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/lager3/!svn/ver/39/Lager/src/de/keag/lager/panels/frame/entnahme/pane/suche/IEntnahmeSuchPaneBeobachter.java
+END

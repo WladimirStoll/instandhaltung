@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/db/connection
+END
+BeanDBStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/db/connection/BeanDBStatus.java
+END
+SqlParam.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/connection/SqlParam.java
+END
+SqlParams.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/lager3/!svn/ver/14/Lager/src/de/keag/lager/db/connection/SqlParams.java
+END
+LagerConnection.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/connection/LagerConnection.java
+END
+BeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/db/connection/BeanDB.java
+END

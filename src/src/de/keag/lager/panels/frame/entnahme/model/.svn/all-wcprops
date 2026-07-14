@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/entnahme/model
+END
+EntnahmeStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/18/Lager/src/de/keag/lager/panels/frame/entnahme/model/EntnahmeStatus.java
+END
+EntnahmeBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/entnahme/model/EntnahmeBean.java
+END
+EntnahmeModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/lager3/!svn/ver/18/Lager/src/de/keag/lager/panels/frame/entnahme/model/EntnahmeModelKnotenBean.java
+END
+PosStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/lager3/!svn/ver/18/Lager/src/de/keag/lager/panels/frame/entnahme/model/PosStatus.java
+END
+EntnahmePosBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/entnahme/model/EntnahmePosBean.java
+END
+EntnahmePosModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/18/Lager/src/de/keag/lager/panels/frame/entnahme/model/EntnahmePosModelKnotenBean.java
+END
+EntnahmeSuchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/lager3/!svn/ver/18/Lager/src/de/keag/lager/panels/frame/entnahme/model/EntnahmeSuchBean.java
+END

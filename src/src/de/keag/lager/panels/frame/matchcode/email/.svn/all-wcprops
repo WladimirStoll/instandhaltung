@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/email
+END
+IEmailMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/email/IEmailMCBeobachter.java
+END
+IEmailMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/email/IEmailMCModel.java
+END
+EmailMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/email/EmailMCView.java
+END
+EmailMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/email/EmailMCModel.java
+END
+IEmailMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/email/IEmailMCAnforderer.java
+END
+EmailMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/email/EmailMCController.java
+END

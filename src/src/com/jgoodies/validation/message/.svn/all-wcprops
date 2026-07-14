@@ -1,0 +1,29 @@
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/message
+END
+AbstractValidationMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/message/AbstractValidationMessage.java
+END
+PropertyValidationMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/message/PropertyValidationMessage.java
+END
+SimpleValidationMessage.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/message/SimpleValidationMessage.java
+END
+package.html
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/lager3/!svn/ver/3/Lager/src/com/jgoodies/validation/message/package.html
+END

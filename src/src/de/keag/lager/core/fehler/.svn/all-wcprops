@@ -1,0 +1,131 @@
+K 25
+svn:wc:ra_dav:version-url
+V 59
+/svn/lager3/!svn/ver/92/Lager/src/de/keag/lager/core/fehler
+END
+BaugruppeOberflacheLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/BaugruppeOberflacheLagerException.java
+END
+AbteilungBeanDbLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/AbteilungBeanDbLagerException.java
+END
+KostenstelleBeanDbLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/KostenstelleBeanDbLagerException.java
+END
+FehlerTyp.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/FehlerTyp.java
+END
+LoginLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/LoginLagerException.java
+END
+BenutzerOberflacheLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/BenutzerOberflacheLagerException.java
+END
+Fehler.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/92/Lager/src/de/keag/lager/core/fehler/Fehler.java
+END
+MengenEinheitBeanDbLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/MengenEinheitBeanDbLagerException.java
+END
+LieferantenBestellnummerBeanDbException.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/LieferantenBestellnummerBeanDbException.java
+END
+KatalogBeanDbLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/KatalogBeanDbLagerException.java
+END
+LagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/LagerException.java
+END
+EmailBeanDbLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 89
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/EmailBeanDbLagerException.java
+END
+BaugruppeBeanDbLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/BaugruppeBeanDbLagerException.java
+END
+Warnung.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/Warnung.java
+END
+ArtikelBeanDbLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/ArtikelBeanDbLagerException.java
+END
+Log.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/lager3/!svn/ver/53/Lager/src/de/keag/lager/core/fehler/Log.java
+END
+BenutzerBeanDbLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/BenutzerBeanDbLagerException.java
+END
+IdLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/IdLagerException.java
+END
+MengeneinheitBeanDbException.java
+K 25
+svn:wc:ra_dav:version-url
+V 92
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/MengeneinheitBeanDbException.java
+END
+Info.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/Info.java
+END
+HerstellerLieferantLagerException.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/fehler/HerstellerLieferantLagerException.java
+END

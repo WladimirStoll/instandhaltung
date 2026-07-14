@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/panels/frame/matchcode/kostenstelle
+END
+KostenstelleMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 112
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/kostenstelle/KostenstelleMCController.java
+END
+IKostenstelleMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/kostenstelle/IKostenstelleMCBeobachter.java
+END
+IKostenstelleMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/kostenstelle/IKostenstelleMCModel.java
+END
+KostenstelleMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/kostenstelle/KostenstelleMCView.java
+END
+IKostenstelleMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/panels/frame/matchcode/kostenstelle/IKostenstelleMCAnforderer.java
+END
+KostenstelleMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/kostenstelle/KostenstelleMCModel.java
+END

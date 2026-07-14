@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/lager3/!svn/ver/46/Lager/src/de/keag/lager/panels/frame/matchcode/mengeneinheit
+END
+IMengeneinheitMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/lager3/!svn/ver/46/Lager/src/de/keag/lager/panels/frame/matchcode/mengeneinheit/IMengeneinheitMCAnforderer.java
+END
+MengeneinheitMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/mengeneinheit/MengeneinheitMCModel.java
+END
+MengeneinheitMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 114
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/mengeneinheit/MengeneinheitMCController.java
+END
+IMengeneinheitMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/mengeneinheit/IMengeneinheitMCBeobachter.java
+END
+IMengeneinheitMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/mengeneinheit/IMengeneinheitMCModel.java
+END
+MengeneinheitMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 108
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/mengeneinheit/MengeneinheitMCView.java
+END

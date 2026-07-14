@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/lager3/!svn/ver/78/Lager/src/de/keag/lager/panels/frame/halle/pane/details/position
+END
+IPositionDetailsBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/lager3/!svn/ver/43/Lager/src/de/keag/lager/panels/frame/halle/pane/details/position/IPositionDetailsBeobachter.java
+END
+PositionDetailsView.java
+K 25
+svn:wc:ra_dav:version-url
+V 113
+/svn/lager3/!svn/ver/78/Lager/src/de/keag/lager/panels/frame/halle/pane/details/position/PositionDetailsView.java
+END
+PositionDetailsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/halle/pane/details/position/PositionDetailsController.java
+END

@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/etage
+END
+IEtageMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/etage/IEtageMCModel.java
+END
+EtageMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/etage/EtageMCView.java
+END
+EtageMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/etage/EtageMCModel.java
+END
+IEtageMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/etage/IEtageMCAnforderer.java
+END
+EtageMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/etage/EtageMCController.java
+END
+IEtageMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/etage/IEtageMCBeobachter.java
+END

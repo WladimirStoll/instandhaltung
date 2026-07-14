@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/56/Lager/src/de/keag/lager/panels/frame/baugruppe/pane/details/baugruppeArtikel
+END
+BaugruppeArtikelDetailsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/baugruppe/pane/details/baugruppeArtikel/BaugruppeArtikelDetailsController.java
+END
+IBaugruppeArtikelDetailsBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/baugruppe/pane/details/baugruppeArtikel/IBaugruppeArtikelDetailsBeobachter.java
+END
+BaugruppeArtikelDetailsView.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/lager3/!svn/ver/56/Lager/src/de/keag/lager/panels/frame/baugruppe/pane/details/baugruppeArtikel/BaugruppeArtikelDetailsView.java
+END

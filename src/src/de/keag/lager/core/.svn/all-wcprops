@@ -1,0 +1,179 @@
+K 25
+svn:wc:ra_dav:version-url
+V 52
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/core
+END
+Model.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/lager3/!svn/ver/70/Lager/src/de/keag/lager/core/Model.java
+END
+ISuchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/ISuchBean.java
+END
+TreeController.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/TreeController.java
+END
+IListBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/IListBeobachter.java
+END
+Bean.java
+K 25
+svn:wc:ra_dav:version-url
+V 62
+/svn/lager3/!svn/ver/70/Lager/src/de/keag/lager/core/Bean.java
+END
+ModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/core/ModelKnotenBean.java
+END
+ListView.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/lager3/!svn/ver/67/Lager/src/de/keag/lager/core/ListView.java
+END
+SuchController.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/SuchController.java
+END
+IPanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/IPanel.java
+END
+IConroller.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/IConroller.java
+END
+IModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/IModel.java
+END
+View.java
+K 25
+svn:wc:ra_dav:version-url
+V 61
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/View.java
+END
+IDetailsBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/IDetailsBeobachter.java
+END
+IAktivBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/IAktivBean.java
+END
+JPanePanel.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/JPanePanel.java
+END
+IBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 63
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/core/IBean.java
+END
+FeldStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/lager3/!svn/ver/60/Lager/src/de/keag/lager/core/FeldStatus.java
+END
+ListController.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/lager3/!svn/ver/67/Lager/src/de/keag/lager/core/ListController.java
+END
+DetailsView.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/lager3/!svn/ver/17/Lager/src/de/keag/lager/core/DetailsView.java
+END
+GenericNode.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/lager3/!svn/ver/56/Lager/src/de/keag/lager/core/GenericNode.java
+END
+Controller.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/Controller.java
+END
+ITreeBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/ITreeBeobachter.java
+END
+PaneController.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/lager3/!svn/ver/67/Lager/src/de/keag/lager/core/PaneController.java
+END
+LagerTreePath.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/52/Lager/src/de/keag/lager/core/LagerTreePath.java
+END
+PaneControllerAdapter.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/PaneControllerAdapter.java
+END
+DetailsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 75
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/core/DetailsController.java
+END
+TreeView.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/lager3/!svn/ver/56/Lager/src/de/keag/lager/core/TreeView.java
+END
+ISuchBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 72
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/ISuchBeobachter.java
+END
+SuchView.java
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/core/SuchView.java
+END

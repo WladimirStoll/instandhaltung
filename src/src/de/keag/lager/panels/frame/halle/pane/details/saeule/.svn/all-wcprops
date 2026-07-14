@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/lager3/!svn/ver/56/Lager/src/de/keag/lager/panels/frame/halle/pane/details/saeule
+END
+SaeuleDetailsView.java
+K 25
+svn:wc:ra_dav:version-url
+V 109
+/svn/lager3/!svn/ver/56/Lager/src/de/keag/lager/panels/frame/halle/pane/details/saeule/SaeuleDetailsView.java
+END
+SaeuleDetailsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 115
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/halle/pane/details/saeule/SaeuleDetailsController.java
+END
+ISaeuleDetailsBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 116
+/svn/lager3/!svn/ver/43/Lager/src/de/keag/lager/panels/frame/halle/pane/details/saeule/ISaeuleDetailsBeobachter.java
+END

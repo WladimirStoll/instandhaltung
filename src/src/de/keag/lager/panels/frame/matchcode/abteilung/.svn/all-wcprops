@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/abteilung
+END
+IAbteilungMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/abteilung/IAbteilungMCBeobachter.java
+END
+IAbteilungMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/abteilung/IAbteilungMCModel.java
+END
+AbteilungMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/abteilung/AbteilungMCView.java
+END
+AbteilungMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/abteilung/AbteilungMCModel.java
+END
+IAbteilungMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/abteilung/IAbteilungMCAnforderer.java
+END
+AbteilungMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/abteilung/AbteilungMCController.java
+END

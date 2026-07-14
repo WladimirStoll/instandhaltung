@@ -1,0 +1,203 @@
+K 25
+svn:wc:ra_dav:version-url
+V 50
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/db
+END
+BaugruppeArtikelBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/BaugruppeArtikelBeanDB.java
+END
+LoginBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/LoginBeanDB.java
+END
+AbteilungBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/AbteilungBeanDB.java
+END
+MengenEinheitBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/MengenEinheitBeanDB.java
+END
+BerichtBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/lager3/!svn/ver/14/Lager/src/de/keag/lager/db/BerichtBeanDB.java
+END
+EntnahmePosBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/lager3/!svn/ver/48/Lager/src/de/keag/lager/db/EntnahmePosBeanDB.java
+END
+BestandspackstueckBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/db/BestandspackstueckBeanDB.java
+END
+BestellungPosBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/BestellungPosBeanDB.java
+END
+EmailBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/EmailBeanDB.java
+END
+BaugruppeBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/42/Lager/src/de/keag/lager/db/BaugruppeBeanDB.java
+END
+LhBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/lager3/!svn/ver/39/Lager/src/de/keag/lager/db/LhBeanDB.java
+END
+PositionBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/db/PositionBeanDB.java
+END
+BestellungBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/BestellungBeanDB.java
+END
+BenutzerZugriffsrechtBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/BenutzerZugriffsrechtBeanDB.java
+END
+BaPosBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lager3/!svn/ver/69/Lager/src/de/keag/lager/db/BaPosBeanDB.java
+END
+LhKatalogBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 71
+/svn/lager3/!svn/ver/10/Lager/src/de/keag/lager/db/LhKatalogBeanDB.java
+END
+ZeileBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/db/ZeileBeanDB.java
+END
+LhZugriffsrechtBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/LhZugriffsrechtBeanDB.java
+END
+KostenstelleBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 73
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/KostenstelleBeanDB.java
+END
+SaeuleBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/db/SaeuleBeanDB.java
+END
+EbeneBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/db/EbeneBeanDB.java
+END
+BaBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 64
+/svn/lager3/!svn/ver/13/Lager/src/de/keag/lager/db/BaBeanDB.java
+END
+KatalogBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/KatalogBeanDB.java
+END
+EtageBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/db/EtageBeanDB.java
+END
+HalleBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 67
+/svn/lager3/!svn/ver/88/Lager/src/de/keag/lager/db/HalleBeanDB.java
+END
+ZugriffsrechtBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/ZugriffsrechtBeanDB.java
+END
+BenutzerAbteilungBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/BenutzerAbteilungBeanDB.java
+END
+ProviderBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/ProviderBeanDB.java
+END
+ArtikelBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/db/ArtikelBeanDB.java
+END
+LieferantenBestellnummerBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/LieferantenBestellnummerBeanDB.java
+END
+BenutzerBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 69
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/db/BenutzerBeanDB.java
+END
+DbChangeHistory.sql
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/lager3/!svn/ver/95/Lager/src/de/keag/lager/db/DbChangeHistory.sql
+END
+EntnahmeBeanDB.java
+K 25
+svn:wc:ra_dav:version-url
+V 70
+/svn/lager3/!svn/ver/40/Lager/src/de/keag/lager/db/EntnahmeBeanDB.java
+END

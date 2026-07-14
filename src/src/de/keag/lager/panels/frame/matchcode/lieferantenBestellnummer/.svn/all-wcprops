@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferantenBestellnummer
+END
+LieferantenBestellnummerMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 136
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferantenBestellnummer/LieferantenBestellnummerMCController.java
+END
+ILieferantenBestellnummerMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferantenBestellnummer/ILieferantenBestellnummerMCBeobachter.java
+END
+ILieferantenBestellnummerMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferantenBestellnummer/ILieferantenBestellnummerMCModel.java
+END
+LieferantenBestellnummerMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferantenBestellnummer/LieferantenBestellnummerMCView.java
+END
+ILieferantenBestellnummerMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferantenBestellnummer/ILieferantenBestellnummerMCAnforderer.java
+END
+LieferantenBestellnummerMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferantenBestellnummer/LieferantenBestellnummerMCModel.java
+END

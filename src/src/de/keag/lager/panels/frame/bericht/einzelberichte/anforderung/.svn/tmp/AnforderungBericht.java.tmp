@@ -1,0 +1,368 @@
+package de.keag.lager.panels.frame.bericht.einzelberichte.anforderung;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import javax.mail.MessagingException;
+
+import de.keag.lager.core.email.SendJavaMail;
+import de.keag.lager.core.fehler.Fehler;
+import de.keag.lager.core.fehler.IdLagerException;
+import de.keag.lager.core.fehler.LagerException;
+import de.keag.lager.core.fehler.Log;
+import de.keag.lager.core.main.Konstanten;
+import de.keag.lager.core.main.Run;
+import de.keag.lager.db.BaBeanDB;
+import de.keag.lager.db.BaPosBeanDB;
+import de.keag.lager.db.BerichtBeanDB;
+import de.keag.lager.db.connection.BeanDBStatus;
+import de.keag.lager.db.connection.LagerConnection;
+import de.keag.lager.panels.frame.bericht.BerichtBean;
+import de.keag.lager.panels.frame.bericht.BerichtSpalte;
+import de.keag.lager.panels.frame.bericht.BerichtZeile;
+import de.keag.lager.panels.frame.bericht.Berichtart;
+import de.keag.lager.panels.frame.bericht.Berichttyp;
+import de.keag.lager.panels.frame.bericht.einzelberichte.EinzelBericht;
+import de.keag.lager.panels.frame.bestellanforderung.BaBean;
+import de.keag.lager.panels.frame.bestellanforderung.BaPosBean;
+
+public class AnforderungBericht extends EinzelBericht {
+	
+	private BaBeanDB baBeanDB;
+	private BerichtBeanDB berichtBeanDB;
+	private BerichtBean berichtBean;
+	private BaBean baBean;
+	private ArrayList<BaPosBean> baPosBeans;
+	
+	public AnforderungBericht() {
+		super();
+	}
+	
+	/*
+	 * 1. BaBean wird gelesen.
+	 * 2. BerichtBean wird erstellt.
+	 * 3. BerichtBean wird in DB abgespeichert und neu eingelesen.
+	 * @see de.keag.lager.panels.frame.bericht.einzelberichte.EinzelBericht#erzeugeBerichtDbSatz(java.lang.Integer, de.keag.lager.panels.frame.bericht.Berichtart, de.keag.lager.panels.frame.bericht.Berichttyp)
+	 */
+	@Override
+	public void erzeugeBerichtDbSatz(Berichttyp berichttyp, Berichtart berichtart, Integer berichtTypId) throws SQLException, LagerException {
+		super.erzeugeBerichtDbSatz(berichttyp, berichtart, berichtTypId);
+		//Aus der Bestellanforderung wird der DruckSatz erzeugt.
+		setBaBean((BaBean)getBaBeanDB().selectAnhandID(berichtTypId)); //Anforderungsbean ist vorhanden und wird aus DB geholt.
+		setBerichtBean(new BerichtBean());
+		getBerichtBean().setId(this.getId()); //neue ID wird ermittelt
+		getBerichtBean().setBerichtArt(this.getBerichtart());
+		getBerichtBean().setBerichtTyp(this.getBerichttyp());
+		getBerichtBean().setBerichtTypId(berichtTypId);
+		getBerichtBean().setAktuellerBenutzer(Run.getOneInstance().getBenutzerBean());
+		getBerichtBean().setBeanDBStatus(BeanDBStatus.INSERT);
+		getBerichtBeanDB().saveBean(getBerichtBean()); //speichern
+		//neu einlesen un ersetzen. Jetzt haben wir den Bericht-Kopf und Bericht daten in Form von 
+		setBerichtBean((BerichtBean) getBerichtBeanDB().selectAnhandID(getBerichtBean().getId()));
+	}
+
+	/*
+	 * Aus BaBean werden Druck-Daten-tabellen produziert.
+	 * @see de.keag.lager.panels.frame.bericht.einzelberichte.EinzelBericht#uebernehmeDruckDaten()
+	 */
+	@Override
+	public void uebernehmeDruckDaten() throws Exception {
+		super.uebernehmeDruckDaten();
+		LagerConnection.getOneInstance().startTransaction();
+		try{
+			//TODO Anfang, Programmmiert und nicht getestet
+			
+			//BaBean in bericht_bestellanforderung abspeichern
+			uebernehmeneDruckDatenBestellanforderung();
+			
+			//BaPosBeans in bericht_bestellanfordurngpsotionen abspeichern
+			//BaPositionen aus der DB einlesen
+			setBaPosBeans(getBaBeanDB().sucheBaPosBeansAnhandBaBean(getBaBean()));
+			for (int i = 0; i< getBaPosBeans().size();i++){
+				uebernehmeneDruckDatenBestellanforderungPositionen(getBaPosBeans().get(i));
+			}
+			
+			//TODO Ende
+			
+			LagerConnection.getOneInstance().commit();
+		}catch (Exception e) {
+			LagerConnection.getOneInstance().rollback();
+			throw e;
+		}
+		
+		
+	}
+
+	private void uebernehmeneDruckDatenBestellanforderung() throws SQLException, LagerException {
+		//Aus der BaBean werden die Daten nach Datenbank übernommen
+		getSqlParams().clear(); //Vorbereitung auf die nächste SQL-Anweisung
+		String insertSQL = 
+			"insert into bericht_bestellanforderung " +
+			" (fk_bericht_id, " +
+			" id, " +
+			" erstellungsdatum, " +
+			" status, " +
+			
+			" fk_herstellerLieferant, " +
+			" fk_herstellerLieferant_name, " +
+			" fk_herstellerLieferant_adresse_land, " +
+			" fk_herstellerLieferant_adresse_plz, " +
+			" fk_herstellerLieferant_adresse_stadt, " +
+			" fk_herstellerLieferant_adresse_strasse, " +
+			
+			" fk_herstellerLieferant_telefon, " +
+			" fk_herstellerLieferant_fax, " +
+			" fk_herstellerLieferant_email, " +
+			" fk_herstellerLieferant_ansprechpartner, " +
+			" " +
+			" fk_benutzerAbsender, " +
+			" fk_benutzerAbsender_name, " +
+			" fk_benutzerAbsender_vorname, " +
+			" fk_benutzerAbsender_loginName, " +
+			" fk_benutzerAbsender_email, " +
+			
+			" fk_benutzerAnnehmer, " +
+			" fk_benutzerAnnehmer_name, " +
+			" fk_benutzerAnnehmer_vorname, " +
+			" fk_benutzerAnnehmer_loginName, " +
+			" fk_benutzerAnnehmer_email, " +
+			
+			"email_ba_empfaenger)" +
+			" values (?,?,?,?,?,?,?,?,?,?," +
+			         "?,?,?,?,?,?,?,?,?,?," +
+			         "?,?,?,?,?)";
+		//Params werden gesetzt.
+		getSqlParams().put("fk_bericht_id", this.getId());
+		getSqlParams().put("id", getBaBean().getId());
+		getSqlParams().put("erstellungsdatum", getBaBean().getErstellungsDatum());
+		getSqlParams().put("status", getBaBean().getStatus().JavaToDB());
+		
+		getSqlParams().put("fk_herstellerLieferant", getBaBean().getLhBean().getId());
+		getSqlParams().put("fk_herstellerLieferant_name", getBaBean().getLhBean().getName());
+		getSqlParams().put("fk_herstellerLieferant_adresse_land", getBaBean().getLhBean().getAdresse_land());
+		getSqlParams().put("fk_herstellerLieferant_adresse_plz", getBaBean().getLhBean().getAdresse_plz());
+		getSqlParams().put("fk_herstellerLieferant_adresse_stadt", getBaBean().getLhBean().getAdresse_stadt());
+		getSqlParams().put("fk_herstellerLieferant_adresse_strasse", getBaBean().getLhBean().getAdresse_strasse());
+		getSqlParams().put("fk_herstellerLieferant_telefon", getBaBean().getLhBean().getTelefon());
+		getSqlParams().put("fk_herstellerLieferant_fax", getBaBean().getLhBean().getFax());
+		getSqlParams().put("fk_herstellerLieferant_email", getBaBean().getLhBean().getEmail());
+		getSqlParams().put("fk_herstellerLieferant_ansprechpartner", getBaBean().getLhBean().getAnsprechpartner());
+		
+		getSqlParams().put("fk_benutzerAbsender", getBaBean().getAbsenderBenutzerBean().getId());
+		getSqlParams().put("fk_benutzerAbsender_name", getBaBean().getAbsenderBenutzerBean().getName());
+		getSqlParams().put("fk_benutzerAbsender_vorname", getBaBean().getAbsenderBenutzerBean().getVorname());
+		getSqlParams().put("fk_benutzerAbsender_loginName", getBaBean().getAbsenderBenutzerBean().getLoginName());
+		getSqlParams().put("fk_benutzerAbsender_email", getBaBean().getAbsenderBenutzerBean().getEmail());
+		
+		getSqlParams().put("fk_benutzerAnnehmer", getBaBean().getAnnehmerBenutzerBean().getId());
+		getSqlParams().put("fk_benutzerAnnehmer_name", getBaBean().getAnnehmerBenutzerBean().getName());
+		getSqlParams().put("fk_benutzerAnnehmer_vorname", getBaBean().getAnnehmerBenutzerBean().getVorname());
+		getSqlParams().put("fk_benutzerAnnehmer_loginName", getBaBean().getAnnehmerBenutzerBean().getLoginName());
+		getSqlParams().put("fk_benutzerAnnehmer_email", getBaBean().getAnnehmerBenutzerBean().getEmail());
+		
+		getSqlParams().put("email_ba_empfaenger", getBaBean().getEmail());
+		
+		//SQL absetzen
+		PreparedStatement stmt = LagerConnection.getOneInstance().getConnection().prepareStatement(insertSQL);
+		//Parameter in den Statement übernehmen
+		getSqlParams().setParams(stmt);
+		//Statement protokolieren
+	    Log.log().finest(stmt.toString());
+	    System.out.println(stmt.toString());
+	    //Statement ausführen
+	    stmt.execute();
+	}
+
+	private void uebernehmeneDruckDatenBestellanforderungPositionen(BaPosBean baPosBean) throws SQLException, LagerException {
+		//Aus der BaBean werden die Daten nach Datenbank übernommen
+		getSqlParams().clear(); //Vorbereitung auf die nächste SQL-Anweisung
+		String 	insertSQL = "insert into bericht_bestellanforderungsposition " +
+			" (fk_bericht_id, " +
+			" id, " +
+			" fk_bestellanforderung, " +
+			" fk_artikel, " +
+			" fk_artikel_bezeichnung, " +
+			" fk_artikel_typ, " +
+			" fk_artikel_keg_nr, " +
+			" bestellmenge, " +
+			" liefertermin, " +
+			" status, " +
+			" fk_kostenstelle, " +
+			" fk_kostenstelle_name, " +
+			" fk_kostenstelle_nummer , " +
+			" fk_mengeneinheit , " +
+			" fk_katalog, " +
+			" fk_katalog_name, " +
+			" lieferantenbestellnummer, " +
+			" katalogseite, " +
+			" katalogpreis)" +
+			" values " +
+			" (?,?,?,?,?,?,?,?,?,?," +
+			 " ?,?,?,?,?,?,?,?,?)";
+		//Params werden gesetzt.
+		getSqlParams().put("fk_bericht_id", this.getId()); 
+		getSqlParams().put("id", baPosBean.getId());
+		getSqlParams().put("fk_bestellanforderung", getBaBean().getId());
+		getSqlParams().put("fk_artikel", baPosBean.getArtikelBean().getId());
+		getSqlParams().put("fk_artikel_bezeichnung", baPosBean.getArtikelBean().getBezeichnung());
+		getSqlParams().put("fk_artikel_typ", baPosBean.getArtikelBean().getTyp());
+		getSqlParams().put("fk_artikel_keg_nr", baPosBean.getArtikelBean().getKeg_nr());
+		getSqlParams().put("bestellmenge", baPosBean.getBestellmenge());
+		getSqlParams().put("liefertermin", baPosBean.getLiefertermin());
+		getSqlParams().put("status", baPosBean.getStatus().JavaToDB());
+		getSqlParams().put("fk_kostenstelle", baPosBean.getKostenstelle().getId());
+		getSqlParams().put("fk_kostenstelle_name", baPosBean.getKostenstelle().getName());
+		getSqlParams().put("fk_kostenstelle_nummer", baPosBean.getKostenstelle().getNummer());
+		getSqlParams().put("fk_mengeneinheit", baPosBean.getMengenEinheitBean().getId());
+		getSqlParams().put("fk_katalog", baPosBean.getKatalogBean().getId());
+		getSqlParams().put("fk_katalog_name", baPosBean.getKatalogBean().getName());
+		getSqlParams().put("lieferantenbestellnummer", baPosBean.getLieferantenbestellnummer());
+		getSqlParams().put("katalogseite", baPosBean.getKatalogseite());
+		getSqlParams().put("katalogpreis", baPosBean.getKatalogpreis());
+		
+		//SQL absetzen
+		PreparedStatement stmt = LagerConnection.getOneInstance().getConnection().prepareStatement(insertSQL);
+		//Parameter in den Statement übernehmen
+		getSqlParams().setParams(stmt);
+		//Statement protokolieren
+	    Log.log().finest(stmt.toString());
+	    //Statement ausführen
+	    stmt.execute();
+	}
+
+	
+	@Override
+	public void verarbeiteBericht() throws SQLException, LagerException, Exception {
+		super.verarbeiteBericht();
+		SendJavaMail sendJavaMail = new SendJavaMail();
+//		String toEmail = "wladimir.stoll@gmx.de";
+		String toEmail = "eugen_schmidt3@freenet.de";
+//		toEmail = getBaBean().getEmail();
+		String subject = "KEG Anforderung "+getBaBean().getId();
+		String messageEMail = "--- kein Inhalt ---";
+		
+		if (getBaBean()!=null){
+			messageEMail = erzeugeEmailInhalt(getBaBean(),getBaPosBeans());
+		}else{
+			throw new LagerException(new Fehler("Keine Daten zu versenden!"));
+		}
+		sendJavaMail.postMailToGmxLagerKEG(toEmail, subject, messageEMail);
+		
+//		sendJavaMail.postMail(
+//				host, 
+//				port, 
+//				toEmail, 
+//				subject, 
+//				message, 
+//				fromEmail, 
+//				kdUser, 
+//				kdPwd, 
+//				attachments, 
+//				outputStream);
+//		
+		Log.log().severe("nicht implementiert");
+	}
+	
+	/**
+	 * Liste erstellen aus (Anforderung und Anforderungspositionen)
+	 * @param baBean
+	 * @param baPosBeans
+	 * @return
+	 */
+	private String erzeugeEmailInhalt(BaBean baBean, ArrayList<BaPosBean> baPosBeans) {
+		String inhalt;
+<<<<<<< .mine
+		inhalt = "Anforderung :" + baBean.getId() + "\n";
+=======
+		
+		//**************  Kopf ************** 
+		inhalt = "Anforderung:" + baBean.getId() + "\n";
+>>>>>>> .r78
+		
+		// ************** Positionen **************
+		getBerichtZeile().setSymbolFuerHorizontaleLinie("-");
+		getBerichtZeile().setSymbolFuerVertikaleLinie("|");
+		getBerichtZeile().getBerichtSpalten().clear();
+		getBerichtZeile().setSplatenHoehe(2);
+		getBerichtZeile().getBerichtSpalten().add(new BerichtSpalte("Pos","", 3," "));
+		getBerichtZeile().getBerichtSpalten().add(new BerichtSpalte("Menge","", 5, " "));
+		getBerichtZeile().getBerichtSpalten().add(new BerichtSpalte("ME","", 6, " "));
+		
+		//erste Linie über den Spalten
+		inhalt = inhalt  + getBerichtZeile().getDurchgehendeLinie() + "\n";
+		
+		//Spalten-Bezeichnungen , erste Zeile
+		inhalt = inhalt  + getBerichtZeile().getSpaltenNamenZeile(1) + "\n";
+		
+		//Spalten-Bezeichnungen, zweite Zeile
+		inhalt = inhalt  + getBerichtZeile().getSpaltenNamenZeile(2) + "\n";
+		
+		//abschliessende  Linie unter den Spalten-Bezeichungen
+		inhalt = inhalt  + getBerichtZeile().getDurchgehendeLinie() + "\n";
+		
+		
+//		for(BaPosBean baPosBean : baPosBeans){ //identisch mit den nächsten 2 Zeilen
+		for(int i = 0; i<baPosBeans.size();i++){
+			BaPosBean baPosBean = baPosBeans.get(i);
+
+			//Alle Spalten mit Daten versorgen
+			getBerichtZeile().getBerichtSpalten().get(0).setInhalt(new Integer(i+1).toString()); //erste Splate
+			getBerichtZeile().getBerichtSpalten().get(1).setInhalt(baPosBean.getBestellmenge().toString()); //zweite Splate
+			getBerichtZeile().getBerichtSpalten().get(2).setInhalt(baPosBean.getMengenEinheitBean().getName()); //nächste Spalte
+			
+			//Zeile drucken
+			inhalt = inhalt  + getBerichtZeile().getDatenZeile() + "\n";
+			
+			//abschliessende  Linie unter den Spalten-Daten
+			inhalt = inhalt  + getBerichtZeile().getDurchgehendeLinie() + "\n";
+		}
+		
+		
+		//************** FUSS **************
+		inhalt = inhalt + "!!! BITTE SOFORT LIEFERN !!! \n" ;
+		String linie = "1234567890123456789012345678901234567890\n" ;
+		inhalt = inhalt + linie;
+		inhalt = inhalt + linie.substring(0,11) + " , Lieferant, " +linie.substring(25); 
+		return inhalt;
+	}
+
+	private BaBeanDB getBaBeanDB() {
+		if (baBeanDB ==null){
+			baBeanDB = new BaBeanDB();
+		}
+		return baBeanDB;
+	}
+
+	private BerichtBeanDB getBerichtBeanDB() {
+		if (berichtBeanDB ==null){
+			berichtBeanDB = new BerichtBeanDB();
+		}
+		return berichtBeanDB;
+	}
+
+	private BerichtBean getBerichtBean() {
+		return berichtBean;
+	}
+
+	private void setBerichtBean(BerichtBean berichtBean) {
+		this.berichtBean = berichtBean;
+	}
+
+	private BaBean getBaBean() {
+		return baBean;
+	}
+
+	private void setBaBean(BaBean baBean) {
+		this.baBean = baBean;
+	}
+
+	private ArrayList<BaPosBean> getBaPosBeans() {
+		return baPosBeans;
+	}
+
+	private void setBaPosBeans(ArrayList<BaPosBean> baPosBeans) {
+		this.baPosBeans = baPosBeans;
+	}
+
+}

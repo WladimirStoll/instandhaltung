@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/panels/frame/matchcode/lieferant
+END
+ILhMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/panels/frame/matchcode/lieferant/ILhMCAnforderer.java
+END
+LhMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferant/LhMCModel.java
+END
+LhMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferant/LhMCController.java
+END
+ILhMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferant/ILhMCBeobachter.java
+END
+ILhMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferant/ILhMCModel.java
+END
+LhMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/lieferant/LhMCView.java
+END

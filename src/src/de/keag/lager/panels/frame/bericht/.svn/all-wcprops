@@ -1,0 +1,53 @@
+K 25
+svn:wc:ra_dav:version-url
+V 68
+/svn/lager3/!svn/ver/84/Lager/src/de/keag/lager/panels/frame/bericht
+END
+BerichtBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/bericht/BerichtBean.java
+END
+BerichtModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bericht/BerichtModelKnotenBean.java
+END
+Berichtart.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bericht/Berichtart.java
+END
+BerichtSuchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/lager3/!svn/ver/6/Lager/src/de/keag/lager/panels/frame/bericht/BerichtSuchBean.java
+END
+BerichtSpalte.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/lager3/!svn/ver/77/Lager/src/de/keag/lager/panels/frame/bericht/BerichtSpalte.java
+END
+BerichtZeile.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/lager3/!svn/ver/84/Lager/src/de/keag/lager/panels/frame/bericht/BerichtZeile.java
+END
+Berichttyp.java
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bericht/Berichttyp.java
+END
+BerichtZeileHtml.java
+K 25
+svn:wc:ra_dav:version-url
+V 90
+/svn/lager3/!svn/ver/84/Lager/src/de/keag/lager/panels/frame/bericht/BerichtZeileHtml.java
+END

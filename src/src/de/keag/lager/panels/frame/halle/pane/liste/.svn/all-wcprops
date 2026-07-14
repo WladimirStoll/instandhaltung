@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/lager3/!svn/ver/50/Lager/src/de/keag/lager/panels/frame/halle/pane/liste
+END
+HalleListPaneView.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/50/Lager/src/de/keag/lager/panels/frame/halle/pane/liste/HalleListPaneView.java
+END
+HalleListPaneController.java
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/lager3/!svn/ver/50/Lager/src/de/keag/lager/panels/frame/halle/pane/liste/HalleListPaneController.java
+END
+IHalleListPaneBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/27/Lager/src/de/keag/lager/panels/frame/halle/pane/liste/IHalleListPaneBeobachter.java
+END

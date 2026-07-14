@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 76
+/svn/lager3/!svn/ver/39/Lager/src/de/keag/lager/panels/frame/matchcode/halle
+END
+IHalleMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 95
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/halle/IHalleMCModel.java
+END
+HalleMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 93
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/halle/HalleMCView.java
+END
+HalleMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/halle/HalleMCModel.java
+END
+IHalleMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/halle/IHalleMCAnforderer.java
+END
+HalleMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/lager3/!svn/ver/39/Lager/src/de/keag/lager/panels/frame/matchcode/halle/HalleMCController.java
+END
+IHalleMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/matchcode/halle/IHalleMCBeobachter.java
+END

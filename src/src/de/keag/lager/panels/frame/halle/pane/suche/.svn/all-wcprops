@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/halle/pane/suche
+END
+IHalleSuchPaneBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 107
+/svn/lager3/!svn/ver/27/Lager/src/de/keag/lager/panels/frame/halle/pane/suche/IHalleSuchPaneBeobachter.java
+END
+HalleSuchPaneView.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/halle/pane/suche/HalleSuchPaneView.java
+END
+HalleSuchController.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/lager3/!svn/ver/33/Lager/src/de/keag/lager/panels/frame/halle/pane/suche/HalleSuchController.java
+END

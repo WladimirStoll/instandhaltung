@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 78
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/benutzer
+END
+BenutzerMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/benutzer/BenutzerMCModel.java
+END
+IBenutzerMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/benutzer/IBenutzerMCAnforderer.java
+END
+BenutzerMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/benutzer/BenutzerMCController.java
+END
+IBenutzerMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 105
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/benutzer/IBenutzerMCBeobachter.java
+END
+IBenutzerMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/benutzer/IBenutzerMCModel.java
+END
+BenutzerMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/benutzer/BenutzerMCView.java
+END

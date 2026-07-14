@@ -1,0 +1,23 @@
+K 25
+svn:wc:ra_dav:version-url
+V 99
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/details/benutzerAbteilung
+END
+BenutzerAbteilungDetailsController.java
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/details/benutzerAbteilung/BenutzerAbteilungDetailsController.java
+END
+IBenutzerAbteilungDetailsBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 140
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/details/benutzerAbteilung/IBenutzerAbteilungDetailsBeobachter.java
+END
+BenutzerAbteilungDetailsView.java
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/benutzer/pane/details/benutzerAbteilung/BenutzerAbteilungDetailsView.java
+END

@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/panels/frame/bestellanforderung
+END
+PosStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/14/Lager/src/de/keag/lager/panels/frame/bestellanforderung/PosStatus.java
+END
+BaBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/lager3/!svn/ver/69/Lager/src/de/keag/lager/panels/frame/bestellanforderung/BaBean.java
+END
+BaModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 101
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bestellanforderung/BaModelKnotenBean.java
+END
+BaPosBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/bestellanforderung/BaPosBean.java
+END
+BaPosModelKnotenBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 104
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bestellanforderung/BaPosModelKnotenBean.java
+END
+BaSuchBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/bestellanforderung/BaSuchBean.java
+END
+AnforderungStatus.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/lager3/!svn/ver/14/Lager/src/de/keag/lager/panels/frame/bestellanforderung/AnforderungStatus.java
+END

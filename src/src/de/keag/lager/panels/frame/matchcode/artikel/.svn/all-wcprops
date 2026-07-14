@@ -1,0 +1,41 @@
+K 25
+svn:wc:ra_dav:version-url
+V 77
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/artikel
+END
+ArtikelMCController.java
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/artikel/ArtikelMCController.java
+END
+IArtikelMCBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/artikel/IArtikelMCBeobachter.java
+END
+IArtikelMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 98
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/artikel/IArtikelMCModel.java
+END
+ArtikelMCView.java
+K 25
+svn:wc:ra_dav:version-url
+V 96
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/artikel/ArtikelMCView.java
+END
+ArtikelMCModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 97
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/artikel/ArtikelMCModel.java
+END
+IArtikelMCAnforderer.java
+K 25
+svn:wc:ra_dav:version-url
+V 103
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/matchcode/artikel/IArtikelMCAnforderer.java
+END

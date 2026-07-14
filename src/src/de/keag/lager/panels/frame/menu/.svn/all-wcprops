@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 65
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/panels/frame/menu
+END
+MenuView.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/panels/frame/menu/MenuView.java
+END
+MenuModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 79
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/menu/MenuModel.java
+END
+MenuController.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/lager3/!svn/ver/86/Lager/src/de/keag/lager/panels/frame/menu/MenuController.java
+END
+IMenuBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/menu/IMenuBeobachter.java
+END
+IMenuModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 80
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/menu/IMenuModel.java
+END

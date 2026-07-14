@@ -1,0 +1,47 @@
+K 25
+svn:wc:ra_dav:version-url
+V 66
+/svn/lager3/!svn/ver/80/Lager/src/de/keag/lager/panels/frame/login
+END
+ILoginBeobachter.java
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/login/ILoginBeobachter.java
+END
+ILoginModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/login/ILoginModel.java
+END
+LoginJUnit.java
+K 25
+svn:wc:ra_dav:version-url
+V 82
+/svn/lager3/!svn/ver/80/Lager/src/de/keag/lager/panels/frame/login/LoginJUnit.java
+END
+LoginView.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/lager3/!svn/ver/68/Lager/src/de/keag/lager/panels/frame/login/LoginView.java
+END
+LoginModel.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/login/LoginModel.java
+END
+LoginController.java
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/lager3/!svn/ver/3/Lager/src/de/keag/lager/panels/frame/login/LoginController.java
+END
+LoginBean.java
+K 25
+svn:wc:ra_dav:version-url
+V 81
+/svn/lager3/!svn/ver/51/Lager/src/de/keag/lager/panels/frame/login/LoginBean.java
+END
