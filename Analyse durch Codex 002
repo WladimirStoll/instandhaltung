@@ -1,0 +1,455 @@
+You have analysied this project before. Hier is your analyse file >>
+     1 +# Technische Bestandsaufnahme der Legacy-Anwendung „Instandhaltung“
+        2 +
+        3 +Stand: 14.07.2026. Grundlage ist eine statische Analyse des Repository-Inhalts. Ein vollständiger Neu-Build wurde nicht ausgeführt, weil in der untersuchten Ubuntu-Umgebung
+  `j
+           ava`, `javac` und `ant` nicht installiert sind. Vorhandene Class-Dateien und Distributionsartefakte wurden ergänzend untersucht.
+        4 +
+        5 +## Kurzfazit
+        6 +
+        7 +Die Anwendung ist eine klassische Swing-Desktopanwendung, die ursprünglich per Java Web Start von einem Tomcat- oder Apache/XAMPP-Webserver ausgeliefert wurde. Sie wurde
+  mit J
+           ava 7 und Apache Ant gebaut; vorhandene Class-Dateien haben Bytecode-Version 51.0 (Java 7). Der Client greift direkt per JDBC auf MySQL zu und erzeugt Berichte mit
+  JasperRepor
+           ts 3.7.2. Die Infrastruktur ist stark auf Windows, Java 6/7, feste IP-Adressen und lokale absolute Pfade zugeschnitten.
+        8 +
+        9 +Ein unveränderter Betrieb auf einem aktuellen Ubuntu ist nicht realistisch. Für einen kontrollierten Legacy-Start ist zunächst eine isolierte Java-8-/OpenWebStart-
+  Testumgebung
+            denkbar. Nachhaltig sollten Build und Abhängigkeiten modernisiert, Java-Web-Start-Verteilung ersetzt und Datenbankzugang sowie Geheimnisse aus dem Client entfernt werden.
+       10 +
+       11 +## 1. Verwendete Java-Version
+       12 +
+       13 +Belegte Zielversion ist **Java 7**:
+       14 +
+       15 +- `.settings/org.eclipse.jdt.core.prefs` setzt Source, Compliance und Target auf `1.7`.
+       16 +- `build.xml` verweist auf `Java/jdk1.7.0_55/jre/lib` und enthält ältere, auskommentierte JDK-6-Pfade.
+       17 +- Eine vorhandene Datei unter `build/` hat Class-Version 51.0, also Java 7.
+       18 +- Das JNLP fordert bevorzugt Java `1.6.0_21`, akzeptiert danach `1.6+` und sogar `1.5+`. Das widerspricht dem späteren Java-7-Compilerlevel und ist historisch überholt.
+       19 +- Ants `<javac>` setzt weder `source` noch `target`; die erzeugte Version hängt deshalb vom tatsächlich verwendeten JDK ab. Für reproduzierbare Builds ist das unzureichend.
+       20 +
+       21 +Im Quellcode kommen außerdem interne JDK-Klassen vor (`com.sun.org.apache.bcel.internal...`, `sun.util...`). Diese sind spätestens mit dem Java-Modulsystem ab Java 9 nicht
+  meh
+           r zuverlässig zugänglich. Zwei der Imports wirken unbenutzt und sollten entfernt werden.
+       22 +
+       23 +## 2. Build-System und Build-Prozess
+       24 +
+       25 +Build-System ist **Apache Ant**, konfiguriert in `build.xml`. Das Default-Target `main` führt folgende Kette aus:
+       26 +
+       27 +1. `make_distribution`
+       28 +   - `clean`: löscht `build/` und `dist/`.
+       29 +   - `compile`: kompiliert den gesamten Source-Root `src/` nach `build/` und kopiert Bildressourcen.
+       30 +   - erzeugt `dist/lib/lager-${DSTAMP}.jar` und `dist/lib/lager.jar`.
+       31 +   - kopiert HTML, JNLP, `lager.properties`, Reports und Bibliotheksverzeichnisse nach `dist/`.
+       32 +2. `signed_auto`
+       33 +   - startet `src/cert_create2.bat` über Windows `cmd`.
+       34 +   - signiert anschließend alle JARs unter `dist/lib`.
+       35 +3. `verteilen_tomcat`
+       36 +   - löscht ein fest verdrahtetes Tomcat-Webapp-Verzeichnis.
+       37 +   - kopiert die komplette Distribution dorthin.
+       38 +
+       39 +Separat existiert `verteilen_xampp`, das nach `xampp/htdocs/lager` kopiert. Das Default-Target ruft dieses Target nicht auf.
+       40 +
+       41 +Wichtige Build-Probleme:
+       42 +
+       43 +- Der Default-Build ist nicht plattformneutral: `cmd`, `.bat`, Windows-Pfade und historisch relative Pfadketten werden vorausgesetzt.
+       44 +- Das Default-Target baut nicht nur, sondern signiert und deployt sofort. Build und Deployment sind nicht getrennt.
+       45 +- Das Keystore-Passwort und Key-Passwort stehen im Klartext in `build.xml`. Sie sind als kompromittiert zu behandeln und zu ersetzen.
+       46 +- Das Keystore wird offenbar erst durch das Batchskript in `dist/lib` erzeugt; ohne Windows-Skript schlägt die Signierung fehl.
+       47 +- Der Klassenpfad wird durch manuell gepflegte Include-Muster aufgebaut. Barcode4J wird zwar verteilt und im JNLP genannt, aber nicht in Ants Compile-Classpath aufgenommen.
+       48 +- Die JAR-Manifeste enthalten keinen `Main-Class`-Eintrag. `java -jar dist/lib/lager.jar` funktioniert daher nicht; gestartet wird über JNLP oder einen expliziten
+  Klassenpfad.
+       49 +- Die installierte Analyseumgebung enthält derzeit kein Java/Javac/Ant. Ein Build würde mindestens ein passendes JDK und Ant benötigen.
+       50 +
+       51 +Historischer Build-Aufruf war vermutlich `ant` oder `ant main`. Für eine reine lokale Übersetzung wäre `ant compile` vorgesehen; auch dieses Target schreibt nach `build/`.
+       52 +
+       53 +## 3. Startpunkt der Anwendung
+       54 +
+       55 +Produktiver Einstiegspunkt ist:
+       56 +
+       57 +```text
+       58 +de.keag.lager.core.main.Main.main(String[] args)
+       59 +```
+       60 +
+       61 +Dies ist explizit in `index.jnlp` als `application-desc main-class` eingetragen. `Main` richtet Logging ein, setzt Metal Look & Feel und öffnet auf dem Swing Event Dispatch
+  Th
+           read über `Run.getOneInstance().zeigeLoginView()` Login und Hauptfenster.
+       62 +
+       63 +Weitere Klassen mit `main` dienen Tests, Demos oder Hilfsaufrufen, beispielsweise `ReportDriver`; sie sind nicht der normale Anwendungsstart. Der JNLP-Parameter `log-
+  level=INF
+           O` wird an `Main` übergeben, dort aber nicht ausgewertet.
+       64 +
+       65 +## 4. Eclipse-Projektstruktur
+       66 +
+       67 +Das Repository enthält ein vollständiges altes Eclipse-Java-Projekt:
+       68 +
+       69 +- `.project`: Projektname `Lager`, JDT-Java-Builder, Java-Nature sowie alte JEM/BeanInfo-Natures.
+       70 +- `.classpath`: Source-Root `src`, Output `bin`, generischer JRE-Container, MySQL-JAR sowie Eclipse-User-Libraries.
+       71 +- `.settings/org.eclipse.jdt.core.prefs`: Java-7-Compilerlevel.
+       72 +- `.settings/org.eclipse.core.resources.prefs`: überwiegend UTF-8, einzelne alte ISO-8859-1-Angabe.
+       73 +- `*.userlibraries`: exportierte Eclipse-User-Libraries. Einige Einträge zeigen auf `/Lager4/...`, ein älterer Source-Pfad sogar auf ein Windows-Laufwerk. Diese
+  Definitionen m
+           üssen beim Import neu eingerichtet werden.
+       74 +
+       75 +Zusätzlich existieren IntelliJ-Dateien (`Lager.iml`, `.idea/`), die im Wesentlichen die Eclipse-Konfiguration spiegeln.
+       76 +
+       77 +Der normale Source-Root ist `src/`. Darunter liegt jedoch nochmals `src/src/` mit 496 Java-Dateien; 489 davon duplizieren Pfade aus dem eigentlichen Source-Baum. Weil Ant
+  und
+           Eclipse `src/` als Wurzel verwenden, werden Klassen unter `src/src/...` als Pakete unterhalb eines zusätzlichen Verzeichnisses betrachtet bzw. erneut gefunden. Dazu kommen
+  1.4
+           27 mitversionierte `.svn`-Metadatendateien. Diese Altlasten sollten vor einer Migration eindeutig klassifiziert und anschließend entfernt oder archiviert werden.
+       78 +
+       79 +Hauptbereiche:
+       80 +
+       81 +- `src/de/keag/lager/core`: Swing-MVC-Basis, Start, Logging, E-Mail, Reports.
+       82 +- `src/de/keag/lager/db`: JDBC-Zugriff und fachliche DAO-Klassen.
+       83 +- `src/de/keag/lager/panels`: UI und Fachmodule.
+       84 +- `src/com/...`: eingebetteter Fremdquellcode, unter anderem JGoodies Validation und JCalendar.
+       85 +- `eigeneReports`: JRXML-, Jasper- und erzeugte Berichtdateien.
+       86 +- `sicherungen`: historische MySQL-Dumps.
+       87 +- `bin`, `build`, `dist`: IDE-/Build-Ausgaben, teilweise mitversioniert.
+       88 +
+       89 +## 5. Externe JAR-Dateien im `lib`-Verzeichnis
+       90 +
+       91 +### Direkt für Anwendung und Build vorgesehene Bibliotheken
+       92 +
+       93 +| Komponente | Dateien/Version | Zweck |
+       94 +|---|---|---|
+       95 +| MySQL Connector/J | `mysql-connector-java-5.1.10-bin.jar` | JDBC-Treiber |
+       96 +| JasperReports | `jasperreports-3.7.2.jar` | Berichtskompilierung, Füllen, Anzeige, Export |
+       97 +| Jasper-Transitives | Commons BeanUtils 1.8.0, Collections 2.1.1, Digester 1.7, Logging 1.0.4 | JasperReports-Laufzeit |
+       98 +| iText | 2.1.5 und 5.0.2 | PDF-Unterstützung; zwei inkompatible Hauptlinien gleichzeitig |
+       99 +| JavaMail | `mail.jar` 1.4.3 plus `mailapi`, `smtp`, `imap`, `pop3`, `dsn` | E-Mail-Versand und Protokolle |
+      100 +| Jemmy | `jemmy.jar` | GUI-Tests/Automatisierung |
+      101 +| JUnit | `junit.jar` (JUnit 3) | Tests |
+      102 +| JGoodies Looks | 1.2.2 | Look & Feel; im Anwendungscode nicht eindeutig aktiv |
+      103 +| Barcode4J | 2.1.0 plus Avalon, CLI, JDOM, Xalan, XML APIs, FOP, Batik und XML Graphics | Barcode-/FOP-Erweiterungen, überwiegend über JNLP verteilt |
+      104 +
+      105 +### Weitere JARs, die nur mit den eingebetteten Fremdprojekten geliefert werden
+      106 +
+      107 +Unter `lib/mysql-connector-java-5.1.10/src/lib` liegen unter anderem c3p0, Log4j 1.2.9, JTA, Ant-Contrib und ein weiteres JUnit. Unter Barcode4J liegen Build-Tools und
+  mehrere
+            alternative FOP-/Batik-Versionen. Ant kopiert diese Verzeichnisse pauschal in die Distribution; dadurch gelangen auch Build- und Testbibliotheken zum Client.
+      108 +
+      109 +Die vollständige maschinenlesbare Liste lässt sich mit folgendem Befehl erzeugen:
+      110 +
+      111 +```bash
+      112 +find lib -type f -iname '*.jar' -print | sort
+      113 +```
+      114 +
+      115 +## 6. Tomcat- und Apache-Abhängigkeiten
+      116 +
+      117 +Tomcat ist kein eigentlicher Application Server für serverseitigen Java-Code dieser Anwendung. Es gibt keine anwendungseigene `web.xml`, keinen Servlet-Code und kein WAR
+  der A
+           nwendung. Tomcat 7.0.29 (historisch auch 6.0.20) dient nur als statischer HTTP-Host für HTML, JNLP, JARs, Properties und Reportdateien unter `/lager`.
+      118 +
+      119 +Der alternative XAMPP-/Apache-HTTPD-Pfad erfüllt denselben Zweck. Er ist ebenfalls hart verdrahtet und Windows-orientiert.
+      120 +
+      121 +Apache-Komponenten in `lib` stammen hauptsächlich aus Barcode4J/FOP und Commons-Bibliotheken für JasperReports. `servlet-2.2.jar` und `barcode4j.war` gehören zur
+  eingebetteten
+            Barcode4J-Distribution, nicht zur Kernanwendung. Alte XML-API-, Xalan-, Batik- und FOP-JARs können auf modernen JREs Klassenkonflikte verursachen.
+      122 +
+      123 +## 7. JNLP- und OpenWebStart-Konfiguration
+      124 +
+      125 +`index.html` verlinkt `index.jnlp`. Das JNLP:
+      126 +
+      127 +- verwendet Spezifikation `1.0+`;
+      128 +- hat eine feste HTTP-Codebase `http://172.21.1.21:8080/lager/`;
+      129 +- fordert `all-permissions`;
+      130 +- startet `de.keag.lager.core.main.Main`;
+      131 +- verlangt 128 MiB initialen und 512 MiB maximalen Heap;
+      132 +- aktiviert Assertions über `-ea`;
+      133 +- referenziert 48 Anwendungs- und Fremd-JARs;
+      134 +- nennt veraltete Oracle-Download-URLs und Java-Versionen 1.5/1.6.
+      135 +
+      136 +Alle genannten Fremd-JARs sind im Repository vorhanden. `lib/lager.jar` fehlt im Quellbaum erwartungsgemäß und wird durch Ant als `dist/lib/lager.jar` erzeugt. Im
+  vorhandenen
+           `dist/` sind die referenzierten JARs signiert.
+      137 +
+      138 +Eine besondere OpenWebStart-Konfiguration (`deployment.properties`, `.config/icedtea-web`, Hersteller-Property oder Installerprofil) ist nicht im Repository vorhanden.
+  OpenWeb
+           Start müsste deshalb extern installiert und konfiguriert werden. Vor einem Test sind mindestens folgende Anpassungen nötig:
+      139 +
+      140 +- Codebase parametrierbar bzw. auf die tatsächliche HTTPS-URL ändern.
+      141 +- JNLP-Java-Anforderung auf eine unterstützte Laufzeit abstimmen; für diesen Altbestand ist Java 8 der naheliegende erste Kompatibilitätstest.
+      142 +- Alle JARs mit demselben aktuell vertrauenswürdigen Zertifikat signieren; das historische Test-Keystore nicht weiterverwenden.
+      143 +- HTTPS und korrekte MIME-Typen (`application/x-java-jnlp-file`) konfigurieren.
+      144 +- Doppelte/unnötige JARs aus dem JNLP entfernen, insbesondere Build-Tools und alternative Implementierungen.
+      145 +- `all-permissions` kritisch prüfen. Direkter JDBC-, Dateisystem- und Druckzugriff erfordern derzeit weitreichende Rechte.
+      146 +
+      147 +## 8. MySQL-Datenbankzugriffe
+      148 +
+      149 +Der Client greift direkt über JDBC auf MySQL zu. Zentrale Klasse ist `de.keag.lager.db.connection.LagerConnection`:
+      150 +
+      151 +```text
+      152 +jdbc:mysql://<hostname>:<port>/<dbname>
+      153 +```
+      154 +
+      155 +Der Treiber `com.mysql.jdbc.Driver` wird per `Class.forName(...).newInstance()` geladen. Verbindungsparameter sind `characterEncoding`, `autoReconnect`,
+  `zeroDateTimeBehavior`
+           , Benutzer und Passwort. `zeroDateTimeBehavior=convertToNull` ist ausdrücklich für JasperReports gesetzt. Die DAOs unter `src/de/keag/lager/db` verwenden überwiegend
+  `Prepared
+           Statement`; es gibt daneben MySQL-spezifische Klassen und SQL-Syntax.
+      156 +
+      157 +`lager.properties` enthält feste Hosts, Port 3306, Datenbankname und Zugangsdaten. Die Datei wird zuerst relativ zum aktuellen Arbeitsverzeichnis geladen. Falls das
+  scheitert,
+            probiert `LagerProperties` nacheinander mehrere fest codierte HTTP-URLs auf Port 8080. Damit werden Datenbank- und Mailkonfiguration unverschlüsselt verteilt. Im
+  Repository l
+           iegen zudem zahlreiche produktionsnahe SQL-Dumps.
+      158 +
+      159 +Risiken und Modernisierungsbedarf:
+      160 +
+      161 +- Zugangsdaten im Repository und im herunterladbaren Client gelten als offengelegt; Passwörter rotieren.
+      162 +- MySQL Connector/J 5.1.10 ist sehr alt. Aktuelle MySQL-Versionen, Authentifizierungsplugins, TLS und Zeitzonenbehandlung können inkompatibel sein.
+      163 +- Der alte Treibername wird bei Connector/J 8 durch `com.mysql.cj.jdbc.Driver` ersetzt; moderne JDBC-Treiber benötigen meist kein explizites `Class.forName`.
+      164 +- Direkter DB-Zugriff aus jedem Desktopclient vergrößert Angriffsfläche und erschwert Netzwerk-/Firewallbetrieb. Mittelfristig sollte ein abgesicherter Server/API-Layer
+  dazwis
+           chenliegen.
+      165 +- Konfiguration nur per HTTPS oder lokalem Secret Store laden; keine Passwörter in JNLP-ausgelieferten Properties.
+      166 +
+      167 +## 9. JasperReports-Abhängigkeiten
+      168 +
+      169 +Verwendet wird JasperReports 3.7.2 mit Commons BeanUtils, Collections, Digester und Logging. `ReportDriver` lädt JRXML lokal oder ersatzweise per HTTP vom Lager-Webserver,
+  kom
+           piliert es zur Laufzeit, füllt es mit der aktiven JDBC-Verbindung und zeigt bzw. exportiert es als PDF, HTML oder XML. Fällt die JRXML-Kompilierung aus, wird eine
+  vorkompilier
+           te `.jasper`-Datei vom Webserver geladen.
+      170 +
+      171 +Die wesentlichen Report-Artefakte für Bestellanforderung, Inventur, Mindestbestand und Wartung sind vorhanden. Mindestens ein historischer Testreport
+  (`wartungen_test.jrxml`)
+           verwendet jedoch `language="groovy"`; eine Groovy-JAR ist nicht vorhanden. Dieser Report lässt sich daher nicht aus JRXML kompilieren, sofern er noch verwendet wird. Die
+  produ
+           ktive `wartungen.jrxml` muss bei einer Migration gesondert gegen die neue Jasper-Version validiert werden.
+      172 +
+      173 +Weitere Risiken:
+      174 +
+      175 +- JasperReports 3.7.2 und seine Commons-Abhängigkeiten sind veraltet.
+      176 +- Gleichzeitige Auslieferung von iText 2.1.5 und 5.0.2 kann zu Klassen- und API-Konflikten führen; JasperReports 3.7.2 stammt aus der iText-2-Ära.
+      177 +- Vorkompilierte `.jasper`-Dateien sind Java-serialisierte Objekte und nicht zuverlässig zwischen JasperReports-Versionen kompatibel. Nach einem Upgrade aus JRXML neu
+  kompilie
+           ren.
+      178 +- Der Import `CategoryChartHyperlinkProvider` deutet auf Chartklassen hin. Typische optionale Jasper-Abhängigkeiten wie JFreeChart/JCommon sind nicht im `lib`-Bestand; der
+  Imp
+           ort wirkt derzeit unbenutzt, Chartfunktionen wären aber zu testen.
+      179 +- Reportpfade sind relativ zum Prozess-Arbeitsverzeichnis und teilweise hart auf HTTP Port 8080 ausgerichtet.
+      180 +
+      181 +## 10. JavaMail-Konfiguration
+      182 +
+      183 +Verwendet wird JavaMail 1.4.3 (`javax.mail`) samt Java Activation Framework. Die Distribution enthält sowohl das monolithische `mail.jar` als auch die aufgeteilten
+  Protokoll-J
+           ARs. Diese Doppelung kann identische Klassen mehrfach auf den Klassenpfad bringen und sollte bereinigt werden.
+      184 +
+      185 +`SendJavaMail` unterstützt SMTP, HTML/Text, CC und Attachments. Konfiguration kommt teilweise aus `lager.properties`, teilweise sind Host, Port, Benutzer und historische
+  Provi
+           der direkt im Quellcode festgeschrieben. Es existieren Varianten für Port 25, STARTTLS sowie SSL-SocketFactory-Konfiguration.
+      186 +
+      187 +Aktuelle Konfiguration nutzt laut Properties einen internen SMTP-Relay auf Port 25 ohne Authentifizierung. Alte GMX-Werte und historische Zugangsdaten finden sich weiterhin
+  in
+            Properties bzw. Quellcode. Diese Secrets sind als kompromittiert zu behandeln, aus der Historie zu entfernen bzw. zu rotieren und nicht in der Dokumentation zu
+  reproduzieren.
+      188 +
+      189 +Kompatibilitätsrisiken:
+      190 +
+      191 +- Moderne SMTP-Server verlangen häufig TLS 1.2+, Authentifizierung und erlauben kein unsicheres Relay auf Port 25.
+      192 +- `Session.getDefaultInstance` kann unerwartet globale Session-Konfiguration teilen; `getInstance` ist kontrollierbarer.
+      193 +- `new Boolean(String)` und `new Integer(String)` sind veraltet; moderne Parse-Methoden verwenden.
+      194 +- Seit Jakarta Mail 2.x heißen Pakete `jakarta.mail`; ein Upgrade erfordert Codeanpassungen oder zunächst eine kompatible `javax.mail`-Version.
+      195 +- `StringBufferInputStream` ist veraltet und verwendet problematische Zeichenkodierung.
+      196 +
+      197 +## 11. Fehlende oder inkonsistente Bibliotheken
+      198 +
+      199 +### Sicher fehlend
+      200 +
+      201 +- **Build-Toolchain auf der untersuchten Ubuntu-Maschine:** Java/Javac und Ant.
+      202 +- **Groovy-Laufzeit für Groovy-JRXML:** Mindestens `wartungen_test.jrxml` deklariert Groovy, aber keine Groovy-JAR ist vorhanden.
+      203 +- **Anwendungs-JAR im Quellbestand:** `lib/lager.jar` wird vom JNLP genannt, entsteht jedoch erst als `dist/lib/lager.jar`; dies ist ein Build-Artefakt und kein
+  eigentlicher R
+           epository-Fehler.
+      204 +
+      205 +### Inkonsistent oder potenziell fehlend
+      206 +
+      207 +- Eclipse-User-Libraries sind nicht selbsttragend und zeigen teilweise auf alte Projektnamen/Pfade. Beim frischen Eclipse-Import erscheinen sie zunächst als unaufgelöst,
+  obwoh
+           l die JARs lokal vorhanden sind.
+      208 +- Barcode4J ist in einer separaten User-Library dokumentiert, aber nicht in `.classpath` und nicht im Ant-Compile-Classpath. Der Anwendungscode importiert derzeit keine
+  Barcod
+           e4J-Klassen direkt; JNLP und Distribution liefern trotzdem die gesamte Suite aus.
+      209 +- Optional für Jasper-Charts wären je nach aktivierter Funktion JFreeChart/JCommon nötig; sie fehlen.
+      210 +- Java Activation ist nicht separat sichtbar, dürfte bei JavaMail 1.4.3 im gebündelten Bestand bzw. in alten JREs verfügbar gewesen sein. Ab Java 11 ist `javax.activation`
+  nic
+           ht mehr Teil des JDK und muss explizit als Abhängigkeit vorliegen.
+      211 +- `mail.jar` plus die modularen JavaMail-JARs und iText 2 plus 5 erzeugen Mehrdeutigkeiten statt einen definierten Dependency-Graphen.
+      212 +
+      213 +Eine belastbare Auflösung sollte über Maven oder Gradle mit fest versionierten direkten und transitiven Abhängigkeiten erfolgen. Erst danach sind Compile-, Report- und
+  Laufzei
+           ttests aussagekräftig.
+      214 +
+      215 +## 12. Mögliche Kompatibilitätsprobleme unter Ubuntu
+      216 +
+      217 +### Build
+      218 +
+      219 +- Windows-only: `cmd`, `.bat`, `.exe`, Laufwerkspfade und XAMPP-/Tomcat-Pfade.
+      220 +- Linux-Dateisysteme unterscheiden Groß-/Kleinschreibung. Historisch unter Windows tolerierte Abweichungen bei Paket-, Klassen-, Bild- und Reportnamen können fehlschlagen.
+      221 +- Default-Build löscht und deployt in einem Schritt; der Tomcat-Pfad ist auf Ubuntu ungültig.
+      222 +- Alte Ant-/JDK-Annahmen und interne `sun.*`-/`com.sun.*`-Imports scheitern auf modernen JDKs.
+      223 +- `src/src` kann zu doppelten bzw. falsch paketierten Quellen führen.
+      224 +
+      225 +### Laufzeit und Desktop
+      226 +
+      227 +- Oracle Java Web Start ist seit Java 11 nicht mehr im JDK enthalten. OpenWebStart oder ein anderer Launcher ist erforderlich.
+      228 +- Swing benötigt eine grafische Sitzung. Auf Headless-Servern funktionieren UI, JasperViewer, Druckdialoge und AWT-Schriftverarbeitung nicht.
+      229 +- Schriftarten und Druckertreiber unterscheiden sich; Reportlayout und Seitenumbrüche können abweichen. Benötigte Fonts sollten explizit paketiert/lizenziert werden.
+      230 +- Relative Pfade setzen ein bestimmtes Arbeitsverzeichnis voraus.
+      231 +- Logdateien werden relativ bzw. lokal angelegt; Schreibrechte sind zu prüfen.
+      232 +- Dateipfade und historische Encodings können unter UTF-8-Linux anders reagieren.
+      233 +
+      234 +### Netzwerk und Sicherheit
+      235 +
+      236 +- Feste private IP-Adressen, Klartext-HTTP, Port 8080, MySQL 3306 und SMTP 25 müssen erreichbar sein.
+      237 +- Aktuelle Browser starten JNLP nicht automatisch; Dateizuordnung zu OpenWebStart ist nötig.
+      238 +- Alte Signaturen/Zertifikate und schwache Algorithmen werden von aktuellen Launchern möglicherweise abgelehnt.
+      239 +- `all-permissions` erhöht die Anforderungen an Signatur und Vertrauen.
+      240 +- Alte Bibliotheken bringen bekannte Sicherheits- und TLS-Probleme mit; ein öffentlicher Betrieb ist nicht vertretbar, bevor Abhängigkeiten aktualisiert wurden.
+      241 +
+      242 +### Datenbank und Bibliotheken
+      243 +
+      244 +- Connector/J 5.1.10 gegen aktuelle MySQL-Server kann an Authentifizierung, TLS, Zeitzone oder SQL-Modi scheitern.
+      245 +- Java 9+ kapselt interne JDK-APIs; Java 11 entfernt Java Web Start und mehrere Java-EE-Module wie Activation.
+      246 +- Alte XML-Bibliotheken überschneiden sich mit JDK-Modulen und können Classloader-Konflikte verursachen.
+      247 +- Vorkompilierte Jasper-Dateien und alte serialisierte Formate sind versionsgebunden.
+      248 +
+      249 +## Empfohlene nächste Schritte
+      250 +
+      251 +1. Alle in Properties, Quellcode und Ant-Datei enthaltenen Passwörter/Keystores rotieren; sensible Dateien aus der künftigen Distribution entfernen.
+      252 +2. Einen reproduzierbaren Legacy-Build in einem isolierten Container oder einer VM mit Java 7/8 und Ant herstellen, ohne produktives Deployment.
+      253 +3. `build`, `dist`, `bin`, `src/src`, `.svn` und IDE-Metadaten klassifizieren; Duplikate erst nach Vergleich bereinigen.
+      254 +4. Build auf Maven oder Gradle umstellen und einen einzigen, geprüften Versionssatz pro Bibliothek definieren.
+      255 +5. Zunächst auf Java 8 stabilisieren, alle internen JDK-Imports entfernen und Tests für Login, JDBC, Mail und jeden Report etablieren.
+      256 +6. Verteilung von Build/Deployment trennen; JNLP/OpenWebStart nur als Übergang verwenden. Mittelfristig einen nativen Paketierer oder eine andere Desktop-/Web-Verteilung
+  einse
+           tzen.
+      257 +7. Direkten MySQL-Zugriff und herunterladbare Secrets durch eine abgesicherte Server-API ersetzen.
+      258 +
+      259 +## Zentrale Belegstellen im Repository
+      260 +
+      261 +- Java-/Build-Konfiguration: `build.xml`, `.settings/org.eclipse.jdt.core.prefs`
+      262 +- Eclipse-Struktur: `.project`, `.classpath`, `*.userlibraries`
+      263 +- Start: `index.jnlp`, `src/de/keag/lager/core/main/Main.java`
+      264 +- Properties-Laden: `src/de/keag/lager/core/main/LagerProperties.java`
+      265 +- JDBC: `src/de/keag/lager/db/connection/LagerConnection.java`
+      266 +- Reports: `src/de/keag/lager/core/jasperReports/ReportDriver.java`, `eigeneReports/`
+      267 +- E-Mail: `src/de/keag/lager/core/email/SendJavaMail.java`, `lager.properties`
+      268 +- Bibliotheken: `lib/`
+
+
+• Danke, ich habe die Bestandsaufnahme als Ausgangslage übernommen. Was soll ich als Nächstes am Projekt tun – etwa den Build modernisieren, einen lauffähigen Legacy-Build herstellen,
+  Abhängigkeiten bereinigen oder einen konkreten Migrationsplan ausarbeiten?
+
+
+› endziel soll so sein >> Browser
+     │
+     │ HTTPS
+     ▼
+  Cloud Run
+  ┌─────────────────────────────────────┐
+  │ Docker-Container                    │
+  │                                     │
+  │ Angular – statische Dateien         │
+  │ Spring Boot – REST-API              │
+  │ Embedded Tomcat                     │
+  │ JasperReports                       │
+  │ Mailversand per SMTP                │
+  └──────────────────┬──────────────────┘
+                     │ JDBC/TLS
+                     ▼
+              TiDB Cloud Starter
+
+
+• Verstanden. Dieses Zielbild ersetzt die Legacy-Desktopanwendung vollständig:
+
+  Browser
+     │ HTTPS
+     ▼
+  Google Cloud Run
+  ┌─────────────────────────────────────┐
+  │ Ein Docker-Container                │
+  │                                     │
+  │ Angular-Frontend                    │
+  │ Spring-Boot-REST-API                │
+  │ Embedded Tomcat                     │
+  │ JasperReports                       │
+  │ SMTP-Mailversand                    │
+  └──────────────────┬──────────────────┘
+                     │ JDBC über TLS
+                     ▼
+            TiDB Cloud Starter
+
+  Die wesentlichen Architekturentscheidungen sind damit:
+
+  - Swing wird vollständig durch Angular ersetzt.
+  - Spring Boot übernimmt Geschäftslogik, Authentifizierung und Datenzugriffe.
+  - Der Browser erhält niemals Datenbank- oder SMTP-Zugangsdaten.
+  - Angular wird produktiv gebaut und als statischer Inhalt von Spring Boot ausgeliefert.
+  - REST-API und Frontend laufen gemeinsam in einer Cloud-Run-Instanz.
+  - JasperReports wird serverseitig ausgeführt; Berichte kommen beispielsweise als PDF-Download zurück.
+  - TiDB wird ausschließlich vom Backend über einen TLS-gesicherten JDBC-Pool angesprochen.
+  - Passwörter und Zertifikate gehören in Secret Manager beziehungsweise Cloud-Run-Secrets.
+  - Der Container bleibt zustandslos. Temporäre Reportdateien dürfen nur kurzzeitig unter /tmp entstehen.
+  - Persistente Dateien, Uploads und Exporte benötigen später gegebenenfalls Cloud Storage.
+  - Schriftarten für JasperReports müssen reproduzierbar im Container installiert oder eingebettet werden.
+
+  Eine sinnvolle Migration lässt sich in diese Etappen zerlegen:
+
+  1. Legacy-Datenmodell und SQL-Verwendung vollständig erfassen.
+  2. Neues Spring-Boot-Grundgerüst mit TiDB-Verbindung und Migrationstool aufbauen.
+  3. Geschäftslogik aus Swing-Controllern und DAOs in Services und REST-Endpunkte überführen.
+  4. Angular-Oberfläche modulweise neu implementieren.
+  5. JRXML-Berichte auf eine aktuelle JasperReports-Version migrieren.
+  6. SMTP-Versand serverseitig integrieren.
+  7. Authentifizierung, Rollen, Validierung und Auditierung ergänzen.
+  8. Angular und Spring Boot in einem Container paketieren.
+  9. Lokale Integrationstests mit Docker durchführen.
+  10. Cloud Run, Secrets, TiDB-TLS, Logging und Deployment einrichten.
+  11. Daten übernehmen und fachliche Vergleichstests gegen die Altanwendung durchführen.
+  12. Java-Web-Start-, Tomcat-Hosting- und direkten Client-JDBC-Betrieb abschalten.
+
+  Das ist keine bloße Aktualisierung der bestehenden Anwendung, sondern eine kontrollierte Neuentwicklung unter Wiederverwendung von Datenmodell, Fachlogik und Reportdefinitionen. Als
+  erster Umsetzungsschritt sollte jetzt die neue Projektstruktur samt Spring Boot, Angular, Docker und lokaler Konfiguration angelegt werden.
+
+
+› ich denke, es macht Sinn, ein neues Projekt anzulegen ../IdeaProjects/instandhaltung26
+
+
+• Ja, das ist sinnvoll. instandhaltung26 sollte als eigenständiges Greenfield-Projekt entstehen; das bestehende Projekt bleibt unverändert als Referenz für Fachlogik, SQL, Masken und
+  Reports.
+
+  Vorgesehene Struktur:
+
+  IdeaProjects/
+  ├── instandhaltung/       # unveränderte Legacy-Referenz
+  └── instandhaltung26/     # neue Anwendung
+      ├── backend/          # Spring Boot, REST, Jasper, Mail, TiDB
+      ├── frontend/         # Angular
+      ├── Dockerfile
+      ├── compose.yaml      # lokale Entwicklung
+      ├── README.md
+      └── .gitignore
+
+  Ich würde zunächst ein minimales, ausführbares Fundament erstellen:
+
+  - Spring Boot mit aktueller Java-LTS-Version
+  - Angular mit TypeScript
+  - Maven oder Gradle
+  - REST-Health-Endpunkt
+  - TiDB/MySQL-Datenquelle mit TLS-Konfiguration
+  - Flyway für versionierte Datenbankmigrationen
+  - JasperReports und Spring Mail
+  - gemeinsamer Produktionscontainer
+  - Profile für lokale Entwicklung, Tests und Cloud Run
+  - keine Zugangsdaten im Repository
+
+  Der neue Pfad liegt außerhalb des aktuell freigegebenen Arbeitsbereichs. Wenn du mich ausdrücklich mit dem Anlegen beauftragst, benötige ich dafür einmal die Schreibfreigabe für /
+  home/admin/IdeaProjects/instandhaltung26.
+Token usage: total=12,663 input=11,499 (+ 48,384 cached) output=1,164 (reasoning 199)
+To continue this session, run codex resume 019f6186-afc3-7e23-8cfc-438da9a2b9f9
+admin@alexander2-ThinkStation-P360-Tower:~/IdeaProjects/instandhaltung$ codex
+⚠ Codex's Linux sandbox uses bubblewrap and needs access to create user namespaces.
