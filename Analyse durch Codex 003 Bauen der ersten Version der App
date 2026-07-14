@@ -1,0 +1,1155 @@
+Patch-Werkzeug wegen fehlender Standardeingabe abgebrochen, ohne Dateien
+  anzulegen; ich übertrage das Gerüst jetzt korrekt und prüfe danach Struktur
+  und Konfiguration.
+
+• Edited 23 files (+383 -0)
+  └ .dockerignore (+7 -0)
+    1 +.git
+    2 +.idea
+    3 +**/node_modules
+    4 +**/dist
+    5 +**/target
+    6 +.env
+    7 +
+
+  └ .env.example (+11 -0)
+     1 +DB_URL=jdbc:mysql://localhost:3306/instandhaltung?useSSL=false&allowPubl
+        icKeyRetrieval=true
+     2 +DB_USERNAME=instandhaltung
+     3 +DB_PASSWORD=change-me
+     4 +DB_MIGRATION_ENABLED=true
+     5 +MAIL_HOST=localhost
+     6 +MAIL_PORT=1025
+     7 +MAIL_USERNAME=
+     8 +MAIL_PASSWORD=
+     9 +MAIL_SMTP_AUTH=false
+    10 +MAIL_STARTTLS=false
+    11 +
+
+  └ .gitignore (+8 -0)
+    1 +.idea/
+    2 +*.iml
+    3 +.env
+    4 +backend/target/
+    5 +frontend/.angular/
+    6 +frontend/dist/
+    7 +frontend/node_modules/
+    8 +
+
+  └ Dockerfile (+23 -0)
+     1 +FROM node:22-alpine AS frontend-build
+     2 +WORKDIR /workspace/frontend
+     3 +COPY frontend/package*.json ./
+     4 +RUN npm install
+     5 +COPY frontend/ ./
+     6 +RUN npm run build
+     7 +
+     8 +FROM maven:3.9-eclipse-temurin-21 AS backend-build
+     9 +WORKDIR /workspace/backend
+    10 +COPY backend/pom.xml ./
+    11 +RUN mvn -B dependency:go-offline
+    12 +COPY backend/src ./src
+    13 +COPY --from=frontend-build /workspace/frontend/dist/frontend/browser ./s
+        rc/main/resources/static
+    14 +RUN mvn -B clean package -DskipTests
+    15 +
+    16 +FROM eclipse-temurin:21-jre-alpine
+    17 +RUN apk add --no-cache fontconfig ttf-dejavu && addgroup -S app && addus
+        er -S app -G app
+    18 +WORKDIR /app
+    19 +COPY --from=backend-build /workspace/backend/target/instandhaltung26.jar
+         app.jar
+    20 +USER app
+    21 +EXPOSE 8080
+    22 +ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-jar", "/app/app.jar"]
+    23 +
+
+  └ README.md (+31 -0)
+     1 +# instandhaltung26
+     2 +
+     3 +Greenfield-Nachfolger der Swing-Anwendung `instandhaltung`. Das Legacy-P
+        rojekt bleibt unveränderte Referenz für Fachlogik, SQL, Masken und Jaspe
+        rReports.
+     4 +
+     5 +## Architektur
+     6 +
+     7 +- Angular-Frontend, im Produktionsbuild von Spring Boot ausgeliefert
+     8 +- Spring-Boot-REST-API auf Java 21 mit Embedded Tomcat
+     9 +- JDBC/HikariCP und Flyway für TiDB Cloud (MySQL-kompatibel)
+    10 +- JasperReports für serverseitige Berichte und Spring Mail für SMTP
+    11 +- ein zustandsloser Docker-Container für Google Cloud Run
+    12 +
+    13 +## Lokal starten
+    14 +
+    15 +Mit Docker und Compose:
+    16 +
+    17 +```bash
+    18 +docker compose up --build
+    19 +```
+    20 +
+    21 +Danach: Anwendung `http://localhost:8080`, REST-Prüfung `/api/health`, C
+        loud-Run-Probe `/actuator/health`.
+    22 +
+    23 +Für getrennte Entwicklung läuft das Backend auf Port 8080 und Angular mi
+        ttels `npm start` auf Port 4200. Der Entwicklungsproxy leitet `/api` zum
+         Backend.
+    24 +
+    25 +## TiDB Cloud und Cloud Run
+    26 +
+    27 +`DB_URL`, `DB_USERNAME` und `DB_PASSWORD` werden in Cloud Run gesetzt; K
+        ennwörter kommen aus Google Secret Manager. Die TiDB-JDBC-URL muss die v
+        om Cluster vorgegebenen TLS-Parameter enthalten. `PORT` setzt Cloud Run
+        automatisch.
+    28 +
+    29 +SMTP wird über `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD
+        `, `MAIL_SMTP_AUTH` und `MAIL_STARTTLS` konfiguriert. Es werden keine Ge
+        heimnisse eingecheckt.
+    30 +
+    31 +Flyway ist standardmäßig deaktiviert und wird über `DB_MIGRATION_ENABLED
+        =true` eingeschaltet. Vor der echten Datenmigration wird die Baseline du
+        rch ein fachlich geprüftes Zielschema ersetzt.
+
+  └ backend/pom.xml (+35 -0)
+     1 +<?xml version="1.0" encoding="UTF-8"?>
+     2 +<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www
+        .w3.org/2001/XMLSchema-instance"
+     3 +         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://m
+        aven.apache.org/xsd/maven-4.0.0.xsd">
+     4 +  <modelVersion>4.0.0</modelVersion>
+     5 +  <parent>
+     6 +    <groupId>org.springframework.boot</groupId>
+     7 +    <artifactId>spring-boot-starter-parent</artifactId>
+     8 +    <version>3.5.0</version>
+     9 +    <relativePath/>
+    10 +  </parent>
+    11 +  <groupId>de.keag</groupId>
+    12 +  <artifactId>instandhaltung26</artifactId>
+    13 +  <version>0.0.1-SNAPSHOT</version>
+    14 +  <properties>
+    15 +    <java.version>21</java.version>
+    16 +    <jasperreports.version>6.21.5</jasperreports.version>
+    17 +  </properties>
+    18 +  <dependencies>
+    19 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-web</artifactId></dependency>
+    20 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-validation</artifactId></dependency>
+    21 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-jdbc</artifactId></dependency>
+    22 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-actuator</artifactId></dependency>
+    23 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-mail</artifactId></dependency>
+    24 +    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-core</
+        artifactId></dependency>
+    25 +    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-mysql<
+        /artifactId></dependency>
+    26 +    <dependency><groupId>com.mysql</groupId><artifactId>mysql-connector-
+        j</artifactId><scope>runtime</scope></dependency>
+    27 +    <dependency><groupId>net.sf.jasperreports</groupId><artifactId>jaspe
+        rreports</artifactId><version>${jasperreports.version}</version></depend
+        ency>
+    28 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-test</artifactId><scope>test</scope></dependency>
+    29 +  </dependencies>
+    30 +  <build>
+    31 +    <finalName>instandhaltung26</finalName>
+    32 +    <plugins><plugin><groupId>org.springframework.boot</groupId><artifac
+        tId>spring-boot-maven-plugin</artifactId></plugin></plugins>
+    33 +  </build>
+    34 +</project>
+    35 +
+
+  └ backend/src/main/java/de/keag/instandhaltung/InstandhaltungApplication.java
+  (+12 -0)
+     1 +package de.keag.instandhaltung;
+     2 +
+     3 +import org.springframework.boot.SpringApplication;
+     4 +import org.springframework.boot.autoconfigure.SpringBootApplication;
+     5 +
+     6 +@SpringBootApplication
+     7 +public class InstandhaltungApplication {
+     8 +    public static void main(String[] args) {
+     9 +        SpringApplication.run(InstandhaltungApplication.class, args);
+    10 +    }
+    11 +}
+    12 +
+
+  └ backend/src/main/java/de/keag/instandhaltung/system/HealthController.java
+  (+17 -0)
+     1 +package de.keag.instandhaltung.system;
+     2 +
+     3 +import java.time.Instant;
+     4 +import java.util.Map;
+     5 +import org.springframework.web.bind.annotation.GetMapping;
+     6 +import org.springframework.web.bind.annotation.RequestMapping;
+     7 +import org.springframework.web.bind.annotation.RestController;
+     8 +
+     9 +@RestController
+    10 +@RequestMapping("/api")
+    11 +public class HealthController {
+    12 +    @GetMapping("/health")
+    13 +    public Map<String, Object> health() {
+    14 +        return Map.of("status", "UP", "time", Instant.now().toString());
+    15 +    }
+    16 +}
+    17 +
+
+  └ backend/src/main/resources/application.yml (+33 -0)
+     1 +spring:
+     2 +  application:
+     3 +    name: instandhaltung26
+     4 +  datasource:
+     5 +    url: ${DB_URL:jdbc:mysql://localhost:3306/instandhaltung?useSSL=fals
+        e&allowPublicKeyRetrieval=true}
+     6 +    username: ${DB_USERNAME:instandhaltung}
+     7 +    password: ${DB_PASSWORD:instandhaltung}
+     8 +    hikari:
+     9 +      initialization-fail-timeout: -1
+    10 +      maximum-pool-size: ${DB_POOL_SIZE:5}
+    11 +  flyway:
+    12 +    enabled: ${DB_MIGRATION_ENABLED:false}
+    13 +  mail:
+    14 +    host: ${MAIL_HOST:localhost}
+    15 +    port: ${MAIL_PORT:1025}
+    16 +    username: ${MAIL_USERNAME:}
+    17 +    password: ${MAIL_PASSWORD:}
+    18 +    properties:
+    19 +      mail.smtp.auth: ${MAIL_SMTP_AUTH:false}
+    20 +      mail.smtp.starttls.enable: ${MAIL_STARTTLS:false}
+    21 +server:
+    22 +  port: ${PORT:8080}
+    23 +  forward-headers-strategy: framework
+    24 +management:
+    25 +  endpoints:
+    26 +    web:
+    27 +      exposure:
+    28 +        include: health,info
+    29 +  endpoint:
+    30 +    health:
+    31 +      probes:
+    32 +        enabled: true
+    33 +
+
+  └ backend/src/main/resources/db/migration/V1__baseline.sql (+6 -0)
+    1 +CREATE TABLE IF NOT EXISTS schema_marker (
+    2 +    id BIGINT PRIMARY KEY,
+    3 +    description VARCHAR(255) NOT NULL,
+    4 +    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    5 +);
+    6 +
+
+  └ backend/src/test/java/de/keag/instandhaltung/system/
+  HealthControllerTest.java (+21 -0)
+     1 +package de.keag.instandhaltung.system;
+     2 +
+     3 +import static org.hamcrest.Matchers.is;
+     4 +import static org.springframework.test.web.servlet.request.MockMvcReques
+        tBuilders.get;
+     5 +import static org.springframework.test.web.servlet.result.MockMvcResultM
+        atchers.jsonPath;
+     6 +import static org.springframework.test.web.servlet.result.MockMvcResultM
+        atchers.status;
+     7 +import org.junit.jupiter.api.Test;
+     8 +import org.springframework.beans.factory.annotation.Autowired;
+     9 +import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTes
+        t;
+    10 +import org.springframework.test.web.servlet.MockMvc;
+    11 +
+    12 +@WebMvcTest(HealthController.class)
+    13 +class HealthControllerTest {
+    14 +    @Autowired MockMvc mockMvc;
+    15 +    @Test void reportsUp() throws Exception {
+    16 +        mockMvc.perform(get("/api/health"))
+    17 +            .andExpect(status().isOk())
+    18 +            .andExpect(jsonPath("$.status", is("UP")));
+    19 +    }
+    20 +}
+    21 +
+
+  └ compose.yaml (+29 -0)
+     1 +services:
+     2 +  db:
+     3 +    image: mysql:8.4
+     4 +    environment:
+     5 +      MYSQL_DATABASE: instandhaltung
+     6 +      MYSQL_USER: instandhaltung
+     7 +      MYSQL_PASSWORD: instandhaltung
+     8 +      MYSQL_ROOT_PASSWORD: local-root-only
+     9 +    ports: ["3306:3306"]
+    10 +    volumes: ["mysql-data:/var/lib/mysql"]
+    11 +    healthcheck:
+    12 +      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+    13 +      interval: 5s
+    14 +      timeout: 3s
+    15 +      retries: 20
+    16 +  app:
+    17 +    build: .
+    18 +    environment:
+    19 +      DB_URL: jdbc:mysql://db:3306/instandhaltung?useSSL=false&allowPubl
+        icKeyRetrieval=true
+    20 +      DB_USERNAME: instandhaltung
+    21 +      DB_PASSWORD: instandhaltung
+    22 +      DB_MIGRATION_ENABLED: "true"
+    23 +    ports: ["8080:8080"]
+    24 +    depends_on:
+    25 +      db:
+    26 +        condition: service_healthy
+    27 +volumes:
+    28 +  mysql-data:
+    29 +
+
+  └ frontend/angular.json (+36 -0)
+     1 +{
+     2 +  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+     3 +  "version": 1,
+     4 +  "projects": {
+     5 +    "frontend": {
+     6 +      "projectType": "application",
+     7 +      "root": "",
+     8 +      "sourceRoot": "src",
+     9 +      "prefix": "app",
+    10 +      "architect": {
+    11 +        "build": {
+    12 +          "builder": "@angular-devkit/build-angular:application",
+    13 +          "options": {
+    14 +            "browser": "src/main.ts",
+    15 +            "polyfills": ["zone.js"],
+    16 +            "tsConfig": "tsconfig.app.json",
+    17 +            "assets": [{"glob": "**/*", "input": "public"}],
+    18 +            "styles": ["src/styles.css"]
+    19 +          },
+    20 +          "configurations": {
+    21 +            "production": {
+    22 +              "outputHashing": "all",
+    23 +              "budgets": [{"type": "initial", "maximumWarning": "750kB",
+         "maximumError": "1MB"}]
+    24 +            }
+    25 +          },
+    26 +          "defaultConfiguration": "production"
+    27 +        },
+    28 +        "serve": {
+    29 +          "builder": "@angular-devkit/build-angular:dev-server",
+    30 +          "options": {"buildTarget": "frontend:build"}
+    31 +        }
+    32 +      }
+    33 +    }
+    34 +  }
+    35 +}
+    36 +
+
+  └ frontend/package.json (+22 -0)
+     1 +{
+     2 +  "name": "instandhaltung26-frontend",
+     3 +  "version": "0.0.1",
+     4 +  "private": true,
+     5 +  "scripts": {"start": "ng serve --proxy-config proxy.conf.json", "build
+        ": "ng build"},
+     6 +  "dependencies": {
+     7 +    "@angular/common": "20.0.0",
+     8 +    "@angular/compiler": "20.0.0",
+     9 +    "@angular/core": "20.0.0",
+    10 +    "@angular/platform-browser": "20.0.0",
+    11 +    "rxjs": "7.8.2",
+    12 +    "tslib": "2.8.1",
+    13 +    "zone.js": "0.15.0"
+    14 +  },
+    15 +  "devDependencies": {
+    16 +    "@angular-devkit/build-angular": "20.0.0",
+    17 +    "@angular/cli": "20.0.0",
+    18 +    "@angular/compiler-cli": "20.0.0",
+    19 +    "typescript": "5.8.3"
+    20 +  }
+    21 +}
+    22 +
+
+  └ frontend/proxy.conf.json (+2 -0)
+    1 +{"/api": {"target": "http://localhost:8080", "secure": false}}
+    2 +
+
+  └ frontend/src/app/app.component.css (+8 -0)
+    1 +:host { display: block; }
+    2 +main { max-width: 760px; margin: 12vh auto; padding: 3rem; background: #f
+       ff; border-radius: 18px; box-shadow: 0 18px 60px #18332a18; }
+    3 +.eyebrow { color: #197451; font-weight: 700; letter-spacing: .14em; text-
+       transform: uppercase; }
+    4 +h1 { margin: .4rem 0 1rem; font-size: clamp(2.4rem, 7vw, 4.8rem); line-he
+       ight: .98; color: #18332a; }
+    5 +p { color: #52645e; font-size: 1.1rem; line-height: 1.6; }
+    6 +section { display: flex; justify-content: space-between; margin-top: 2.5r
+       em; padding-top: 1.25rem; border-top: 1px solid #d9e2de; }
+    7 +strong { color: #197451; }
+    8 +
+
+  └ frontend/src/app/app.component.html (+7 -0)
+    1 +<main>
+    2 +  <p class="eyebrow">Instandhaltung 2026</p>
+    3 +  <h1>Das neue Fundament steht.</h1>
+    4 +  <p>Angular und Spring Boot werden gemeinsam als zustandsloser Cloud-Run
+       -Container ausgeliefert.</p>
+    5 +  <section><span>Backend</span><strong>{{ backendStatus | async }}</stron
+       g></section>
+    6 +</main>
+    7 +
+
+  └ frontend/src/app/app.component.ts (+20 -0)
+     1 +import { AsyncPipe } from '@angular/common';
+     2 +import { HttpClient } from '@angular/common/http';
+     3 +import { Component, inject } from '@angular/core';
+     4 +import { catchError, map, of } from 'rxjs';
+     5 +
+     6 +@Component({
+     7 +  selector: 'app-root',
+     8 +  standalone: true,
+     9 +  imports: [AsyncPipe],
+    10 +  templateUrl: './app.component.html',
+    11 +  styleUrl: './app.component.css'
+    12 +})
+    13 +export class AppComponent {
+    14 +  private readonly http = inject(HttpClient);
+    15 +  readonly backendStatus = this.http.get<{status: string}>('/api/health'
+        ).pipe(
+    16 +    map(response => response.status),
+    17 +    catchError(() => of('NICHT ERREICHBAR'))
+    18 +  );
+    19 +}
+    20 +
+
+  └ frontend/src/index.html (+11 -0)
+     1 +<!doctype html>
+     2 +<html lang="de">
+     3 +<head>
+     4 +  <meta charset="utf-8">
+     5 +  <title>Instandhaltung</title>
+     6 +  <base href="/">
+     7 +  <meta name="viewport" content="width=device-width, initial-scale=1">
+     8 +</head>
+     9 +<body><app-root></app-root></body>
+    10 +</html>
+    11 +
+
+  └ frontend/src/main.ts (+7 -0)
+    1 +import { provideHttpClient } from '@angular/common/http';
+    2 +import { bootstrapApplication } from '@angular/platform-browser';
+    3 +import { AppComponent } from './app/app.component';
+    4 +
+    5 +bootstrapApplication(AppComponent, {providers: [provideHttpClient()]})
+    6 +  .catch((error: unknown) => console.error(error));
+    7 +
+
+  └ frontend/src/styles.css (+4 -0)
+    1 +html { font-family: Inter, ui-sans-serif, system-ui, sans-serif; backgrou
+       nd: #eef4f1; }
+    2 +body { margin: 0; padding: 1rem; }
+    3 +* { box-sizing: border-box; }
+    4 +
+
+  └ frontend/tsconfig.app.json (+7 -0)
+    1 +{
+    2 +  "extends": "./tsconfig.json",
+    3 +  "compilerOptions": {"outDir": "./out-tsc/app", "types": []},
+    4 +  "files": ["src/main.ts"],
+    5 +  "include": ["src/**/*.d.ts"]
+    6 +}
+    7 +
+
+  └ frontend/tsconfig.json (+26 -0)
+     1 +{
+     2 +  "compileOnSave": false,
+     3 +  "compilerOptions": {
+     4 +    "outDir": "./dist/out-tsc",
+     5 +    "strict": true,
+     6 +    "noImplicitOverride": true,
+     7 +    "noPropertyAccessFromIndexSignature": true,
+     8 +    "noImplicitReturns": true,
+     9 +    "noFallthroughCasesInSwitch": true,
+    10 +    "sourceMap": true,
+    11 +    "declaration": false,
+    12 +    "experimentalDecorators": true,
+    13 +    "moduleResolution": "bundler",
+    14 +    "importHelpers": true,
+    15 +    "target": "ES2022",
+    16 +    "module": "ES2022",
+    17 +    "useDefineForClassFields": false,
+    18 +    "lib": ["ES2022", "dom"]
+    19 +  },
+    20 +  "angularCompilerOptions": {
+    21 +    "strictInjectionParameters": true,
+    22 +    "strictInputAccessModifiers": true,
+    23 +    "strictTemplates": true
+    24 +  }
+    25 +}
+    26 +
+
+✔ You approved codex to run rg --files -g '!node_modules/**' -g '!target/**' |
+  sort && git status --short... this time
+
+• Ran rg --files -g '!node_modules/**' -g '!target/**' | sort && git status
+  │ --short 2>/dev/null || true
+  └ (no output)
+
+• Explored
+  └ List instandhaltung26
+
+────────────────────────────────────────────────────────────────────────────────
+
+• Das Patch-Werkzeug hat außerhalb des freigegebenen Workspace erwartungsgemäß
+  keine Dateien geschrieben. Ich erstelle dieselben Dateien deshalb zunächst mit
+  dem vorgeschriebenen Patch-Verfahren innerhalb des freigegebenen Bereichs und
+  verschiebe anschließend ausschließlich dieses neue Verzeichnis an den
+  gewünschten Schwesterpfad.
+
+• Edited 23 files (+295 -0)
+  └ instandhaltung26-scaffold/.dockerignore (+6 -0)
+    1 +.git
+    2 +.idea
+    3 +**/node_modules
+    4 +**/dist
+    5 +**/target
+    6 +.env
+
+  └ instandhaltung26-scaffold/.env.example (+10 -0)
+     1 +DB_URL=jdbc:mysql://localhost:3306/instandhaltung?useSSL=false&allowPubl
+        icKeyRetrieval=true
+     2 +DB_USERNAME=instandhaltung
+     3 +DB_PASSWORD=change-me
+     4 +DB_MIGRATION_ENABLED=true
+     5 +MAIL_HOST=localhost
+     6 +MAIL_PORT=1025
+     7 +MAIL_USERNAME=
+     8 +MAIL_PASSWORD=
+     9 +MAIL_SMTP_AUTH=false
+    10 +MAIL_STARTTLS=false
+
+  └ instandhaltung26-scaffold/.gitignore (+7 -0)
+    1 +.idea/
+    2 +*.iml
+    3 +.env
+    4 +backend/target/
+    5 +frontend/.angular/
+    6 +frontend/dist/
+    7 +frontend/node_modules/
+
+  └ instandhaltung26-scaffold/Dockerfile (+22 -0)
+     1 +FROM node:22-alpine AS frontend-build
+     2 +WORKDIR /workspace/frontend
+     3 +COPY frontend/package*.json ./
+     4 +RUN npm install
+     5 +COPY frontend/ ./
+     6 +RUN npm run build
+     7 +
+     8 +FROM maven:3.9-eclipse-temurin-21 AS backend-build
+     9 +WORKDIR /workspace/backend
+    10 +COPY backend/pom.xml ./
+    11 +RUN mvn -B dependency:go-offline
+    12 +COPY backend/src ./src
+    13 +COPY --from=frontend-build /workspace/frontend/dist/frontend/browser ./s
+        rc/main/resources/static
+    14 +RUN mvn -B clean package -DskipTests
+    15 +
+    16 +FROM eclipse-temurin:21-jre-alpine
+    17 +RUN apk add --no-cache fontconfig ttf-dejavu && addgroup -S app && addus
+        er -S app -G app
+    18 +WORKDIR /app
+    19 +COPY --from=backend-build /workspace/backend/target/instandhaltung26.jar
+         app.jar
+    20 +USER app
+    21 +EXPOSE 8080
+    22 +ENTRYPOINT ["java", "-XX:MaxRAMPercentage=75", "-jar", "/app/app.jar"]
+
+  └ instandhaltung26-scaffold/README.md (+27 -0)
+     1 +# instandhaltung26
+     2 +
+     3 +Greenfield-Nachfolger der Swing-Anwendung `instandhaltung`. Das Legacy-P
+        rojekt bleibt unveränderte Referenz für Fachlogik, SQL, Masken und Jaspe
+        rReports.
+     4 +
+     5 +## Architektur
+     6 +
+     7 +- Angular-Frontend, im Produktionsbuild von Spring Boot ausgeliefert
+     8 +- Spring-Boot-REST-API auf Java 21 mit Embedded Tomcat
+     9 +- JDBC/HikariCP und Flyway für TiDB Cloud (MySQL-kompatibel)
+    10 +- JasperReports für serverseitige Berichte und Spring Mail für SMTP
+    11 +- ein zustandsloser Docker-Container für Google Cloud Run
+    12 +
+    13 +## Lokal starten
+    14 +
+    15 +```bash
+    16 +docker compose up --build
+    17 +```
+    18 +
+    19 +Danach: Anwendung `http://localhost:8080`, REST-Prüfung `/api/health`, C
+        loud-Run-Probe `/actuator/health`.
+    20 +
+    21 +Für getrennte Entwicklung läuft das Backend auf Port 8080 und Angular mi
+        ttels `npm start` auf Port 4200. Der Proxy leitet `/api` zum Backend.
+    22 +
+    23 +## TiDB Cloud und Cloud Run
+    24 +
+    25 +`DB_URL`, `DB_USERNAME` und `DB_PASSWORD` werden in Cloud Run gesetzt; K
+        ennwörter kommen aus Secret Manager. Die TiDB-JDBC-URL muss die vom Clus
+        ter vorgegebenen TLS-Parameter enthalten. `PORT` setzt Cloud Run automat
+        isch.
+    26 +
+    27 +SMTP wird über `MAIL_HOST`, `MAIL_PORT`, `MAIL_USERNAME`, `MAIL_PASSWORD
+        `, `MAIL_SMTP_AUTH` und `MAIL_STARTTLS` konfiguriert. Flyway wird über `
+        DB_MIGRATION_ENABLED=true` eingeschaltet.
+
+  └ instandhaltung26-scaffold/backend/pom.xml (+20 -0)
+     1 +<?xml version="1.0" encoding="UTF-8"?>
+     2 +<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www
+        .w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache
+        .org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+     3 +  <modelVersion>4.0.0</modelVersion>
+     4 +  <parent><groupId>org.springframework.boot</groupId><artifactId>spring-
+        boot-starter-parent</artifactId><version>3.5.0</version><relativePath/><
+        /parent>
+     5 +  <groupId>de.keag</groupId><artifactId>instandhaltung26</artifactId><ve
+        rsion>0.0.1-SNAPSHOT</version>
+     6 +  <properties><java.version>21</java.version><jasperreports.version>6.21
+        .5</jasperreports.version></properties>
+     7 +  <dependencies>
+     8 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-web</artifactId></dependency>
+     9 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-validation</artifactId></dependency>
+    10 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-jdbc</artifactId></dependency>
+    11 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-actuator</artifactId></dependency>
+    12 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-mail</artifactId></dependency>
+    13 +    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-core</
+        artifactId></dependency>
+    14 +    <dependency><groupId>org.flywaydb</groupId><artifactId>flyway-mysql<
+        /artifactId></dependency>
+    15 +    <dependency><groupId>com.mysql</groupId><artifactId>mysql-connector-
+        j</artifactId><scope>runtime</scope></dependency>
+    16 +    <dependency><groupId>net.sf.jasperreports</groupId><artifactId>jaspe
+        rreports</artifactId><version>${jasperreports.version}</version></depend
+        ency>
+    17 +    <dependency><groupId>org.springframework.boot</groupId><artifactId>s
+        pring-boot-starter-test</artifactId><scope>test</scope></dependency>
+    18 +  </dependencies>
+    19 +  <build><finalName>instandhaltung26</finalName><plugins><plugin><groupI
+        d>org.springframework.boot</groupId><artifactId>spring-boot-maven-plugin
+        </artifactId></plugin></plugins></build>
+    20 +</project>
+
+  └ instandhaltung26-scaffold/backend/src/main/java/de/keag/instandhaltung/
+  InstandhaltungApplication.java (+7 -0)
+    1 +package de.keag.instandhaltung;
+    2 +import org.springframework.boot.SpringApplication;
+    3 +import org.springframework.boot.autoconfigure.SpringBootApplication;
+    4 +@SpringBootApplication
+    5 +public class InstandhaltungApplication {
+    6 +    public static void main(String[] args) { SpringApplication.run(Instan
+       dhaltungApplication.class, args); }
+    7 +}
+
+  └ instandhaltung26-scaffold/backend/src/main/java/de/keag/instandhaltung/
+  system/HealthController.java (+12 -0)
+     1 +package de.keag.instandhaltung.system;
+     2 +import java.time.Instant;
+     3 +import java.util.Map;
+     4 +import org.springframework.web.bind.annotation.GetMapping;
+     5 +import org.springframework.web.bind.annotation.RequestMapping;
+     6 +import org.springframework.web.bind.annotation.RestController;
+     7 +@RestController
+     8 +@RequestMapping("/api")
+     9 +public class HealthController {
+    10 +    @GetMapping("/health")
+    11 +    public Map<String, Object> health() { return Map.of("status", "UP",
+        "time", Instant.now().toString()); }
+    12 +}
+
+  └ instandhaltung26-scaffold/backend/src/main/resources/application.yml (+32
+  -0)
+     1 +spring:
+     2 +  application:
+     3 +    name: instandhaltung26
+     4 +  datasource:
+     5 +    url: ${DB_URL:jdbc:mysql://localhost:3306/instandhaltung?useSSL=fals
+        e&allowPublicKeyRetrieval=true}
+     6 +    username: ${DB_USERNAME:instandhaltung}
+     7 +    password: ${DB_PASSWORD:instandhaltung}
+     8 +    hikari:
+     9 +      initialization-fail-timeout: -1
+    10 +      maximum-pool-size: ${DB_POOL_SIZE:5}
+    11 +  flyway:
+    12 +    enabled: ${DB_MIGRATION_ENABLED:false}
+    13 +  mail:
+    14 +    host: ${MAIL_HOST:localhost}
+    15 +    port: ${MAIL_PORT:1025}
+    16 +    username: ${MAIL_USERNAME:}
+    17 +    password: ${MAIL_PASSWORD:}
+    18 +    properties:
+    19 +      mail.smtp.auth: ${MAIL_SMTP_AUTH:false}
+    20 +      mail.smtp.starttls.enable: ${MAIL_STARTTLS:false}
+    21 +server:
+    22 +  port: ${PORT:8080}
+    23 +  forward-headers-strategy: framework
+    24 +management:
+    25 +  endpoints:
+    26 +    web:
+    27 +      exposure:
+    28 +        include: health,info
+    29 +  endpoint:
+    30 +    health:
+    31 +      probes:
+    32 +        enabled: true
+
+  └ instandhaltung26-scaffold/backend/src/main/resources/db/migration/
+  V1__baseline.sql (+5 -0)
+    1 +CREATE TABLE IF NOT EXISTS schema_marker (
+    2 +    id BIGINT PRIMARY KEY,
+    3 +    description VARCHAR(255) NOT NULL,
+    4 +    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+    5 +);
+
+  └ instandhaltung26-scaffold/backend/src/test/java/de/keag/instandhaltung/
+  system/HealthControllerTest.java (+16 -0)
+     1 +package de.keag.instandhaltung.system;
+     2 +import static org.hamcrest.Matchers.is;
+     3 +import static org.springframework.test.web.servlet.request.MockMvcReques
+        tBuilders.get;
+     4 +import static org.springframework.test.web.servlet.result.MockMvcResultM
+        atchers.jsonPath;
+     5 +import static org.springframework.test.web.servlet.result.MockMvcResultM
+        atchers.status;
+     6 +import org.junit.jupiter.api.Test;
+     7 +import org.springframework.beans.factory.annotation.Autowired;
+     8 +import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTes
+        t;
+     9 +import org.springframework.test.web.servlet.MockMvc;
+    10 +@WebMvcTest(HealthController.class)
+    11 +class HealthControllerTest {
+    12 +    @Autowired MockMvc mockMvc;
+    13 +    @Test void reportsUp() throws Exception {
+    14 +        mockMvc.perform(get("/api/health")).andExpect(status().isOk()).a
+        ndExpect(jsonPath("$.status", is("UP")));
+    15 +    }
+    16 +}
+
+  └ instandhaltung26-scaffold/compose.yaml (+28 -0)
+     1 +services:
+     2 +  db:
+     3 +    image: mysql:8.4
+     4 +    environment:
+     5 +      MYSQL_DATABASE: instandhaltung
+     6 +      MYSQL_USER: instandhaltung
+     7 +      MYSQL_PASSWORD: instandhaltung
+     8 +      MYSQL_ROOT_PASSWORD: local-root-only
+     9 +    ports: ["3306:3306"]
+    10 +    volumes: ["mysql-data:/var/lib/mysql"]
+    11 +    healthcheck:
+    12 +      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+    13 +      interval: 5s
+    14 +      timeout: 3s
+    15 +      retries: 20
+    16 +  app:
+    17 +    build: .
+    18 +    environment:
+    19 +      DB_URL: jdbc:mysql://db:3306/instandhaltung?useSSL=false&allowPubl
+        icKeyRetrieval=true
+    20 +      DB_USERNAME: instandhaltung
+    21 +      DB_PASSWORD: instandhaltung
+    22 +      DB_MIGRATION_ENABLED: "true"
+    23 +    ports: ["8080:8080"]
+    24 +    depends_on:
+    25 +      db:
+    26 +        condition: service_healthy
+    27 +volumes:
+    28 +  mysql-data:
+
+  └ instandhaltung26-scaffold/frontend/angular.json (+27 -0)
+     1 +{
+     2 +  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+     3 +  "version": 1,
+     4 +  "projects": {
+     5 +    "frontend": {
+     6 +      "projectType": "application",
+     7 +      "root": "",
+     8 +      "sourceRoot": "src",
+     9 +      "prefix": "app",
+    10 +      "architect": {
+    11 +        "build": {
+    12 +          "builder": "@angular-devkit/build-angular:application",
+    13 +          "options": {
+    14 +            "browser": "src/main.ts",
+    15 +            "polyfills": ["zone.js"],
+    16 +            "tsConfig": "tsconfig.app.json",
+    17 +            "assets": [],
+    18 +            "styles": ["src/styles.css"]
+    19 +          },
+    20 +          "configurations": {"production": {"outputHashing": "all"}},
+    21 +          "defaultConfiguration": "production"
+    22 +        },
+    23 +        "serve": {"builder": "@angular-devkit/build-angular:dev-server",
+         "options": {"buildTarget": "frontend:build"}}
+    24 +      }
+    25 +    }
+    26 +  }
+    27 +}
+
+  └ instandhaltung26-scaffold/frontend/package.json (+21 -0)
+     1 +{
+     2 +  "name": "instandhaltung26-frontend",
+     3 +  "version": "0.0.1",
+     4 +  "private": true,
+     5 +  "scripts": {"start": "ng serve --proxy-config proxy.conf.json", "build
+        ": "ng build"},
+     6 +  "dependencies": {
+     7 +    "@angular/common": "20.0.0",
+     8 +    "@angular/compiler": "20.0.0",
+     9 +    "@angular/core": "20.0.0",
+    10 +    "@angular/platform-browser": "20.0.0",
+    11 +    "rxjs": "7.8.2",
+    12 +    "tslib": "2.8.1",
+    13 +    "zone.js": "0.15.0"
+    14 +  },
+    15 +  "devDependencies": {
+    16 +    "@angular-devkit/build-angular": "20.0.0",
+    17 +    "@angular/cli": "20.0.0",
+    18 +    "@angular/compiler-cli": "20.0.0",
+    19 +    "typescript": "5.8.3"
+    20 +  }
+    21 +}
+
+  └ instandhaltung26-scaffold/frontend/proxy.conf.json (+1 -0)
+    1 +{"/api": {"target": "http://localhost:8080", "secure": false}}
+
+  └ instandhaltung26-scaffold/frontend/src/app/app.component.css (+7 -0)
+    1 +:host { display: block; }
+    2 +main { max-width: 760px; margin: 12vh auto; padding: 3rem; background: #f
+       ff; border-radius: 18px; box-shadow: 0 18px 60px #18332a18; }
+    3 +.eyebrow { color: #197451; font-weight: 700; letter-spacing: .14em; text-
+       transform: uppercase; }
+    4 +h1 { margin: .4rem 0 1rem; font-size: clamp(2.4rem, 7vw, 4.8rem); line-he
+       ight: .98; color: #18332a; }
+    5 +p { color: #52645e; font-size: 1.1rem; line-height: 1.6; }
+    6 +section { display: flex; justify-content: space-between; margin-top: 2.5r
+       em; padding-top: 1.25rem; border-top: 1px solid #d9e2de; }
+    7 +strong { color: #197451; }
+
+  └ instandhaltung26-scaffold/frontend/src/app/app.component.html (+6 -0)
+    1 +<main>
+    2 +  <p class="eyebrow">Instandhaltung 2026</p>
+    3 +  <h1>Das neue Fundament steht.</h1>
+    4 +  <p>Angular und Spring Boot werden gemeinsam als zustandsloser Cloud-Run
+       -Container ausgeliefert.</p>
+    5 +  <section><span>Backend</span><strong>{{ backendStatus | async }}</stron
+       g></section>
+    6 +</main>
+
+  └ instandhaltung26-scaffold/frontend/src/app/app.component.ts (+10 -0)
+     1 +import { AsyncPipe } from '@angular/common';
+     2 +import { HttpClient } from '@angular/common/http';
+     3 +import { Component, inject } from '@angular/core';
+     4 +import { catchError, map, of } from 'rxjs';
+     5 +@Component({selector: 'app-root', standalone: true, imports: [AsyncPipe]
+        , templateUrl: './app.component.html', styleUrl: './app.component.css'})
+     6 +export class AppComponent {
+     7 +  private readonly http = inject(HttpClient);
+     8 +  readonly backendStatus = this.http.get<{status: string}>('/api/health'
+        ).pipe(
+     9 +    map(response => response.status), catchError(() => of('NICHT ERREICH
+        BAR')));
+    10 +}
+
+  └ instandhaltung26-scaffold/frontend/src/index.html (+3 -0)
+    1 +<!doctype html>
+    2 +<html lang="de"><head><meta charset="utf-8"><title>Instandhaltung</title>
+       <base href="/"><meta name="viewport" content="width=device-width, initial
+       -scale=1"></head>
+    3 +<body><app-root></app-root></body></html>
+
+  └ instandhaltung26-scaffold/frontend/src/main.ts (+4 -0)
+    1 +import { provideHttpClient } from '@angular/common/http';
+    2 +import { bootstrapApplication } from '@angular/platform-browser';
+    3 +import { AppComponent } from './app/app.component';
+    4 +bootstrapApplication(AppComponent, {providers: [provideHttpClient()]}).ca
+       tch((error: unknown) => console.error(error));
+
+  └ instandhaltung26-scaffold/frontend/src/styles.css (+3 -0)
+    1 +html { font-family: Inter, ui-sans-serif, system-ui, sans-serif; backgrou
+       nd: #eef4f1; }
+    2 +body { margin: 0; padding: 1rem; }
+    3 +* { box-sizing: border-box; }
+
+  └ instandhaltung26-scaffold/frontend/tsconfig.app.json (+1 -0)
+    1 +{"extends": "./tsconfig.json", "compilerOptions": {"outDir": "./out-tsc/a
+       pp", "types": []}, "files": ["src/main.ts"], "include": ["src/**/*.d.ts"]
+       }
+
+  └ instandhaltung26-scaffold/frontend/tsconfig.json (+20 -0)
+     1 +{
+     2 +  "compileOnSave": false,
+     3 +  "compilerOptions": {
+     4 +    "strict": true,
+     5 +    "noImplicitOverride": true,
+     6 +    "noPropertyAccessFromIndexSignature": true,
+     7 +    "noImplicitReturns": true,
+     8 +    "noFallthroughCasesInSwitch": true,
+     9 +    "sourceMap": true,
+    10 +    "declaration": false,
+    11 +    "experimentalDecorators": true,
+    12 +    "moduleResolution": "bundler",
+    13 +    "importHelpers": true,
+    14 +    "target": "ES2022",
+    15 +    "module": "ES2022",
+    16 +    "useDefineForClassFields": false,
+    17 +    "lib": ["ES2022", "dom"]
+    18 +  },
+    19 +  "angularCompilerOptions": {"strictInjectionParameters": true, "strictI
+        nputAccessModifiers": true, "strictTemplates": true}
+    20 +}
+
+• Explored
+  └ List instandhaltung26-scaffold
+
+✔ You approved codex to run rmdir /home/admin/IdeaProjects/instandhaltung26 &&
+  mv /home/admin/IdeaProject... this time
+
+• Ran rmdir /home/admin/IdeaProjects/instandhaltung26 && mv /home/admin/
+  │ IdeaProjects/instandhaltung/instandhaltung26-scaffold /home/admin/
+  │ IdeaProjects/instandhaltung26
+  └ (no output)
+
+────────────────────────────────────────────────────────────────────────────────
+
+• Das Projekt liegt nun am gewünschten Pfad. Als letzte Prüfung installiere ich
+  die festgelegten Angular-Abhängigkeiten, erzeuge damit die Lockdatei und führe
+  den Frontend-Produktionsbuild aus; das Backend kann lokal erst mit Java/Maven
+  oder über Docker kompiliert werden, die auf diesem Rechner derzeit fehlen.
+
+✔ You approved codex to run npm install && npm run build this time
+
+• Ran npm install && npm run build
+  └ npm WARN EBADENGINE Unsupported engine {
+    npm WARN EBADENGINE   package: '@angular-devkit/build-angular@20.0.0',
+    … +155 lines (ctrl + t to view transcript)
+    additional instructions.
+
+
+────────────────────────────────────────────────────────────────────────────────
+
+• Die Lockdatei wurde erzeugt. Der lokale Build stoppt ausschließlich an der
+  vorhandenen Node-Version 18.19; Angular 20 verlangt mindestens Node 20.11,
+  während der Docker-Build bereits Node 22 nutzt. Ich passe den Container jetzt
+  auf die reproduzierbare Lockdatei (npm ci) an und führe noch statische
+  Konsistenzprüfungen durch.
+
+✔ You approved codex to run apply_patch "*** Begin Patch\n*** Update File:
+  Dockerfile\n@@\n-RUN npm insta... this time
+
+• Ran apply_patch "*** Begin Patch\n*** Update File: Dockerfile\n@@\n-RUN npm
+  │ install\n+RUN npm ci\n*** Update File: README.md\n@@\n-Für getrennte
+  │ Entwicklung läuft das Backend auf Port 8080 und Angular mittels `npm
+  │ … +4 lines
+  └ npm ERR! code ENOENT
+    npm ERR! syscall open
+    … +20 lines (ctrl + t to view transcript)
+    /bin/bash: line 1: /api: No such file or directory
+    Invalid patch: The first line of the patch must be '*** Begin Patch'
+
+✔ You approved codex to run node -e "for (const f of ['frontend/
+  package.json','frontend/angular.json','fr... this time
+
+• Ran node -e "for (const f of ['frontend/package.json','frontend/
+  │ angular.json','frontend/tsconfig.json','frontend/
+  │ tsconfig.app.json','frontend/proxy.conf.json'])
+  │ … +4 lines
+  └ JSON configuration: OK
+    Dockerfile
+    … +19 lines (ctrl + t to view transcript)
+    frontend/tsconfig.json
+    npm lockfile: OK
+
+────────────────────────────────────────────────────────────────────────────────
+
+• Das neue Projekt wurde unter /home/admin/IdeaProjects/instandhaltung26
+  angelegt. Das Legacy-Projekt blieb unverändert.
+
+  Enthalten sind:
+
+  - Spring Boot 3.5 / Java 21 mit REST-Health-Endpunkt
+  - Angular 20 mit einfacher Statusseite
+  - JDBC/HikariCP für TiDB/MySQL
+  - Flyway-Baseline
+  - JasperReports und Spring Mail
+  - Multi-Stage-/home/admin/IdeaProjects/instandhaltung26/Dockerfile
+  - lokale MySQL-Umgebung per /home/admin/IdeaProjects/instandhaltung26/
+    compose.yaml
+
+  - Cloud-Run-kompatibler PORT
+  - Umgebungsvariablen und Secret-Vorlage
+  - Backend-Test und npm-Lockdatei
+  - Dokumentation in der /home/admin/IdeaProjects/instandhaltung26/README.md
+
+  Die Konfigurationsdateien wurden statisch erfolgreich geprüft. Ein
+  vollständiger Build war lokal noch nicht möglich:
+
+  - Installiert ist Node 18.19; Angular 20 benötigt mindestens Node 20.11. Der
+    Docker-Build verwendet bereits Node 22.
+
+  - Java, Maven und Docker sind auf dem Rechner derzeit nicht verfügbar.
+  - npm audit meldet für den aktuellen Angular-Abhängigkeitsbaum 33 Hinweise;
+    diese sollten vor einem produktiven Deployment bewertet und durch
+    Versionsaktualisierung bereinigt werden.
+
+  Sobald Docker installiert ist, lautet der vorgesehene Start:
+
+  cd /home/admin/IdeaProjects/instandhaltung26
+  docker compose up --build
+
+  Danach wäre die Anwendung unter http://localhost:8080 erreichbar.
+
+─ Worked for 11m 00s ───────────────────────────────────────────────────────────
+
+
+› so sieht es bei mir jetzt aus, nach der Docker installatin >>
+  admin@alexander2-ThinkStation-P360-Tower:~$ docker --version
+  docker compose version
+  docker buildx version
+  Docker version 29.6.1, build 8900f1d
+  Docker Compose version v5.3.1
+  github.com/docker/buildx v0.35.0 a319e5b15052cf6557ceb666eb8ff6e32380b782
+  admin@alexander2-ThinkStation-P360-Tower:~$ docker run --rm -p 8080:80 nginx
+  Unable to find image 'nginx:latest' locally
+  latest: Pulling from library/nginx
+  062e450697fa: Pull complete
+  39694cde734e: Pull complete
+  0b19be717994: Pull complete
+  3b9f3509a826: Pull complete
+  6a24a6ebcf30: Pull complete
+  8d2092eabbc5: Pull complete
+  45ef33eb91c8: Pull complete
+  cd64a2895680: Download complete
+  29456554d205: Download complete
+  Digest:
+  sha256:b5a9a3cfc86b81dd6f1458d53f2ad2b559cc255653d2efd6cacee5636bf2066f
+  Status: Downloaded newer image for nginx:latest
+  /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to
+  perform configuration
+  /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+  /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-
+  default.sh
+  10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/
+  conf.d/default.conf
+  10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/
+  conf.d/default.conf
+  /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+  /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-
+  templates.sh
+  /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-
+  processes.sh
+  /docker-entrypoint.sh: Configuration complete; ready for start up
+  2026/07/14 17:31:48 [notice] 1#1: using the "epoll" event method
+  2026/07/14 17:31:48 [notice] 1#1: nginx/1.31.2
+  2026/07/14 17:31:48 [notice] 1#1: built by gcc 14.2.0 (Debian 14.2.0-19)
+  2026/07/14 17:31:48 [notice] 1#1: OS: Linux 6.11.0-26-generic
+  2026/07/14 17:31:48 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1024:524288
+  2026/07/14 17:31:48 [notice] 1#1: start worker processes
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 29
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 30
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 31
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 32
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 33
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 34
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 35
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 36
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 37
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 38
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 39
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 40
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 41
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 42
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 43
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 44
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 45
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 46
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 47
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 48
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 49
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 50
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 51
+  2026/07/14 17:31:48 [notice] 1#1: start worker process 52
+  172.17.0.1 - - [14/Jul/2026:17:31:52 +0000] "GET / HTTP/1.1" 200 896 "-"
+  "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:146.0) Gecko/20100101
+  Firefox/146.0" "-"
+  2026/07/14 17:31:52 [error] 29#29: *1 open()
+  "/usr/share/nginx/html/favicon.ico" failed (2: No such file or directory),
+  client: 172.17.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1",
+  host: "localhost:8080", referrer: "http://localhost:8080/"
+  172.17.0.1 - - [14/Jul/2026:17:31:52 +0000] "GET /favicon.ico HTTP/1.1" 404
+  153 "http://localhost:8080/" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64;
+  rv:146.0) Gecko/20100101 Firefox/146.0" "-"
+
+
+• Das sieht gut aus: Docker Engine, Compose und Buildx funktionieren, und der
+  Nginx-Test war erfolgreich. Der favicon.ico-404 ist harmlos.
+
+  Der Nginx-Container läuft momentan im Vordergrund und belegt Port 8080. Beende
+  ihn zunächst mit:
+
+  Ctrl+C
+
+  Danach kannst du unser Projekt erstmals vollständig bauen und starten:
+
+  cd /home/admin/IdeaProjects/instandhaltung26
+  docker compose up --build
+
+  Beim ersten Durchlauf werden Node-, Maven-, Java- und MySQL-Images sowie alle
+  Abhängigkeiten geladen; das kann einige Minuten dauern. Anschließend:
+
+  - Anwendung: http://localhost:8080
+  - REST-Test: http://localhost:8080/api/health
+  - System-Health: http://localhost:8080/actuator/health
+
+  Falls der Build abbricht, sende mir einfach die Fehlermeldung. Dann korrigiere
+  ich das Projektgerüst direkt.
+
+■ Failed to paste image: no image on clipboard: The clipboard contents were not
+available in the requested format or the clipboard is empty.
+
+
+› http://localhost:8080/ liefer dies hier > Welcome to nginx!
+
+  If you see this page, nginx is successfully installed and working. Further
+  configuration is required for the web server, reverse proxy, API gateway,
+  load balancer, content cache, or other features.
+
+  For online documentation and support please refer to nginx.org.
+  To engage with the community please visit community.nginx.org.
+  For enterprise grade support, professional services, additional security
+  features and capabilities please refer to f5.com/nginx.
+
+  Thank you for using nginx.
+
+
+• Der Nginx-Testcontainer läuft noch und belegt Port 8080. Wechsle in das
+  Terminal, in dem docker run --rm -p 8080:80 nginx läuft, und drücke:
+
+  Ctrl+C
+
+  Falls das Terminal nicht mehr auffindbar ist:
+
+  docker ps
+
+  Dann den Nginx-Container über seine ID stoppen:
+
+  docker stop <CONTAINER_ID>
+
+  Anschließend das neue Projekt starten:
+
+  cd /home/admin/IdeaProjects/instandhaltung26
+  docker compose up --build
+
+  Prüfe danach erneut http://localhost:8080. Dort sollte „Das neue Fundament
+  steht“ statt der Nginx-Seite erscheinen.
+
+
+› Find and fix a bug in @filename
+
+  gpt-5.6-sol default · ~/IdeaProjects/instandhaltung
