@@ -1,0 +1,2748 @@
+026/07/14 17:33:40 [notice] 1#1: worker process 37 exited with code 0
+  2026/07/14 17:33:40 [notice] 1#1: signal 17 (SIGCHLD) received from 35
+  2026/07/14 17:33:40 [notice] 1#1: worker process 35 exited with code 0
+  2026/07/14 17:33:40 [notice] 1#1: exit
+  admin@alexander2-ThinkStation-P360-Tower:~$ cd /home/admin/IdeaProjects/
+  instandhaltung26
+    docker compose up --build
+  [+] up 13/13
+   ✔ Image mysql:8.4 Pulled
+  36.7s
+  [+] Building 292.8s (26/26) FINISHED
+   => [internal] load local bake definitions
+  0.0s
+   => => reading from stdin 540B
+  0.0s
+   => [internal] load build definition from Dockerfile
+  0.1s
+   => => transferring dockerfile: 792B
+  0.0s
+   => [internal] load metadata for
+  docker.io/library/eclipse-temurin:21-jre-alpine
+  1.5s
+   => [internal] load metadata for docker.io/library/node:22-alpine
+  1.6s
+   => [internal] load metadata for
+  docker.io/library/maven:3.9-eclipse-temurin-21
+  1.6s
+   => [internal] load .dockerignore
+  0.1s
+   => => transferring context: 90B
+  0.0s
+   => [stage-2 1/4] FROM
+  docker.io/library/eclipse-temurin:21-jre-alpine@sha256:3f08b13888f595cc49edabe
+a7250ba69499ba25602b267da59172076940
+  17.8s
+   => => resolve
+  docker.io/library/eclipse-temurin:21-jre-alpine@sha256:3f08b13888f595cc49edabe
+a7250ba69499ba25602b267da591720769400e08c
+  0.1s
+   => =>
+  sha256:19e04dda4cc8f30bcf6b1d841e785d39480726e5c43ef4a831590bee62f6096d
+  2.28kB / 2.28kB                                              0.4s
+   => =>
+  sha256:8cfab6bf27dfce5f5d20f1f7581fde4dea20655dee7870bf82459720482da648
+  128B / 128B                                                  0.2s
+   => =>
+  sha256:f48bc301bba7c8d73bf2805c4290bb5114f91b9282b58db35a330e971859078c
+  53.30MB / 53.30MB                                           15.6s
+   => =>
+  sha256:37871e84e40af454a54b03c545cfa7a05d360b1cf8bdc2b2faef8da08b487358
+  16.82MB / 16.82MB                                           12.0s
+   => =>
+  sha256:e6f31ffc071e5560b82a8685fba8214954e5721e3e49269d00958316edbe89fe
+  3.84MB / 3.84MB                                              2.7s
+   => => extracting
+  sha256:e6f31ffc071e5560b82a8685fba8214954e5721e3e49269d00958316edbe89fe
+  0.2s
+   => => extracting
+  sha256:37871e84e40af454a54b03c545cfa7a05d360b1cf8bdc2b2faef8da08b487358
+  0.4s
+   => => extracting
+  sha256:f48bc301bba7c8d73bf2805c4290bb5114f91b9282b58db35a330e971859078c
+  0.8s
+   => => extracting
+  sha256:8cfab6bf27dfce5f5d20f1f7581fde4dea20655dee7870bf82459720482da648
+  0.1s
+   => => extracting
+  sha256:19e04dda4cc8f30bcf6b1d841e785d39480726e5c43ef4a831590bee62f6096d
+  0.0s
+   => [frontend-build 1/6] FROM
+  docker.io/library/node:22-alpine@sha256:16e22a550f3863206a3f701448c45f7912c689
+6a62de43add43bb9c86130c3e2
+  27.4s
+   => => resolve
+  docker.io/library/node:22-alpine@sha256:16e22a550f3863206a3f701448c45f7912c689
+6a62de43add43bb9c86130c3e2
+  0.1s
+   => =>
+  sha256:d10ff586f6bdbdd6000a70a914e56bf05bedc78de3311d08a953643982d84e23
+  446B / 446B                                                  0.2s
+   => =>
+  sha256:1d4d101ceaad39fb56dcac0bb6cc291e6cdec3b711786f0c82b050b5b5b85690
+  1.26MB / 1.26MB                                              0.6s
+   => =>
+  sha256:3f4c164634d251a8b256151a9e1c1d3e5c5b21f1974f00a213875e66e3fa0801
+  52.31MB / 52.31MB                                           25.5s
+   => =>
+  sha256:55afa1ecc21d2bb5e5045f32dafee56272ffd89860bac26f6c32123439af26a4
+  3.85MB / 3.85MB                                              0.9s
+   => => extracting
+  sha256:55afa1ecc21d2bb5e5045f32dafee56272ffd89860bac26f6c32123439af26a4
+  0.2s
+   => => extracting
+  sha256:3f4c164634d251a8b256151a9e1c1d3e5c5b21f1974f00a213875e66e3fa0801
+  1.0s
+   => => extracting
+  sha256:1d4d101ceaad39fb56dcac0bb6cc291e6cdec3b711786f0c82b050b5b5b85690
+  0.1s
+   => => extracting
+  sha256:d10ff586f6bdbdd6000a70a914e56bf05bedc78de3311d08a953643982d84e23
+  0.0s
+   => [internal] load build context
+  0.3s
+   => => transferring context: 469.07kB
+  0.0s
+   => [backend-build 1/7] FROM
+  docker.io/library/maven:3.9-eclipse-temurin-21@sha256:2b4496088e7b80ae10a8c9f7
+4e574ea21380325a006ec684532ad6
+  52.8s
+   => => resolve
+  docker.io/library/maven:3.9-eclipse-temurin-21@sha256:2b4496088e7b80ae10a8c9f7
+4e574ea21380325a006ec684532ad6bad5bc7273
+  0.1s
+   => =>
+  sha256:764996f01d6f25c8fab2ee3732ca6fb511662b261669a0a71f7040bb84793beb
+  155B / 155B                                                  0.2s
+   => =>
+  sha256:39bd7d79a71081c646aadfa0604f7a29367aa6eb6034c4b30cc92bf5a5cf621b
+  853B / 853B                                                  0.2s
+   => =>
+  sha256:46f53307f145fa97c89252d562bc4dcc803e9187b42c03a1cf3b2c7f1b449b6d
+  9.36MB / 9.36MB                                              3.9s
+   => =>
+  sha256:9f2f6b5a0f335e9292c7c3fb15e5eac8df7a40c54cca6151bbe57194184f4a2c
+  24.95MB / 24.95MB                                            8.0s
+   => =>
+  sha256:9cda2e1bab1def689538dc788de29713a5ae061975dd3bbe89de89e7035b9536
+  2.28kB / 2.28kB                                              0.4s
+   => =>
+  sha256:f3203fa21b480c1257312dea0e6e7f0af55f7a0fa1c72b7fedbda4e5514c522b
+  158B / 158B                                                  0.3s
+   => =>
+  sha256:f55c6b566db012d556e9bfd6be4c87a9982106f3bfb9e2b5b069c2995ae29695
+  158.17MB / 158.17MB                                         35.8s
+   => =>
+  sha256:f0b722184a7b5cd41d88fcfe6715ae56de236481a707a2996078170bc0ffd7ff
+  22.93MB / 22.93MB                                            7.6s
+   => =>
+  sha256:ca2678b20700c15185707964d9211b1a6406196114bf675f568b6025d37b3888
+  29.74MB / 29.74MB                                           11.1s
+   => => extracting
+  sha256:ca2678b20700c15185707964d9211b1a6406196114bf675f568b6025d37b3888
+  0.8s
+   => => extracting
+  sha256:f0b722184a7b5cd41d88fcfe6715ae56de236481a707a2996078170bc0ffd7ff
+  0.5s
+   => => extracting
+  sha256:f55c6b566db012d556e9bfd6be4c87a9982106f3bfb9e2b5b069c2995ae29695
+  1.6s
+   => => extracting
+  sha256:f3203fa21b480c1257312dea0e6e7f0af55f7a0fa1c72b7fedbda4e5514c522b
+  0.0s
+   => => extracting
+  sha256:9cda2e1bab1def689538dc788de29713a5ae061975dd3bbe89de89e7035b9536
+  0.0s
+   => => extracting
+  sha256:9f2f6b5a0f335e9292c7c3fb15e5eac8df7a40c54cca6151bbe57194184f4a2c
+  0.8s
+   => => extracting
+  sha256:46f53307f145fa97c89252d562bc4dcc803e9187b42c03a1cf3b2c7f1b449b6d
+  0.2s
+   => => extracting
+  sha256:39bd7d79a71081c646aadfa0604f7a29367aa6eb6034c4b30cc92bf5a5cf621b
+  0.0s
+   => => extracting
+  sha256:764996f01d6f25c8fab2ee3732ca6fb511662b261669a0a71f7040bb84793beb
+  0.0s
+   => [stage-2 2/4] RUN apk add --no-cache fontconfig ttf-dejavu && addgroup -S
+  app && adduser -S app -G app                                 10.9s
+   => [frontend-build 2/6] WORKDIR /workspace/frontend
+  0.5s
+   => [frontend-build 3/6] COPY frontend/package*.json ./
+  0.1s
+   => [frontend-build 4/6] RUN npm install
+  30.9s
+   => [stage-2 3/4] WORKDIR /app
+  0.1s
+   => [backend-build 2/7] WORKDIR /workspace/backend
+  0.2s
+   => [backend-build 3/7] COPY backend/pom.xml ./
+  0.1s
+   => [backend-build 4/7] RUN mvn -B dependency:go-offline
+  225.7s
+   => [frontend-build 5/6] COPY frontend/ ./
+  0.4s
+   => [frontend-build 6/6] RUN npm run build
+  5.6s
+   => [backend-build 5/7] COPY backend/src ./src
+  0.2s
+   => [backend-build 6/7] COPY --from=frontend-build /workspace/frontend/dist/
+  frontend/browser ./src/main/resources/static                    0.1s
+   => [backend-build 7/7] RUN mvn -B clean package -DskipTests
+  7.5s
+   => [stage-2 4/4] COPY --from=backend-build /workspace/backend/target/
+  instandhaltung26.jar app.jar                                          0.2s
+   => exporting to image
+  3.6s
+   => => exporting layers
+  2.9s
+   => => exporting manifest
+  sha256:b93a023b22a0891e6604cce988917630898caa74cc6a6dfb38fa5f347d7302bb
+  0.0s
+   => => exporting config
+  sha256:4302a444a8f6c7695b8472de61bd7460ea4bf4d39d0679de7adaeaee29b7d1c9
+  0.0s
+   => => exporting attestation manifest
+  sha256:d1a68d5d5f1cba905c4ce9187a47fe859437cd58f9427d3336251c4975d163a0
+  0.1s
+   => => exporting manifest list
+  sha256:191535b44540609e74a2732dd31712a7a40d4917e1ac05512ca974a9b07dbb68
+  0.0s
+   => => naming to docker.io/library/instandhaltung26-app:latest
+  0.0s
+  [+] up 18/18king to docker.io/library/instandhaltung26-app:latest
+  0.5s
+   ✔ Image mysql:8.4                    Pulled
+  36.7s
+   ✔ Image instandhaltung26-app         Built
+  293.0s
+   ✔ Network instandhaltung26_default   Created
+  0.1s
+   ✔ Volume instandhaltung26_mysql-data Created
+  0.0s
+   ✔ Container instandhaltung26-db-1    Created
+  0.2s
+   ✔ Container instandhaltung26-app-1   Created
+  0.1s
+  Attaching to app-1, db-1
+  db-1  | 2026-07-14 17:39:27+00:00 [Note] [Entrypoint]: Entrypoint script for
+  MySQL Server 8.4.10-1.el9 started.
+  Container instandhaltung26-db-1 Waiting
+  db-1  | 2026-07-14 17:39:28+00:00 [Note] [Entrypoint]: Switching to dedicated
+  user 'mysql'
+  db-1  | 2026-07-14 17:39:28+00:00 [Note] [Entrypoint]: Entrypoint script for
+  MySQL Server 8.4.10-1.el9 started.
+  db-1  | 2026-07-14 17:39:28+00:00 [Note] [Entrypoint]: Initializing database
+  files
+  db-1  | 2026-07-14T17:39:28.829936Z 0 [System] [MY-015017] [Server] MySQL
+  Server Initialization - start.
+  db-1  | 2026-07-14T17:39:28.833306Z 0 [System] [MY-013169] [Server] /usr/
+  sbin/mysqld (mysqld 8.4.10) initializing of server in progress as process 80
+  db-1  | 2026-07-14T17:39:28.858995Z 1 [System] [MY-013576] [InnoDB] InnoDB
+  initialization has started.
+  db-1  | 2026-07-14T17:39:29.652451Z 1 [System] [MY-013577] [InnoDB] InnoDB
+  initialization has ended.
+  db-1  | 2026-07-14T17:39:33.182098Z 6 [Warning] [MY-010453] [Server]
+  root@localhost is created with an empty password ! Please consider switching
+  off the --initialize-insecure option.
+  db-1  | 2026-07-14T17:39:37.251291Z 0 [System] [MY-015018] [Server] MySQL
+  Server Initialization - end.
+  db-1  | 2026-07-14 17:39:37+00:00 [Note] [Entrypoint]: Database files
+  initialized
+  db-1  | 2026-07-14 17:39:37+00:00 [Note] [Entrypoint]: Starting temporary
+  server
+  db-1  | 2026-07-14T17:39:37.332730Z 0 [System] [MY-015015] [Server] MySQL
+  Server - start.
+  db-1  | 2026-07-14T17:39:37.522117Z 0 [System] [MY-010116] [Server] /usr/
+  sbin/mysqld (mysqld 8.4.10) starting as process 138
+  db-1  | 2026-07-14T17:39:37.551554Z 1 [System] [MY-013576] [InnoDB] InnoDB
+  initialization has started.
+  db-1  | 2026-07-14T17:39:38.231941Z 1 [System] [MY-013577] [InnoDB] InnoDB
+  initialization has ended.
+  db-1  | 2026-07-14T17:39:38.939463Z 0 [Warning] [MY-010068] [Server] CA
+  certificate ca.pem is self signed.
+  db-1  | 2026-07-14T17:39:38.939513Z 0 [System] [MY-013602] [Server] Channel
+  mysql_main configured to support TLS. Encrypted connections are now supported
+  for this channel.
+  db-1  | 2026-07-14T17:39:38.948413Z 0 [Warning] [MY-011810] [Server] Insecure
+  configuration for --pid-file: Location '/var/run/mysqld' in the path is
+  accessible to all OS users. Consider choosing a different directory.
+  db-1  | 2026-07-14T17:39:38.980633Z 0 [System] [MY-011323] [Server] X Plugin
+  ready for connections. Socket: /var/run/mysqld/mysqlx.sock
+  db-1  | 2026-07-14T17:39:38.980783Z 0 [System] [MY-010931] [Server] /usr/
+  sbin/mysqld: ready for connections. Version: '8.4.10'  socket: '/var/run/
+  mysqld/mysqld.sock'  port: 0  MySQL Community Server - GPL.
+  db-1  | 2026-07-14 17:39:39+00:00 [Note] [Entrypoint]: Temporary server
+  started.
+  db-1  | '/var/lib/mysql/mysql.sock' -> '/var/run/mysqld/mysqld.sock'
+  db-1  | Warning: Unable to load '/usr/share/zoneinfo/iso3166.tab' as time
+  zone. Skipping it.
+  db-1  | Warning: Unable to load '/usr/share/zoneinfo/leap-seconds.list' as
+  time zone. Skipping it.
+  db-1  | Warning: Unable to load '/usr/share/zoneinfo/leapseconds' as time
+  zone. Skipping it.
+  db-1  | Warning: Unable to load '/usr/share/zoneinfo/tzdata.zi' as time zone.
+  Skipping it.
+  db-1  | Warning: Unable to load '/usr/share/zoneinfo/zone.tab' as time zone.
+  Skipping it.
+  db-1  | Warning: Unable to load '/usr/share/zoneinfo/zone1970.tab' as time
+  zone. Skipping it.
+  db-1  | 2026-07-14 17:39:40+00:00 [Note] [Entrypoint]: Creating database
+  instandhaltung
+  db-1  | 2026-07-14 17:39:40+00:00 [Note] [Entrypoint]: Creating user
+  instandhaltung
+  db-1  | 2026-07-14 17:39:41+00:00 [Note] [Entrypoint]: Giving user
+  instandhaltung access to schema instandhaltung
+  db-1  |
+  db-1  | 2026-07-14 17:39:41+00:00 [Note] [Entrypoint]: Stopping temporary
+  server
+  db-1  | 2026-07-14T17:39:41.064070Z 13 [System] [MY-013172] [Server] Received
+  SHUTDOWN from user root. Shutting down mysqld (Version: 8.4.10).
+  db-1  | 2026-07-14 17:39:42+00:00 [Note] [Entrypoint]: Temporary server
+  stopped
+  db-1  |
+  db-1  | 2026-07-14 17:39:42+00:00 [Note] [Entrypoint]: MySQL init process
+  done. Ready for start up.
+  db-1  |
+  db-1  | 2026-07-14T17:39:42.075645Z 0 [System] [MY-010910] [Server] /usr/
+  sbin/mysqld: Shutdown complete (mysqld 8.4.10)  MySQL Community Server - GPL.
+  db-1  | 2026-07-14T17:39:42.075672Z 0 [System] [MY-015016] [Server] MySQL
+  Server - end.
+  db-1  | 2026-07-14T17:39:42.106290Z 0 [System] [MY-015015] [Server] MySQL
+  Server - start.
+  db-1  | 2026-07-14T17:39:42.294147Z 0 [System] [MY-010116] [Server] /usr/
+  sbin/mysqld (mysqld 8.4.10) starting as process 1
+  db-1  | 2026-07-14T17:39:42.307167Z 1 [System] [MY-013576] [InnoDB] InnoDB
+  initialization has started.
+  db-1  | 2026-07-14T17:39:42.985639Z 1 [System] [MY-013577] [InnoDB] InnoDB
+  initialization has ended.
+  db-1  | 2026-07-14T17:39:43.523130Z 0 [Warning] [MY-010068] [Server] CA
+  certificate ca.pem is self signed.
+  db-1  | 2026-07-14T17:39:43.523172Z 0 [System] [MY-013602] [Server] Channel
+  mysql_main configured to support TLS. Encrypted connections are now supported
+  for this channel.
+  db-1  | 2026-07-14T17:39:43.532520Z 0 [Warning] [MY-011810] [Server] Insecure
+  configuration for --pid-file: Location '/var/run/mysqld' in the path is
+  accessible to all OS users. Consider choosing a different directory.
+  db-1  | 2026-07-14T17:39:43.566539Z 0 [System] [MY-011323] [Server] X Plugin
+  ready for connections. Bind-address: '::' port: 33060, socket: /var/run/
+  mysqld/mysqlx.sock
+  db-1  | 2026-07-14T17:39:43.566601Z 0 [System] [MY-010931] [Server] /usr/
+  sbin/mysqld: ready for connections. Version: '8.4.10'  socket: '/var/run/
+  mysqld/mysqld.sock'  port: 3306  MySQL Community Server - GPL.
+  Container instandhaltung26-db-1 Healthy
+  app-1  | Standard Commons Logging discovery in action with spring-jcl: please
+  remove commons-logging.jar from classpath in order to avoid potential
+  conflicts
+  app-1  |
+  app-1  |   .   ____          _            __ _ _
+  app-1  |  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+  app-1  | ( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+  app-1  |  \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  app-1  |   '  |____| .__|_| |_|_| |_\__, | / / / /
+  app-1  |  =========|_|==============|___/=/_/_/_/
+  app-1  |
+  app-1  |  :: Spring Boot ::                (v3.5.0)
+  app-1  |
+  app-1  | 2026-07-14T17:39:49.474Z  INFO 1 --- [instandhaltung26]
+  [           main] d.k.i.InstandhaltungApplication          : Starting
+  InstandhaltungApplication v0.0.1-SNAPSHOT using Java 21.0.11 with PID 1 (/
+  app/app.jar started by app in /app)
+  app-1  | 2026-07-14T17:39:49.476Z  INFO 1 --- [instandhaltung26]
+  [           main] d.k.i.InstandhaltungApplication          : No active
+  profile set, falling back to 1 default profile: "default"
+  app-1  | 2026-07-14T17:39:50.246Z  INFO 1 --- [instandhaltung26]
+  [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat
+  initialized with port 8080 (http)
+  app-1  | 2026-07-14T17:39:50.255Z  INFO 1 --- [instandhaltung26]
+  [           main] o.apache.catalina.core.StandardService   : Starting service
+  [Tomcat]
+  app-1  | 2026-07-14T17:39:50.255Z  INFO 1 --- [instandhaltung26]
+  [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet
+  engine: [Apache Tomcat/10.1.41]
+  app-1  | 2026-07-14T17:39:50.270Z  INFO 1 --- [instandhaltung26]
+  [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing
+  Spring embedded WebApplicationContext
+  app-1  | 2026-07-14T17:39:50.271Z  INFO 1 --- [instandhaltung26]
+  [           main] w.s.c.ServletWebServerApplicationContext : Root
+  WebApplicationContext: initialization completed in 772 ms
+  app-1  | Standard Commons Logging discovery in action with spring-jcl: please
+  remove commons-logging.jar from classpath in order to avoid potential
+  conflicts
+  app-1  | 2026-07-14T17:39:50.446Z  INFO 1 --- [instandhaltung26]
+  [           main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome
+  page: class path resource [static/index.html]
+  app-1  | 2026-07-14T17:39:50.836Z  INFO 1 --- [instandhaltung26]
+  [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 -
+  Starting...
+  app-1  | 2026-07-14T17:39:50.863Z  INFO 1 --- [instandhaltung26]
+  [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 -
+  Start completed.
+  app-1  | 2026-07-14T17:39:51.090Z  INFO 1 --- [instandhaltung26] [
+  main] org.flywaydb.core.FlywayExecutor         : Database:
+  jdbc:mysql://db:3306/instandhaltung?useSSL=false&allowPublicKeyRetrieval=true
+  (MySQL 8.4)
+  app-1  | 2026-07-14T17:39:51.186Z  WARN 1 --- [instandhaltung26]
+  [           main] o.f.c.internal.database.base.Database    : Flyway upgrade
+  recommended: MySQL 8.4 is newer than this version of Flyway and support has
+  not been tested. The latest supported version of MySQL is 8.1.
+  app-1  | 2026-07-14T17:39:51.198Z  INFO 1 --- [instandhaltung26]
+  [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Schema history
+  table `instandhaltung`.`flyway_schema_history` does not exist yet
+  app-1  | 2026-07-14T17:39:51.199Z  INFO 1 --- [instandhaltung26]
+  [           main] o.f.core.internal.command.DbValidate     : Successfully
+  validated 1 migration (execution time 00:00.008s)
+  app-1  | 2026-07-14T17:39:51.208Z  INFO 1 --- [instandhaltung26]
+  [           main] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema
+  History table `instandhaltung`.`flyway_schema_history` ...
+  app-1  | 2026-07-14T17:39:51.362Z  INFO 1 --- [instandhaltung26]
+  [           main] o.f.core.internal.command.DbMigrate      : Current version
+  of schema `instandhaltung`: << Empty Schema >>
+  app-1  | 2026-07-14T17:39:51.374Z  INFO 1 --- [instandhaltung26]
+  [           main] o.f.core.internal.command.DbMigrate      : Migrating schema
+  `instandhaltung` to version "1 - baseline"
+  app-1  | 2026-07-14T17:39:51.487Z  INFO 1 --- [instandhaltung26]
+  [           main] o.f.core.internal.command.DbMigrate      : Successfully
+  applied 1 migration to schema `instandhaltung`, now at version v1 (execution
+  time 00:00.064s)
+  app-1  | 2026-07-14T17:39:51.603Z  INFO 1 --- [instandhaltung26]
+  [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2
+  endpoints beneath base path '/actuator'
+  app-1  | 2026-07-14T17:39:51.637Z  INFO 1 --- [instandhaltung26]
+  [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started
+  on port 8080 (http) with context path '/'
+  app-1  | 2026-07-14T17:39:51.643Z  INFO 1 --- [instandhaltung26]
+  [           main] d.k.i.InstandhaltungApplication          : Started
+  InstandhaltungApplication in 2.485 seconds (process running for 2.86)
+
+
+
+  ⚠ Codex's Linux sandbox uses bubblewrap and needs access to create user
+    namespaces.
+
+  ╭───────────────────────────────────────────╮
+  │ >_ OpenAI Codex (v0.144.4)                │
+  │                                           │
+  │ model:     gpt-5.6-sol   /model to change │
+  │ directory: ~/IdeaProjects/instandhaltung  │
+  ╰───────────────────────────────────────────╯
+
+    Tip: Type / to open the command popup; Tab autocompletes slash commands.
+
+
+  › cd /Id
+
+
+  • I’ll check whether /Id exists and switch the working context there if
+    available.
+
+  • /Id does not exist. Current directory remains /home/admin/IdeaProjects/
+    instandhaltung.
+
+
+  › cd /home/admin/IdeaProjects/instandhaltung26
+
+
+  • I’ll verify that directory before using it as the working context.
+
+  • Working directory set to /home/admin/IdeaProjects/instandhaltung26.
+
+
+  › bitte melde dich beim github an und lege dort ein projekt an
+    https://github.com/WladimirStoll/instandhaltung26
+
+
+  • Ich prüfe zuerst den lokalen Git-Stand und die GitHub-Anmeldung. Danach
+  lege
+    ich das Repository WladimirStoll/instandhaltung26 an beziehungsweise
+  verbinde
+    und übertrage das vorhandene Projekt dorthin.
+
+  • Die GitHub-CLI (gh) ist auf diesem System nicht installiert. Ich prüfe nun,
+  ob
+    das lokale Projekt bereits als Git-Repository vorbereitet ist und
+  ob GitHub-
+    Zugangsdaten über Git verfügbar sind.
+
+  • Der Ordner ist noch kein Git-Repository, und es sind keine Git-Zugangsdaten
+    eingerichtet. Ich prüfe noch, ob das Ziel-Repository auf GitHub bereits
+    existiert; falls nicht, brauche ich anschließend eine interaktive GitHub-
+    Anmeldung.
+
+  • Searched the web for https://github.com/WladimirStoll/instandhaltung26
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Das GitHub-Repository existiert noch nicht. Auf dem System fehlen außerdem
+  die
+    GitHub-CLI und gespeicherte Zugangsdaten.
+
+    Für die Anmeldung und Erstellung muss ich zuerst gh installieren. Soll ich
+  die
+    GitHub-CLI per Paketverwaltung installieren und danach die
+  interaktive GitHub-
+    Anmeldung starten?
+
+
+  › installiere gh
+
+
+  • Ich installiere jetzt die GitHub-CLI über die Paketverwaltung und prüfe
+    anschließend die Installation.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die Paketverwaltung benötigt Administratorrechte. Ich versuche die
+    Installation deshalb über sudo; falls ein Kennwort verlangt wird, muss es
+    lokal eingegeben werden.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • sudo verlangt ein Kennwort, das ich nicht entgegennehmen sollte. Ich
+    installiere gh daher ohne Administratorrechte lokal im Projektordner; damit
+    kann ich die GitHub-Anmeldung und Repository-Erstellung direkt fortsetzen.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • gh Version 2.96.0 wurde lokal installiert:
+
+    /home/admin/IdeaProjects/instandhaltung26/.tools/bin/gh
+
+    Die Installation ist geprüft und einsatzbereit. Wegen fehlender sudo-Rechte
+    ist gh nicht systemweit installiert.
+
+
+  › installiere gh global, ich erlaube dir
+
+
+  • Ich versuche die vorhandene, geprüfte gh-Binary nach /usr/local/bin zu
+    installieren. Falls das System trotz Freigabe weiterhin ein sudo-Kennwort
+    verlangt, bleibt nur die lokale Kennworteingabe durch dich.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die globale Installation scheitert an den Linux-Administratorrechten; die
+    Freigabe hier ersetzt das lokale sudo-Kennwort nicht.
+
+    Bitte einmal selbst im Terminal ausführen:
+
+    sudo install -m 0755 \
+      /home/admin/IdeaProjects/instandhaltung26/.tools/bin/gh \
+      /usr/local/bin/gh
+
+    Danach prüfst du sie mit:
+
+    gh --version
+
+    Gib mir anschließend kurz Bescheid; dann melde ich GitHub an und erstelle
+  das
+    Repository.
+
+
+  › admin@alexander2-ThinkStation-P360-Tower:~$ gh --version
+    gh version 2.96.0 (2026-07-02)
+    https://github.com/cli/cli/releases/tag/v2.96.0
+
+
+  • Die globale Installation funktioniert. Ich prüfe jetzt die GitHub-
+  Anmeldung;
+    falls noch keine Sitzung besteht, starte ich die Geräteanmeldung und gebe
+  dir
+    den einmaligen Code.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die Terminaloberfläche der Anmeldung blieb an einer Darstellungsabfrage
+    hängen. Ich starte denselben sicheren Gerätefluss ohne interaktive
+    Terminaldarstellung neu.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Bitte öffne jetzt https://github.com/login/device und gib den einmaligen
+  Code
+    9F63-08B9 ein. Bestätige dort den Zugriff für GitHub CLI; ich warte
+    währenddessen und fahre danach automatisch mit der Repository-Erstellung
+  fort.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die GitHub-Anmeldung wartet auf deine Bestätigung:
+
+    1. Öffne https://github.com/login/device
+    2. Gib den Code 9F63-08B9 ein.
+    3. Bestätige den Zugriff für GitHub CLI.
+
+    Schreib danach kurz „fertig“, dann erstelle ich WladimirStoll/
+    instandhaltung26.
+
+
+  › admin@alexander2-ThinkStation-P360-Tower:~$ gh --version
+    gh version 2.96.0 (2026-07-02)
+    https://github.com/cli/cli/releases/tag/v2.96.0
+    fertig
+
+
+  • Ich prüfe die bestätigte Anmeldung und lege anschließend das Repository an.
+    Danach initialisiere und übertrage ich den lokalen Projektstand.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die Anmeldung ist erfolgreich als WladimirStoll. Da keine Sichtbarkeit
+  genannt
+    wurde, lege ich das Repository sicherheitshalber privat an. Lokale IDE-
+    Dateien, .env, Build-Ausgaben und das lokale .tools-Verzeichnis werden
+  nicht
+    übertragen.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Das Repository und der Commit sind erstellt. Der erste Push benötigt noch
+  die
+    Git-Credential-Verknüpfung mit der bereits bestätigten gh-Anmeldung; ich
+    richte sie ein und wiederhole den Push.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Das GitHub-Projekt wurde erfolgreich erstellt und hochgeladen:
+
+    https://github.com/WladimirStoll/instandhaltung26
+
+    - Sichtbarkeit: privat
+    - Standardbranch: main
+    - Erster Commit: Initial commit
+    - Lokaler Branch ist mit origin/main synchronisiert
+    - Das lokale .tools/-Verzeichnis wurde nicht hochgeladen
+
+
+  › cd ~/IdeaProject/instandhaltung26
+
+
+  • Ich prüfe den angegebenen Pfad; vermutlich fehlt das „s“ bei IdeaProjects.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Der Pfad existiert nicht. Der richtige Befehl lautet:
+
+    cd ~/IdeaProjects/instandhaltung26
+
+
+  › verbinde die lokale installatioin hier mit der GitHub, welche grade
+  angelegt
+    wurde
+
+
+  • Ich prüfe im richtigen lokalen Ordner ~/IdeaProjects/instandhaltung26 die
+    Remote-Verbindung und stelle sicher, dass sie auf das gerade
+  angelegte GitHub-
+    Repository zeigt.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die lokale Installation ist bereits korrekt mit GitHub verbunden:
+
+    - Lokal: ~/IdeaProjects/instandhaltung26
+    - Remote: https://github.com/WladimirStoll/instandhaltung26.git
+    - Branch: main
+    - Tracking: origin/main
+    - Status: synchronisiert
+
+    Nur .tools/ ist lokal und wird nicht zu GitHub übertragen.
+
+
+  › das ist schön. jetzt muss ich überlegen, wie wir mit Dir, lieber KI weiter
+    vorgehen. Sollen wir das Projekt in Google Run Umgebung zum laufen
+  bekommen?
+
+
+  • Ja — Cloud Run passt gut zu diesem Projekt, besonders weil bereits
+  Dockerfile
+    und compose.yaml vorhanden sind.
+
+    Ich würde in dieser Reihenfolge vorgehen:
+
+    1. Anwendung lokal vollständig testen.
+    2. Docker-Image bauen und lokal starten.
+    3. PostgreSQL für Cloud SQL vorbereiten.
+    4. Google-Cloud-Projekt und Abrechnung prüfen.
+    5. Artifact Registry einrichten und Image hochladen.
+    6. Backend auf Cloud Run bereitstellen.
+    7. Datenbankzugang, Secrets und Umgebungsvariablen konfigurieren.
+    8. Frontend bereitstellen und Domain/CORS einrichten.
+    9. Deployment über GitHub Actions automatisieren.
+
+    Wichtige Architekturentscheidung: Cloud Run führt nicht einfach die gesamte
+    compose.yaml als Einheit aus. Backend, Frontend und Datenbank sollten
+  getrennt
+    betrieben werden:
+
+    - Spring Boot → Cloud Run
+    - Angular → Cloud Run oder Firebase Hosting
+    - PostgreSQL → Cloud SQL
+    - Zugangsdaten → Secret Manager
+
+    Mein Favorit wäre Angular auf Firebase Hosting und Spring Boot auf Cloud
+  Run.
+    Das ist sauber, kostengünstig und später gut wartbar.
+
+    Als nächsten Schritt sollte ich das bestehende Projekt technisch prüfen und
+    einen konkreten Cloud-Run-Deploymentplan dafür erstellen. Dabei ändere oder
+    veröffentliche ich noch nichts in Google Cloud.
+
+
+  › ich würde gerne embedded Angular als Statik im gleichen Einheit betreiben.
+    Also Tomcat (embedded)  + Springboot + Angular(Static) im gleichen
+  Container.
+    DB - Instance soll dagegen auf der Plattform TiDB (Starter-Version) laufen.
+
+
+  • Das ist eine stimmige Zielarchitektur: ein einziges ausführbares Spring-
+  Boot-
+    JAR mit eingebettetem Tomcat und den kompilierten Angular-Dateien unter
+    static/, daraus ein Cloud-Run-Container; TiDB bleibt extern. Ich prüfe kurz
+    den aktuellen Build und die Datenbankkonfiguration, damit der nächste
+  Schritt
+    genau zum vorhandenen Projekt passt.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Der erfreuliche Befund: Genau diese Ein-Container-Architektur ist im
+  Projekt
+    bereits angelegt. Der Multi-Stage-Docker-Build kompiliert Angular, kopiert
+  das
+    Ergebnis in Spring Boots static/ und erzeugt anschließend ein einziges JAR.
+    Für TiDB müssen wir vor allem TLS, Secrets, Migrationen und die SPA-Routen
+    sauber ergänzen.
+
+  • Searched the web for site:docs.pingcap.com tidb cloud starter connect mysql
+    jdbc TLS ...
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Ja, genau so würde ich es umsetzen:
+
+    Browser
+       │
+       ▼
+    Cloud Run: ein Container
+       └── Spring Boot + Embedded Tomcat
+           ├── /api/**       → REST-Backend
+           ├── /actuator/**  → Health Checks
+           └── /**           → Angular SPA
+                    │
+                    ▼
+              TiDB Cloud Starter
+
+    Das Projekt ist dafür bereits weitgehend vorbereitet:
+
+    - Angular wird im Docker-Build kompiliert.
+    - Das Build-Ergebnis wird nach src/main/resources/static kopiert.
+    - Spring Boot, Tomcat und Angular landen gemeinsam in instandhaltung26.jar.
+    - Cloud Runs dynamischer PORT wird bereits durch ${PORT:8080}
+  berücksichtigt.
+      Cloud Run stellt diese Variable automatisch bereit. Cloud Run Container
+      Contract (https://docs.cloud.google.com/run/docs/container-contract)
+
+    - MySQL Connector/J und Flyway-MySQL sind bereits vorhanden. TiDB ist
+      MySQL-kompatibel und unterstützt JDBC über diesen Treiber. TiDB
+      JDBC-Dokumentation
+
+  (https://docs.pingcap.com/tidb/stable/dev-guide-sample-application-java-jdbc
+  /)
+
+    Noch zu erledigen:
+
+    1. Angular-Routing mit einem SPA-Fallback auf index.html absichern.
+    2. API-Endpunkte konsequent unter /api halten.
+    3. TiDB-Starter-Cluster anlegen und die TLS-JDBC-URL konfigurieren. TiDB
+       empfiehlt für Starter-Verbindungen TLS. TiDB TLS-Verbindungen
+
+  (https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-cluste
+  rs/)
+
+    4. DB_PASSWORD im Google Secret Manager hinterlegen; Cloud Run unterstützt
+       Secrets als Umgebungsvariablen oder Dateien. Cloud Run Secrets
+       (https://docs.cloud.google.com/run/docs/configuring/services/secrets)
+
+    5. Flyway zunächst kontrolliert für die Ersteinrichtung aktivieren.
+    6. Container lokal gegen TiDB testen.
+    7. Anschließend über Artifact Registry auf Cloud Run deployen.
+    8. Danach GitHub Actions für automatische Deployments ergänzen.
+
+    Eine wichtige Einstellung: Der Hikari-Pool sollte bei TiDB Starter und
+  Cloud
+    Run klein bleiben, etwa DB_POOL_SIZE=3 bis 5, weil mehrere Cloud-Run-
+  Instanzen
+    jeweils einen eigenen Pool öffnen.
+
+    Als nächsten praktischen Schritt würde ich jetzt das Projekt für SPA-
+  Fallback,
+    TiDB-TLS und Cloud-Run-Deployment vorbereiten und lokal bauen. Für die
+    tatsächlichen TiDB-Zugangsdaten verwenden wir anschließend Secrets und
+    committen sie niemals nach GitHub.
+
+
+  › nun, ja, ich habe bereits ein Tidbcloud.com - Konto (Starter, kostenlos).
+    Dort gibt es ein Projekt "Instandhaltung26" und im Projekt ein Schema
+    "Instandhaltung26"
+
+
+  • Sehr gut – damit ist die Datenbankseite fast vorbereitet. Wir benötigen aus
+    TiDB Cloud jetzt nur noch die Verbindungsparameter.
+
+    Öffne im Projekt Instandhaltung26 beim Starter-Cluster den Dialog Connect
+  und
+    wähle:
+
+    - Connect with: General
+    - Database: Instandhaltung26
+    - Network: Public
+    - TLS/SSL: aktiviert
+
+    Ich benötige anschließend:
+
+    - Hostname
+    - Port, üblicherweise 4000
+    - Benutzername
+    - den angezeigten JDBC-Verbindungsstring, falls vorhanden
+
+    Das Passwort bitte nicht hier einfügen und niemals in GitHub speichern. Wir
+    hinterlegen es später direkt im Google Secret Manager beziehungsweise
+    verwenden es nur lokal über eine nicht versionierte .env-Datei.
+
+    Die Anwendung wird ungefähr diese Konfiguration erhalten:
+
+    DB_URL=jdbc:mysql://<host>:4000/Instandhaltung26?sslMode=VERIFY_IDENTITY
+    DB_USERNAME=<tidb-benutzer>
+    DB_PASSWORD=<secret>
+    DB_POOL_SIZE=3
+    DB_MIGRATION_ENABLED=true
+
+    Bevor wir Flyway ausführen, sollten wir außerdem klären, ob
+  Instandhaltung26
+    wirklich eine leere Datenbank ist oder bereits Tabellen enthält. Vorhandene
+    Tabellen dürfen wir nicht versehentlich durch eine Baseline-Migration
+    beeinflussen.
+
+    Schick mir am besten den von TiDB angezeigten Verbindungsstring mit
+  entferntem
+    Passwort. Dann passe ich das Projekt exakt daran an.
+
+
+  ›
+  mysql://2K1ksH2rZC6h8yk.root:u52zHNWtPekuYRwZ@gateway01.eu-central-1.prod.aws.
+  tidbcloud.com:4000/sys
+
+
+  • Achtung: Diese URL enthält ein vollständiges TiDB-Passwort. Bitte ändere
+    dieses Passwort jetzt sofort in TiDB Cloud und verwende das gepostete
+  Passwort
+    nicht weiter. Ich werde es weder verwenden noch speichern.
+
+    Außerdem verweist die URL aktuell auf die Systemdatenbank sys, nicht auf
+  dein
+    Schema Instandhaltung26. Der bereinigte JDBC-Endpunkt sollte danach
+  ungefähr
+    so aussehen:
+
+
+  jdbc:mysql://gateway01.eu-central-1.prod.aws.tidbcloud.com:4000/Instandhaltung
+  26?sslMode=VERIFY_IDENTITY
+
+    Bekannte, nicht geheime Angaben:
+
+    Host: gateway01.eu-central-1.prod.aws.tidbcloud.com
+    Port: 4000
+    Benutzer: 2K1ksH2rZC6h8yk.root
+    Datenbank: Instandhaltung26
+    TLS: VERIFY_IDENTITY
+
+    Bitte jetzt:
+
+    1. TiDB-Passwort rotieren.
+    2. Im TiDB-Connect-Dialog die Datenbank Instandhaltung26 statt sys
+  auswählen.
+    3. Nur bestätigen, dass das erledigt ist – das neue Passwort nicht hier
+       posten.
+
+    Anschließend passe ich die Anwendung mit Platzhaltern für DB_URL,
+  DB_USERNAME
+    und DB_PASSWORD an; das Passwort kommt später sicher in Google Secret
+  Manager.
+
+
+  › Instance Properties
+    Starter
+
+    Instance Name
+
+    Instandhaltung26
+
+    Instance ID
+
+    10814748699444871201
+
+    Status
+
+    Active
+
+    TiDB Version
+
+    v8.5.3
+
+    Cloud Provider
+
+    AWS
+
+    Region
+
+    Frankfurt (eu-central-1)
+
+    Created by
+
+    wladimir.stoll@gmx.de
+
+    Created at
+
+    2026-07-14 07:29:32
+
+    High Availability
+
+    Zonal
+
+
+  • Perfekt, damit kennen wir die Zielinstanz:
+
+    - Instanz: Instandhaltung26
+    - TiDB: v8.5.3
+    - Tarif: Starter
+    - Standort: AWS Frankfurt
+    - Status: aktiv
+    - Hochverfügbarkeit: zonal
+
+    Für geringe Latenz sollten wir Cloud Run ebenfalls in Frankfurt betreiben.
+    Google und TiDB liegen dann zwar weiterhin in unterschiedlichen Clouds,
+  aber
+    geografisch nah beieinander.
+
+    Noch wichtig: Der zuvor übermittelte Verbindungsstring endete auf /sys.
+    Instance Name und Datenbank/Schema sind unterschiedliche Dinge. Bitte
+    kontrolliere in TiDB Cloud unter SQL Editor:
+
+    SHOW DATABASES;
+
+    Dort sollte eine Datenbank wie diese erscheinen:
+
+    Instandhaltung26
+
+    Falls sie fehlt:
+
+    CREATE DATABASE `Instandhaltung26`
+      CHARACTER SET utf8mb4
+      COLLATE utf8mb4_unicode_ci;
+
+    Bitte bestätige danach nur:
+
+    - Passwort wurde geändert
+    - Datenbank Instandhaltung26 existiert
+
+    Das neue Passwort bitte nicht senden. Dann können wir die Spring-Boot-
+    Konfiguration, Flyway-Migrationen und den Cloud-Run-Build vorbereiten.
+
+
+  › create database habe ich ausgeführt, aber passwort bekomme ich es nicht hin
+    zu ändern. Ich verstehe auch nicht, was "rotiere Passwort" bedeutet
+
+
+  • „Passwort rotieren“ heißt schlicht: das alte Datenbankpasswort durch ein
+  neues
+    ersetzen, weil das alte hier vollständig sichtbar geworden ist. Ich schaue
+    kurz in die aktuelle TiDB-Cloud-Anleitung, damit ich dir den richtigen
+  Menüweg
+    für eine Starter-Instanz nennen kann.
+
+  • Searching the web
+
+  • Searched the web for site:docs.pingcap.com/tidbcloud Starter change reset
+    database password user password TiDB Cloud console ...
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Kein Problem. „Passwort rotieren“ bedeutet einfach: ein neues
+    Datenbankpasswort erzeugen, sodass das alte nicht mehr funktioniert. Dabei
+    werden weder Datenbank noch Tabellen gelöscht.
+
+    Gemeint ist nicht dein TiDB-Webkonto-Passwort, sondern das Passwort
+  des SQL-
+    Benutzers …root.
+
+    So geht es bei TiDB Starter:
+
+    1. Öffne in TiDB Cloud die Instanz Instandhaltung26.
+    2. Klicke oben rechts auf Connect.
+    3. Wähle die Datenbank Instandhaltung26.
+    4. Suche im Dialog nach Reset Password.
+    5. Klicke darauf und bestätige.
+    6. TiDB erzeugt ein neues Passwort. Speichere es in einem Passwortmanager
+  oder
+       vorübergehend lokal – es wird möglicherweise nur einmal angezeigt.
+
+    Das Zurücksetzen beendet bestehende Verbindungen des Root-Benutzers,
+  verändert
+    aber keine Daten. Dies ist der offizielle Weg für Starter-Instanzen.
+    TiDB-Anleitung für TLS-Verbindungen
+
+  (https://docs.pingcap.com/tidbcloud/secure-connections-to-serverless-clusters/
+  )
+
+    Alternativ findest du unter SQL Users beim Root-Benutzer rechts das Menü …
+  →
+    Edit. Dort lässt sich ebenfalls das Passwort ändern; der Root-Benutzer
+  selbst
+    kann nicht gelöscht werden. TiDB SQL Users
+    (https://docs.pingcap.com/tidbcloud/configure-sql-users/)
+
+    Wichtig: Das neue Passwort bitte nicht hier posten. Antworte anschließend
+  nur
+    mit „Passwort geändert“. Danach bereiten wir die sichere lokale
+  Konfiguration
+    vor.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+
+  › "passwort geändert"
+
+
+  • Gut, das kompromittierte Passwort ist damit ungültig. Als Nächstes bereite
+  ich
+    die Anwendung so vor, dass TiDB per TLS angebunden wird, ohne Zugangsdaten
+  in
+    Git oder Docker-Images zu schreiben. Zuerst prüfe ich die vorhandene .env-
+    Vorlage und Compose-Konfiguration.
+
+  ✔ You approved codex to run sed -n '1,200p' .env.example; sed -n '1,240p'
+    compose.yaml; sed -n '1,220p' R... this time
+
+  • Ran sed -n '1,200p' .env.example; sed -n '1,240p' compose.yaml; sed -n
+    │ '1,220p' README.md; git status --short --branch
+    └ DB_URL=jdbc:mysql://localhost:3306/instandhaltung?
+      useSSL=false&allowPublicKeyRetrieval=true
+      … +68 lines (ctrl + t to view transcript)
+      ## main...origin/main
+      ?? .tools/
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Sehr gut. Das alte Passwort ist jetzt unbrauchbar.
+
+    Lege nun lokal die nicht versionierte Konfigurationsdatei an:
+
+    cd ~/IdeaProjects/instandhaltung26
+    cp .env.example .env
+    nano .env
+
+    Trage dort ein:
+
+    DB_URL=jdbc:mysql://gateway01.eu-central-1.prod.aws.tidbcloud.com:4000/
+    Instandhaltung26?sslMode=VERIFY_IDENTITY
+    DB_USERNAME=2K1ksH2rZC6h8yk.root
+    DB_PASSWORD=DEIN_NEUES_PASSWORT
+    DB_POOL_SIZE=3
+    DB_MIGRATION_ENABLED=true
+
+    Das neue Passwort nur in .env eintragen, nicht hier senden. .env wird
+  bereits
+    durch .gitignore von GitHub ausgeschlossen.
+
+    Speichere in nano mit Strg+O, Enter und beende mit Strg+X. Antworte danach
+  nur
+    mit „.env fertig“. Dann teste ich die Verbindung und führe die
+  erste Flyway-
+    Migration aus.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+
+  › .env fertig
+
+
+  • Ich prüfe jetzt nur, ob die benötigten Variablen vorhanden sind – ohne ihre
+    Werte auszugeben. Danach baue ich den Container und starte ihn einmal gegen
+    TiDB; dabei werden Verbindung und Flyway-Migration über den Health-Endpunkt
+    verifiziert.
+
+  • Running docker version --format '{{.Server.Version}}'
+
+  ✔ You approved codex to run docker version --format '{{.Server.Version}}'
+  this
+    time
+
+  ✔ You approved codex to run sed -n 's/=.*//p' .env this time
+
+  • Ran docker version --format '{{.Server.Version}}'
+    └
+      permission denied while trying to connect to the docker API at
+      unix:///var/run/docker.sock
+
+  • Ran sed -n 's/=.*//p' .env
+    └ DB_URL
+      DB_USERNAME
+      … +11 lines (ctrl + t to view transcript)
+      MAIL_SMTP_AUTH
+      MAIL_STARTTLS
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die fünf benötigten TiDB-Variablen sind vorhanden. Zusätzlich stehen vier
+  alte
+    Variablen mit führendem Unterstrich in der Datei; sie beeinflussen Spring
+  Boot
+    nicht, können später aber entfernt werden.
+
+    Docker ist für den Benutzer admin derzeit nicht freigegeben. Ich prüfe
+    deshalb, ob wir den Backend-Test direkt mit lokalem Java und Maven
+  durchführen
+    können.
+
+  • Running java -version
+
+  • Running mvn -version
+
+  ✗ You canceled the request to run java -version
+
+  • Ran java -version
+    └ (no output)
+
+  • Ran node --version
+    └ (no output)
+
+  ■ Conversation interrupted - tell the model what to do differently. Something
+  went wrong? Hit `/feedback` to report the issue.
+
+
+  › macht es sinn docker für user admin freizugeben?
+
+
+  • Ja, auf einer persönlichen Entwicklungsmaschine ist das praktisch.
+  Allerdings
+    wichtig: Mitglieder der Gruppe docker besitzen faktisch Root-Rechte, weil
+  sie
+    privilegierte Container und Host-Verzeichnisse einbinden können.
+
+    Wenn nur du den Rechner nutzt und admin dein vertrauenswürdiger
+    Entwicklungsbenutzer ist, kannst du ihn freigeben:
+
+    sudo usermod -aG docker admin
+
+    Danach vollständig ab- und wieder anmelden – alternativ einmal:
+
+    newgrp docker
+
+    Anschließend testen:
+
+    docker version
+    docker run --rm hello-world
+
+    Für einen gemeinsam genutzten oder besonders sicherheitskritischen Rechner
+    wäre Rootless Docker die bessere, aber aufwendigere Variante. Für diese
+  lokale
+    Entwicklungsumgebung halte ich die Docker-Gruppe für angemessen.
+
+
+  › .env fertig
+
+
+  • Die .env-Datei war bereits vollständig. Ich prüfe jetzt erneut den Docker-
+    Zugriff; wenn die Gruppenfreigabe aktiv ist, baue und teste ich den
+  Container
+    gegen TiDB.
+
+  ✔ You approved codex to run docker version --format '{{.Server.Version}}'
+  this
+    time
+
+  • Ran docker version --format '{{.Server.Version}}'
+    └
+      permission denied while trying to connect to the docker API at
+      unix:///var/run/docker.sock
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die .env ist fertig, aber admin hat weiterhin keinen Zugriff auf Docker:
+
+    permission denied ... /var/run/docker.sock
+
+    Bitte ausführen:
+
+    sudo usermod -aG docker admin
+
+    Danach am zuverlässigsten vollständig abmelden und erneut anmelden.
+    Anschließend prüfen:
+
+    groups
+    docker version
+
+    In der Ausgabe von groups muss docker erscheinen. Gib danach kurz „Docker
+    funktioniert“ durch; dann baue und teste ich die Anwendung gegen TiDB.
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+
+  › admin@alexander2-ThinkStation-P360-Tower:~/IdeaProjects/instandhaltung26$
+    groups
+      docker version
+    docker admin
+    Client: Docker Engine - Community
+     Version:           29.6.1
+     API version:       1.55
+     Go version:        go1.26.4
+     Git commit:        8900f1d
+     Built:             Fri Jun 26 11:40:19 2026
+     OS/Arch:           linux/amd64
+     Context:           default
+
+    Server: Docker Engine - Community
+     Engine:
+      Version:          29.6.1
+      API version:      1.55 (minimum version 1.40)
+      Go version:       go1.26.4
+      Git commit:       8ec5ab3
+      Built:            Fri Jun 26 11:40:19 2026
+      OS/Arch:          linux/amd64
+      Experimental:     false
+     containerd:
+      Version:          v2.2.6
+      GitCommit:        11ce9d5f3c68c941867e82890e93e815c1304f1b
+     runc:
+      Version:          1.3.6
+      GitCommit:        v1.3.6-0-g491b69ba
+     docker-init:
+      Version:          0.19.0
+      GitCommit:        de40ad0
+
+
+  • Docker ist jetzt korrekt freigegeben. Ich baue zunächst das gemeinsame
+    Angular/Spring-Boot-Image. Danach starte ich es mit der lokalen .env gegen
+    TiDB und prüfe Startprotokoll sowie Health-Endpunkt, ohne geheime Werte
+    auszugeben.
+
+  ✔ You approved codex to run docker build -t instandhaltung26:local . this
+  time
+
+  • Ran docker build -t instandhaltung26:local .
+    └ ERROR: permission denied while trying to connect to the docker API at
+      unix:///var/run/docker.sock
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Dein neu angemeldetes Terminal hat Zugriff; mein bereits laufender Prozess
+    besitzt noch die alte Gruppenliste. Ich führe Docker deshalb für diesen
+  Lauf
+    ausdrücklich mit der neuen docker-Gruppe aus.
+
+  ✔ You approved codex to run sg docker -c 'docker build -t
+    instandhaltung26:local .' this time
+
+  • Ran sg docker -c 'docker build -t instandhaltung26:local .'
+    └ #0 building with "default" instance using docker driver
+
+      … +90 lines (ctrl + t to view transcript)
+      #24 unpacking to docker.io/library/instandhaltung26:local 0.0s done
+      #24 DONE 0.3s
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Das kombinierte Image wurde erfolgreich gebaut. Ich starte jetzt einen
+    Testcontainer auf Port 8080; Flyway ist dabei aktiviert und sollte das
+    Basisschema in der neu angelegten TiDB-Datenbank erzeugen.
+
+  ✔ You approved codex to run sg docker -c 'docker run --name instandhaltung26-
+    tidb-test --env-file .env -p... this time
+
+  • Ran sg docker -c 'docker run --name instandhaltung26-tidb-test --env-
+  file .env
+    │ -p 8080:8080 -d instandhaltung26:local'
+    └ e3a69dd0bd397cdca7242c2b14bcfc47aa25610f2322269fa269841e4c666ee4
+      docker: Error response from daemon: failed to set up container
+  networking:
+      … +4 lines (ctrl + t to view transcript)
+
+      Run 'docker run --help' for more information
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Port 8080 ist bereits belegt. Der Container selbst wurde noch nicht
+  gestartet.
+    Ich entferne nur diesen fehlgeschlagenen Testcontainer und starte denselben
+    Test auf dem freien Host-Port 18080; intern bleibt Cloud-Run-konform Port
+    8080.
+
+  ✔ You approved codex to run sg docker -c 'docker rm instandhaltung26-tidb-
+  test'
+    this time
+
+  • Ran sg docker -c 'docker rm instandhaltung26-tidb-test'
+    └ instandhaltung26-tidb-test
+
+  ✔ You approved codex to run sg docker -c 'docker run --name instandhaltung26-
+    tidb-test --env-file .env -p... this time
+
+  • Ran sg docker -c 'docker run --name instandhaltung26-tidb-test --env-
+  file .env
+    │ -p 18080:8080 -d instandhaltung26:local'
+    └ 1f0e71a212e8e22cb0acacff2b914337a4abb97c74acbaa1816a345aacb7f546
+
+  ✔ You approved codex to run sg docker -c 'docker logs instandhaltung26-tidb-
+    test' this time
+
+  • Ran sg docker -c 'docker logs instandhaltung26-tidb-test'
+    └ Standard Commons Logging discovery in action with spring-jcl: please
+  remove
+      commons-logging.jar from classpath in order to avoid potential conflicts
+      … +39 lines (ctrl + t to view transcript)
+      d.k.i.InstandhaltungApplication          : Started
+  InstandhaltungApplication
+      in 6.299 seconds (process running for 7.008)
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die TiDB-Verbindung steht, TLS funktioniert und Flyway hat Migration V1
+    erfolgreich ausgeführt. Ich prüfe noch die drei ausgelieferten Oberflächen:
+    Angular-Startseite, REST-Health und Actuator-Probe.
+
+  • Running curl -fsS http://localhost:18080/actuator/health
+
+  • Running curl -fsS -o /dev/null -w '%{http_code} %{content_type}\n'
+    │ http://localhost:18080/
+
+  ✔ You approved codex to run curl -fsS http://localhost:18080/actuator/health
+    this time
+
+  • Ran curl -fsS http://localhost:18080/actuator/health
+    └ curl: (22) The requested URL returned error: 503
+
+  ✔ You approved codex to run curl -fsS http://localhost:18080/api/health this
+    time
+
+  ✔ You approved codex to run curl -fsS -o /dev/null -w '%{http_code}
+    %{content_type}\n' http://localhost:1... this time
+
+  • Ran curl -fsS http://localhost:18080/api/health
+    └ {"time":"2026-07-14T20:16:52.692187880Z","status":"UP"}
+
+  • Ran curl -fsS -o /dev/null -w '%{http_code} %{content_type}\n'
+    │ http://localhost:18080/
+    └ 200 text/html;charset=UTF-8
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Angular und der REST-Endpunkt liefern 200/UP. Die Actuator-Probe meldet
+  jedoch
+    503; ich untersuche das vor dem Cloud-Run-Deployment, weil Cloud Run diese
+    Probe zur Instanzbewertung verwenden soll.
+
+  • Running curl -sS http://localhost:18080/actuator/health
+
+  ✔ You approved codex to run curl -sS http://localhost:18080/actuator/health
+  this
+    time
+
+  ✔ You approved codex to run sg docker -c 'docker logs --tail 80
+    instandhaltung26-tidb-test' this time
+
+  • Ran curl -sS http://localhost:18080/actuator/health
+    └ {"status":"DOWN","groups":["liveness","readiness"]}
+
+  • Ran sg docker -c 'docker logs --tail 80 instandhaltung26-tidb-test'
+    └     at
+
+  org.springframework.boot.actuate.health.HealthEndpointSupport.getContributio
+      … +92 lines (ctrl + t to view transcript)
+          ... 79 common frames omitted
+
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die Datenbank ist gesund; 503 kommt ausschließlich vom Mail-Healthcheck,
+  weil
+    lokal kein SMTP-Server auf Port 1025 läuft. Ich ändere die Konfiguration
+  so,
+    dass dieser optionale Check standardmäßig deaktiviert ist und nur bei real
+    konfiguriertem SMTP ausdrücklich aktiviert wird. Das macht die Cloud-Run-
+  Probe
+    korrekt, ohne die Mailfunktion selbst abzuschalten.
+
+  ✔ You approved codex to run apply_patch this time
+
+  • Ran apply_patch
+    └ *** Begin Patch
+      *** Update File: backend/src/main/resources/application.yml
+      … +7 lines (ctrl + t to view transcript)
+      Success. Updated the following files:
+      M backend/src/main/resources/application.yml
+
+  ↳ Interacted with background terminal
+    └ *** Begin Patch
+      *** Update File: backend/src/main/resources/application.yml
+      @@
+       management:
+      +  health:
+      +    mail:
+      +      enabled: ${MAIL_HEALTH_ENABLED:false}
+         endpoints:
+      *** End Patch
+
+
+  • Ran apply_patch
+    └ *** Begin Patch
+      *** Update File: backend/src/main/resources/application.yml
+      … +7 lines (ctrl + t to view transcript)
+      Success. Updated the following files:
+      M backend/src/main/resources/application.yml
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die Probe-Konfiguration ist korrigiert. Ich baue das Image neu, ersetze
+    ausschließlich unseren Testcontainer und wiederhole die Health-Prüfung.
+
+  ✔ You approved codex to run sg docker -c 'docker build -t
+    instandhaltung26:local .' this time
+
+  • Ran sg docker -c 'docker build -t instandhaltung26:local .'
+    └ #0 building with "default" instance using docker driver
+
+      … +171 lines (ctrl + t to view transcript)
+      #24 unpacking to docker.io/library/instandhaltung26:local 0.6s done
+      #24 DONE 4.0s
+
+  ✔ You approved codex to run sg docker -c 'docker rm -f instandhaltung26-tidb-
+    test' this time
+
+  • Ran sg docker -c 'docker rm -f instandhaltung26-tidb-test'
+    └ instandhaltung26-tidb-test
+
+  ✔ You approved codex to run sg docker -c 'docker run --name instandhaltung26-
+    tidb-test --env-file .env -p... this time
+
+  • Ran sg docker -c 'docker run --name instandhaltung26-tidb-test --env-
+  file .env
+    │ -p 18080:8080 -d instandhaltung26:local'
+    └ d2f74fa109d19a80b8994d5e90ac657db94164da99e9229aa057d7e5d598789a
+
+  ✔ You approved codex to run curl --retry 10 --retry-delay 1 --retry-
+  connrefused
+    -fsS http://localhost:180... this time
+
+  • Ran curl --retry 10 --retry-delay 1 --retry-connrefused -fsS
+    │ http://localhost:18080/actuator/health
+    └ {"status":"UP","groups":["liveness","readiness"]}
+
+  ✔ You approved codex to run git diff -- backend/src/main/resources/
+    application.yml; git status --short --... this time
+
+  • Ran git diff -- backend/src/main/resources/application.yml; git status
+  --short
+    │ --branch
+    └ diff --git a/backend/src/main/resources/application.yml b/backend/src/
+  main/
+      resources/application.yml
+      … +14 lines (ctrl + t to view transcript)
+       M backend/src/main/resources/application.yml
+      ?? .tools/
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Die Anwendung läuft erfolgreich als gemeinsamer Angular-/Spring-Boot-
+  Container
+    gegen TiDB.
+
+    Ergebnis:
+
+    - Angular-Startseite: 200 OK
+    - REST /api/health: UP
+    - Actuator /actuator/health: UP
+    - TLS-Verbindung zu TiDB: erfolgreich
+    - Flyway-Migration V1: erfolgreich
+    - Schema Instandhaltung26: Version 1
+    - Lokaler Test: http://localhost:18080
+
+    Ich habe außerdem den optionalen Mail-Healthcheck standardmäßig
+  deaktiviert,
+    weil ohne SMTP-Server sonst fälschlich 503 DOWN gemeldet wurde. Die
+    Mailfunktion selbst bleibt erhalten.
+
+    Die Änderung liegt momentan lokal und ist noch nicht zu GitHub übertragen.
+  Als
+    nächstes können wir sie committen und anschließend Google Cloud Run
+    vorbereiten.
+
+  ─ Worked for 6m 38s
+  ────────────────────────────────────────────────────────────
+
+
+  › commite bitte diese Änderung mit dem Kommentar "TiDB" eingebunden und TLS-
+    Verbindung durch Codex getestest  - Angular-Startseite: 200 OK
+      - REST /api/health: UP
+      - Actuator /actuator/health: UP
+      - TLS-Verbindung zu TiDB: erfolgreich
+      - Flyway-Migration V1: erfolgreich
+      - Schema Instandhaltung26: Version 1
+      - Lokaler Test: http://localhost:18080
+
+
+  • Ich committe ausschließlich die geänderte Spring-Boot-Konfiguration. .env
+    und .tools/ bleiben ausdrücklich außerhalb des Commits; die von dir
+  genannten
+    Testergebnisse nehme ich als mehrzeilige Commit-Beschreibung auf.
+
+  ✔ You approved codex to run git add backend/src/main/resources/
+  application.yml
+    this time
+
+  • Ran git add backend/src/main/resources/application.yml
+    └ (no output)
+
+  ✔ You approved codex to run git commit -m '"TiDB" eingebunden und TLS-
+  Verbindung
+    durch Codex getestest' -... this time
+
+  • Ran git commit -m '"TiDB" eingebunden und TLS-Verbindung durch Codex
+    │ getestest' -m 'Angular-Startseite: 200 OK
+    │ REST /api/health: UP
+    │ … +5 lines
+    └ [main 7dc574b] "TiDB" eingebunden und TLS-Verbindung durch Codex
+  getestest
+       1 file changed, 3 insertions(+)
+
+  ✔ You approved codex to run git show --stat --format=fuller -1; git status
+    --short --branch this time
+
+  • Ran git show --stat --format=fuller -1; git status --short --branch
+    └ commit 7dc574ba78f5e14f46bd4ac79579fbeac6af3cd7
+      Author:     Wladimir Stoll <wladimir.stoll@gmx.de>
+      … +16 lines (ctrl + t to view transcript)
+      ## main...origin/main [ahead 1]
+      ?? .tools/
+
+  ─────────────────────────────────────────────────────────────────────────────
+  ───
+
+  • Commit erfolgreich erstellt:
+
+    7dc574b "TiDB" eingebunden und TLS-Verbindung durch Codex getestest
+
+    - Nur application.yml wurde committed.
+    - .env wurde nicht aufgenommen.
+    - .tools/ bleibt unversioniert.
+    - Lokaler Branch ist jetzt einen Commit vor origin/main.
+
+    Der Commit wurde noch nicht zu GitHub gepusht. damit sollte es für dich
+  möglich sein, an unsere arbeit von gestern zu erinnern und weiter zu machen.
+  Wir wollen die aktuelle anwendung /home/admin/IdeaProjects/instandhaltung26
+  in Google run umgebung zum laufen bringen. Dafür muss ich vermutlich zuerst
+  unter Google Run ein account erstellen, oder?
+
+
+• Ja. Für Cloud Run brauchst du kein separates „Google-Run-Konto“, sondern:
+
+  1. ein Google-Konto,
+  2. ein Google-Cloud-Projekt,
+  3. ein damit verknüpftes Abrechnungskonto,
+  4. aktivierte Cloud-Run- und Artifact-Registry-Dienste.
+
+  Dein nächster Schritt:
+
+  - Öffne die Google Cloud Console (https://console.cloud.google.com/).
+  - Melde dich mit deinem Google-Konto an.
+  - Erstelle ein neues Projekt, beispielsweise instandhaltung26.
+  - Verknüpfe die Abrechnung. Cloud Run besitzt kostenlose Kontingente, verlangt
+    aber üblicherweise trotzdem ein Abrechnungskonto.
+
+  - Teile mir danach nur die Google-Cloud-Project ID mit. Diese ist nicht
+    geheim.
+
+  Wichtig: Wir wählen für Cloud Run möglichst europe-west3 (Frankfurt), da deine
+  TiDB-Instanz ebenfalls in Frankfurt läuft.
+
+  Danach erledigen wir gemeinsam:
+
+  - Google Cloud CLI einrichten und anmelden
+  - APIs aktivieren
+  - Artifact Registry in Frankfurt anlegen
+  - TiDB-Passwort im Secret Manager speichern
+  - Container bauen und hochladen
+  - Cloud Run mit TiDB-Konfiguration bereitstellen
+  - /, /api/health und /actuator/health über HTTPS testen
+
+  Vorher sollten wir außerdem den vorhandenen lokalen Commit 7dc574b zu GitHub
+  pushen. Zugangsdaten aus .env werden dabei nicht übertragen.
+
+■ Failed to paste image: no image on clipboard: The clipboard contents were not
+available in the requested format or the clipboard is empty.
+
+■ Failed to paste image: no image on clipboard: The clipboard contents were not
+available in the requested format or the clipboard is empty.
+
+
+› projekt-id instandhaltung26  , projektnummer 844558361522 , projektname
+  instandhaltung26
+
+
+• Perfekt, damit ist das Google-Cloud-Projekt eindeutig festgelegt. Ich prüfe
+  jetzt lokal den Git-Stand sowie die Google-Cloud-CLI; danach können wir die
+  Anmeldung und das Cloud-Run-Deployment vorbereiten, ohne die .env oder
+  Passwörter hochzuladen.
+
+• Die lokale Prüfung ist an der Sandbox-Netzwerkisolation gescheitert, nicht am
+  Projekt. Ich wiederhole die rein lesende Prüfung außerhalb dieser Isolation;
+  dabei werden keine Dateien verändert und keine Geheimnisse ausgegeben.
+
+✔ You approved codex to run git status --short --branch && git remote -v &&
+  command -v gcloud || true && ... this time
+
+• Ran git status --short --branch && git remote -v && command -v gcloud || true
+  │ && gcloud --version 2>/dev/null || true
+  └ ## main...origin/main
+    ?? .tools/
+    origin    https://github.com/WladimirStoll/instandhaltung26.git (fetch)
+    origin    https://github.com/WladimirStoll/instandhaltung26.git (push)
+
+────────────────────────────────────────────────────────────────────────────────
+
+• Perfekt. Wir verwenden:
+
+  - Projekt-ID: instandhaltung26
+  - Projektnummer: 844558361522
+  - Projektname: instandhaltung26
+  - Zielregion: europe-west3 (Frankfurt)
+
+  Der lokale Git-Branch ist mit GitHub synchronisiert. Nur .tools/ ist
+  unversioniert; die geheime .env wird nicht übertragen.
+
+  Die Google-Cloud-CLI gcloud ist noch nicht installiert. Als nächsten Schritt
+  sollten wir sie global installieren, uns bei Google anmelden und anschließend
+  das Projekt instandhaltung26 auswählen. Danach richten wir Artifact Registry,
+  Secret Manager und Cloud Run ein.
+
+  Soll ich jetzt die Installation der Google-Cloud-CLI vorbereiten?
+
+
+
+  • Ran java -version
+    └ (no output)
+
+  • Ran node --version
+    └ (no output)
+
+  ■ Conversation interrupted - tell the model what to do differently. Something
+  went wrong? Hit `/feedback` to report the issue.
+
+
+  › macht es sinn docker für user admin freizugeben?
+
+
+  • Ja, auf einer persönlichen Entwicklungsmaschine ist das praktisch. Allerdings
+    wichtig: Mitglieder der Gruppe docker besitzen faktisch Root-Rechte, weil sie
+    privilegierte Container und Host-Verzeichnisse einbinden können.
+
+    Wenn nur du den Rechner nutzt und admin dein vertrauenswürdiger
+    Entwicklungsbenutzer ist, kannst du ihn freigeben:
+
+    sudo usermod -aG docker admin
+
+    Danach vollständig ab- und wieder anmelden – alternativ einmal:
+
+    newgrp docker
+
+    Anschließend testen:
+
+    docker version
+    docker run --rm hello-world
+
+    Für einen gemeinsam genutzten oder besonders sicherheitskritischen Rechner
+    wäre Rootless Docker die bessere, aber aufwendigere Variante. Für diese lokale
+    Entwicklungsumgebung halte ich die Docker-Gruppe für angemessen.
+
+
+  › .env fertig
+
+
+  • Die .env-Datei war bereits vollständig. Ich prüfe jetzt erneut den Docker-
+    Zugriff; wenn die Gruppenfreigabe aktiv ist, baue und teste ich den Container
+    gegen TiDB.
+
+  ✔ You approved codex to run docker version --format '{{.Server.Version}}' this
+    time
+
+  • Ran docker version --format '{{.Server.Version}}'
+    └
+      permission denied while trying to connect to the docker API at
+      unix:///var/run/docker.sock
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Die .env ist fertig, aber admin hat weiterhin keinen Zugriff auf Docker:
+
+    permission denied ... /var/run/docker.sock
+
+    Bitte ausführen:
+
+    sudo usermod -aG docker admin
+
+    Danach am zuverlässigsten vollständig abmelden und erneut anmelden.
+    Anschließend prüfen:
+
+    groups
+    docker version
+
+    In der Ausgabe von groups muss docker erscheinen. Gib danach kurz „Docker
+    funktioniert“ durch; dann baue und teste ich die Anwendung gegen TiDB.
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+
+  › admin@alexander2-ThinkStation-P360-Tower:~/IdeaProjects/instandhaltung26$
+    groups
+      docker version
+    docker admin
+    Client: Docker Engine - Community
+     Version:           29.6.1
+     API version:       1.55
+     Go version:        go1.26.4
+     Git commit:        8900f1d
+     Built:             Fri Jun 26 11:40:19 2026
+     OS/Arch:           linux/amd64
+     Context:           default
+
+    Server: Docker Engine - Community
+     Engine:
+      Version:          29.6.1
+      API version:      1.55 (minimum version 1.40)
+      Go version:       go1.26.4
+      Git commit:       8ec5ab3
+      Built:            Fri Jun 26 11:40:19 2026
+      OS/Arch:          linux/amd64
+      Experimental:     false
+     containerd:
+      Version:          v2.2.6
+      GitCommit:        11ce9d5f3c68c941867e82890e93e815c1304f1b
+     runc:
+      Version:          1.3.6
+      GitCommit:        v1.3.6-0-g491b69ba
+     docker-init:
+      Version:          0.19.0
+      GitCommit:        de40ad0
+
+
+  • Docker ist jetzt korrekt freigegeben. Ich baue zunächst das gemeinsame
+    Angular/Spring-Boot-Image. Danach starte ich es mit der lokalen .env gegen
+    TiDB und prüfe Startprotokoll sowie Health-Endpunkt, ohne geheime Werte
+    auszugeben.
+
+  ✔ You approved codex to run docker build -t instandhaltung26:local . this time
+
+  • Ran docker build -t instandhaltung26:local .
+    └ ERROR: permission denied while trying to connect to the docker API at
+      unix:///var/run/docker.sock
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Dein neu angemeldetes Terminal hat Zugriff; mein bereits laufender Prozess
+    besitzt noch die alte Gruppenliste. Ich führe Docker deshalb für diesen Lauf
+    ausdrücklich mit der neuen docker-Gruppe aus.
+
+  ✔ You approved codex to run sg docker -c 'docker build -t
+    instandhaltung26:local .' this time
+
+  • Ran sg docker -c 'docker build -t instandhaltung26:local .'
+    └ #0 building with "default" instance using docker driver
+
+      … +90 lines (ctrl + t to view transcript)
+      #24 unpacking to docker.io/library/instandhaltung26:local 0.0s done
+      #24 DONE 0.3s
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Das kombinierte Image wurde erfolgreich gebaut. Ich starte jetzt einen
+    Testcontainer auf Port 8080; Flyway ist dabei aktiviert und sollte das
+    Basisschema in der neu angelegten TiDB-Datenbank erzeugen.
+
+  ✔ You approved codex to run sg docker -c 'docker run --name instandhaltung26-
+    tidb-test --env-file .env -p... this time
+
+  • Ran sg docker -c 'docker run --name instandhaltung26-tidb-test --env-file .env
+    │ -p 8080:8080 -d instandhaltung26:local'
+    └ e3a69dd0bd397cdca7242c2b14bcfc47aa25610f2322269fa269841e4c666ee4
+      docker: Error response from daemon: failed to set up container networking:
+      … +4 lines (ctrl + t to view transcript)
+
+      Run 'docker run --help' for more information
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Port 8080 ist bereits belegt. Der Container selbst wurde noch nicht gestartet.
+    Ich entferne nur diesen fehlgeschlagenen Testcontainer und starte denselben
+    Test auf dem freien Host-Port 18080; intern bleibt Cloud-Run-konform Port
+    8080.
+
+  ✔ You approved codex to run sg docker -c 'docker rm instandhaltung26-tidb-test'
+    this time
+
+  • Ran sg docker -c 'docker rm instandhaltung26-tidb-test'
+    └ instandhaltung26-tidb-test
+
+  ✔ You approved codex to run sg docker -c 'docker run --name instandhaltung26-
+    tidb-test --env-file .env -p... this time
+
+  • Ran sg docker -c 'docker run --name instandhaltung26-tidb-test --env-file .env
+    │ -p 18080:8080 -d instandhaltung26:local'
+    └ 1f0e71a212e8e22cb0acacff2b914337a4abb97c74acbaa1816a345aacb7f546
+
+  ✔ You approved codex to run sg docker -c 'docker logs instandhaltung26-tidb-
+    test' this time
+
+  • Ran sg docker -c 'docker logs instandhaltung26-tidb-test'
+    └ Standard Commons Logging discovery in action with spring-jcl: please remove
+      commons-logging.jar from classpath in order to avoid potential conflicts
+      … +39 lines (ctrl + t to view transcript)
+      d.k.i.InstandhaltungApplication          : Started InstandhaltungApplication
+      in 6.299 seconds (process running for 7.008)
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Die TiDB-Verbindung steht, TLS funktioniert und Flyway hat Migration V1
+    erfolgreich ausgeführt. Ich prüfe noch die drei ausgelieferten Oberflächen:
+    Angular-Startseite, REST-Health und Actuator-Probe.
+
+  • Running curl -fsS http://localhost:18080/actuator/health
+
+  • Running curl -fsS -o /dev/null -w '%{http_code} %{content_type}\n'
+    │ http://localhost:18080/
+
+  ✔ You approved codex to run curl -fsS http://localhost:18080/actuator/health
+    this time
+
+  • Ran curl -fsS http://localhost:18080/actuator/health
+    └ curl: (22) The requested URL returned error: 503
+
+  ✔ You approved codex to run curl -fsS http://localhost:18080/api/health this
+    time
+
+  ✔ You approved codex to run curl -fsS -o /dev/null -w '%{http_code}
+    %{content_type}\n' http://localhost:1... this time
+
+  • Ran curl -fsS http://localhost:18080/api/health
+    └ {"time":"2026-07-14T20:16:52.692187880Z","status":"UP"}
+
+  • Ran curl -fsS -o /dev/null -w '%{http_code} %{content_type}\n'
+    │ http://localhost:18080/
+    └ 200 text/html;charset=UTF-8
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Angular und der REST-Endpunkt liefern 200/UP. Die Actuator-Probe meldet jedoch
+    503; ich untersuche das vor dem Cloud-Run-Deployment, weil Cloud Run diese
+    Probe zur Instanzbewertung verwenden soll.
+
+  • Running curl -sS http://localhost:18080/actuator/health
+
+  ✔ You approved codex to run curl -sS http://localhost:18080/actuator/health this
+    time
+
+  ✔ You approved codex to run sg docker -c 'docker logs --tail 80
+    instandhaltung26-tidb-test' this time
+
+  • Ran curl -sS http://localhost:18080/actuator/health
+    └ {"status":"DOWN","groups":["liveness","readiness"]}
+
+  • Ran sg docker -c 'docker logs --tail 80 instandhaltung26-tidb-test'
+    └     at
+      org.springframework.boot.actuate.health.HealthEndpointSupport.getContributio
+      … +92 lines (ctrl + t to view transcript)
+          ... 79 common frames omitted
+
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Die Datenbank ist gesund; 503 kommt ausschließlich vom Mail-Healthcheck, weil
+    lokal kein SMTP-Server auf Port 1025 läuft. Ich ändere die Konfiguration so,
+    dass dieser optionale Check standardmäßig deaktiviert ist und nur bei real
+    konfiguriertem SMTP ausdrücklich aktiviert wird. Das macht die Cloud-Run-Probe
+    korrekt, ohne die Mailfunktion selbst abzuschalten.
+
+  ✔ You approved codex to run apply_patch this time
+
+  • Ran apply_patch
+    └ *** Begin Patch
+      *** Update File: backend/src/main/resources/application.yml
+      … +7 lines (ctrl + t to view transcript)
+      Success. Updated the following files:
+      M backend/src/main/resources/application.yml
+
+  ↳ Interacted with background terminal
+    └ *** Begin Patch
+      *** Update File: backend/src/main/resources/application.yml
+      @@
+       management:
+      +  health:
+      +    mail:
+      +      enabled: ${MAIL_HEALTH_ENABLED:false}
+         endpoints:
+      *** End Patch
+
+
+  • Ran apply_patch
+    └ *** Begin Patch
+      *** Update File: backend/src/main/resources/application.yml
+      … +7 lines (ctrl + t to view transcript)
+      Success. Updated the following files:
+      M backend/src/main/resources/application.yml
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Die Probe-Konfiguration ist korrigiert. Ich baue das Image neu, ersetze
+    ausschließlich unseren Testcontainer und wiederhole die Health-Prüfung.
+
+  ✔ You approved codex to run sg docker -c 'docker build -t
+    instandhaltung26:local .' this time
+
+  • Ran sg docker -c 'docker build -t instandhaltung26:local .'
+    └ #0 building with "default" instance using docker driver
+
+      … +171 lines (ctrl + t to view transcript)
+      #24 unpacking to docker.io/library/instandhaltung26:local 0.6s done
+      #24 DONE 4.0s
+
+  ✔ You approved codex to run sg docker -c 'docker rm -f instandhaltung26-tidb-
+    test' this time
+
+  • Ran sg docker -c 'docker rm -f instandhaltung26-tidb-test'
+    └ instandhaltung26-tidb-test
+
+  ✔ You approved codex to run sg docker -c 'docker run --name instandhaltung26-
+    tidb-test --env-file .env -p... this time
+
+  • Ran sg docker -c 'docker run --name instandhaltung26-tidb-test --env-file .env
+    │ -p 18080:8080 -d instandhaltung26:local'
+    └ d2f74fa109d19a80b8994d5e90ac657db94164da99e9229aa057d7e5d598789a
+
+  ✔ You approved codex to run curl --retry 10 --retry-delay 1 --retry-connrefused
+    -fsS http://localhost:180... this time
+
+  • Ran curl --retry 10 --retry-delay 1 --retry-connrefused -fsS
+    │ http://localhost:18080/actuator/health
+    └ {"status":"UP","groups":["liveness","readiness"]}
+
+  ✔ You approved codex to run git diff -- backend/src/main/resources/
+    application.yml; git status --short --... this time
+
+  • Ran git diff -- backend/src/main/resources/application.yml; git status --short
+    │ --branch
+    └ diff --git a/backend/src/main/resources/application.yml b/backend/src/main/
+      resources/application.yml
+      … +14 lines (ctrl + t to view transcript)
+       M backend/src/main/resources/application.yml
+      ?? .tools/
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Die Anwendung läuft erfolgreich als gemeinsamer Angular-/Spring-Boot-Container
+    gegen TiDB.
+
+    Ergebnis:
+
+    - Angular-Startseite: 200 OK
+    - REST /api/health: UP
+    - Actuator /actuator/health: UP
+    - TLS-Verbindung zu TiDB: erfolgreich
+    - Flyway-Migration V1: erfolgreich
+    - Schema Instandhaltung26: Version 1
+    - Lokaler Test: http://localhost:18080
+
+    Ich habe außerdem den optionalen Mail-Healthcheck standardmäßig deaktiviert,
+    weil ohne SMTP-Server sonst fälschlich 503 DOWN gemeldet wurde. Die
+    Mailfunktion selbst bleibt erhalten.
+
+    Die Änderung liegt momentan lokal und ist noch nicht zu GitHub übertragen. Als
+    nächstes können wir sie committen und anschließend Google Cloud Run
+    vorbereiten.
+
+  ─ Worked for 6m 38s ────────────────────────────────────────────────────────────
+
+
+  › commite bitte diese Änderung mit dem Kommentar "TiDB" eingebunden und TLS-
+    Verbindung durch Codex getestest  - Angular-Startseite: 200 OK
+      - REST /api/health: UP
+      - Actuator /actuator/health: UP
+      - TLS-Verbindung zu TiDB: erfolgreich
+      - Flyway-Migration V1: erfolgreich
+      - Schema Instandhaltung26: Version 1
+      - Lokaler Test: http://localhost:18080
+
+
+  • Ich committe ausschließlich die geänderte Spring-Boot-Konfiguration. .env
+    und .tools/ bleiben ausdrücklich außerhalb des Commits; die von dir genannten
+    Testergebnisse nehme ich als mehrzeilige Commit-Beschreibung auf.
+
+  ✔ You approved codex to run git add backend/src/main/resources/application.yml
+    this time
+
+  • Ran git add backend/src/main/resources/application.yml
+    └ (no output)
+
+  ✔ You approved codex to run git commit -m '"TiDB" eingebunden und TLS-Verbindung
+    durch Codex getestest' -... this time
+
+  • Ran git commit -m '"TiDB" eingebunden und TLS-Verbindung durch Codex
+    │ getestest' -m 'Angular-Startseite: 200 OK
+    │ REST /api/health: UP
+    │ … +5 lines
+    └ [main 7dc574b] "TiDB" eingebunden und TLS-Verbindung durch Codex getestest
+       1 file changed, 3 insertions(+)
+
+  ✔ You approved codex to run git show --stat --format=fuller -1; git status
+    --short --branch this time
+
+  • Ran git show --stat --format=fuller -1; git status --short --branch
+    └ commit 7dc574ba78f5e14f46bd4ac79579fbeac6af3cd7
+      Author:     Wladimir Stoll <wladimir.stoll@gmx.de>
+      … +16 lines (ctrl + t to view transcript)
+      ## main...origin/main [ahead 1]
+      ?? .tools/
+
+  ────────────────────────────────────────────────────────────────────────────────
+
+  • Commit erfolgreich erstellt:
+
+    7dc574b "TiDB" eingebunden und TLS-Verbindung durch Codex getestest
+
+    - Nur application.yml wurde committed.
+    - .env wurde nicht aufgenommen.
+    - .tools/ bleibt unversioniert.
+    - Lokaler Branch ist jetzt einen Commit vor origin/main.
+
+    Der Commit wurde noch nicht zu GitHub gepusht. damit sollte es für dich möglich
+  sein, an unsere arbeit von gestern zu erinnern und weiter zu machen. Wir wollen
+  die aktuelle anwendung /home/admin/IdeaProjects/instandhaltung26 in Google run
+  umgebung zum laufen bringen. Dafür muss ich vermutlich zuerst unter Google Run
+  ein account erstellen, oder?
+
+
+• Ja. Für Cloud Run brauchst du kein separates „Google-Run-Konto“, sondern:
+
+  1. ein Google-Konto,
+  2. ein Google-Cloud-Projekt,
+  3. ein damit verknüpftes Abrechnungskonto,
+  4. aktivierte Cloud-Run- und Artifact-Registry-Dienste.
+
+  Dein nächster Schritt:
+
+  - Öffne die Google Cloud Console (https://console.cloud.google.com/).
+  - Melde dich mit deinem Google-Konto an.
+  - Erstelle ein neues Projekt, beispielsweise instandhaltung26.
+  - Verknüpfe die Abrechnung. Cloud Run besitzt kostenlose Kontingente, verlangt
+    aber üblicherweise trotzdem ein Abrechnungskonto.
+
+  - Teile mir danach nur die Google-Cloud-Project ID mit. Diese ist nicht geheim.
+
+  Wichtig: Wir wählen für Cloud Run möglichst europe-west3 (Frankfurt), da deine
+  TiDB-Instanz ebenfalls in Frankfurt läuft.
+
+  Danach erledigen wir gemeinsam:
+
+  - Google Cloud CLI einrichten und anmelden
+  - APIs aktivieren
+  - Artifact Registry in Frankfurt anlegen
+  - TiDB-Passwort im Secret Manager speichern
+  - Container bauen und hochladen
+  - Cloud Run mit TiDB-Konfiguration bereitstellen
+  - /, /api/health und /actuator/health über HTTPS testen
+
+  Vorher sollten wir außerdem den vorhandenen lokalen Commit 7dc574b zu GitHub
+  pushen. Zugangsdaten aus .env werden dabei nicht übertragen.
+
+■ Failed to paste image: no image on clipboard: The clipboard contents were not
+available in the requested format or the clipboard is empty.
+
+■ Failed to paste image: no image on clipboard: The clipboard contents were not
+available in the requested format or the clipboard is empty.
+
+
+› projekt-id instandhaltung26  , projektnummer 844558361522 , projektname
+  instandhaltung26
+
+
+• Perfekt, damit ist das Google-Cloud-Projekt eindeutig festgelegt. Ich prüfe jetzt
+  lokal den Git-Stand sowie die Google-Cloud-CLI; danach können wir die Anmeldung
+  und das Cloud-Run-Deployment vorbereiten, ohne die .env oder Passwörter
+  hochzuladen.
+
+• Die lokale Prüfung ist an der Sandbox-Netzwerkisolation gescheitert, nicht am
+  Projekt. Ich wiederhole die rein lesende Prüfung außerhalb dieser Isolation; dabei
+  werden keine Dateien verändert und keine Geheimnisse ausgegeben.
+
+✔ You approved codex to run git status --short --branch && git remote -v && command
+  -v gcloud || true && ... this time
+
+• Ran git status --short --branch && git remote -v && command -v gcloud || true &&
+  │ gcloud --version 2>/dev/null || true
+  └ ## main...origin/main
+    ?? .tools/
+    origin    https://github.com/WladimirStoll/instandhaltung26.git (fetch)
+    origin    https://github.com/WladimirStoll/instandhaltung26.git (push)
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Perfekt. Wir verwenden:
+
+  - Projekt-ID: instandhaltung26
+  - Projektnummer: 844558361522
+  - Projektname: instandhaltung26
+  - Zielregion: europe-west3 (Frankfurt)
+
+  Der lokale Git-Branch ist mit GitHub synchronisiert. Nur .tools/ ist
+  unversioniert; die geheime .env wird nicht übertragen.
+
+  Die Google-Cloud-CLI gcloud ist noch nicht installiert. Als nächsten Schritt
+  sollten wir sie global installieren, uns bei Google anmelden und anschließend das
+  Projekt instandhaltung26 auswählen. Danach richten wir Artifact Registry, Secret
+  Manager und Cloud Run ein.
+
+  Soll ich jetzt die Installation der Google-Cloud-CLI vorbereiten?
+
+────────────────────────────────────────────────────────────────────────────────────
+
+
+› ja bitte Google-Cloud-CLI vorbereiten
+
+
+• Ich bereite die globale Installation nach der aktuellen offiziellen Google-
+  Anleitung für Ubuntu 24.04 vor. Zuerst prüfe ich Paketquellen und vorhandene
+  Komponenten; anschließend installiere ich die CLI oder gebe dir nur den einzelnen
+  notwendigen sudo-Schritt, falls das lokale Kennwort erforderlich wird.
+
+• Searching the web
+
+• Searched the web for site:cloud.google.com/sdk/docs/install apt Ubuntu Google
+  Cloud CLI official
+
+✔ You approved codex to run test -f /etc/apt/sources.list.d/google-cloud-sdk.list &&
+  sed -n '1,20p' /etc/... this time
+
+• Ran test -f /etc/apt/sources.list.d/google-cloud-sdk.list && sed -n '1,20p' /etc/
+  │ apt/sources.list.d/google-cloud-sdk.list || true; test -f /usr/share/keyrings/
+  │ cloud.google.gpg && ls -l /usr/share/keyrings/cloud.google.gpg || true;
+  │ … +1 lines
+  └ /usr/bin/curl
+    /usr/bin/gpg
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Voraussetzungen sind vorhanden, aber die Google-Paketquelle ist noch nicht
+  eingerichtet. Für die globale Installation sind sudo-Rechte erforderlich.
+
+  Bitte diese Befehle im Terminal ausführen:
+
+  sudo install -m 0755 -d /usr/share/keyrings
+
+  curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg \
+    | sudo gpg --dearmor --yes -o /usr/share/keyrings/cloud.google.gpg
+
+  echo "deb [signed-by=/usr/share/keyrings/cloud.google.gpg]
+  https://packages.cloud.google.com/apt cloud-sdk main" \
+    | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
+
+  sudo apt update
+  sudo apt install -y google-cloud-cli
+
+  gcloud --version
+
+  Diese Vorgehensweise entspricht der offiziellen Google-Cloud-CLI-Anleitung für
+  Debian/Ubuntu (https://docs.cloud.google.com/sdk/docs/install-sdk).
+
+  Schick mir danach die Ausgabe von gcloud --version. Anschließend starten wir die
+  Google-Anmeldung und setzen instandhaltung26 als aktives Projekt.
+
+────────────────────────────────────────────────────────────────────────────────────
+
+
+› E: Malformed entry 1 in list file /etc/apt/sources.list.d/google-cloud-sdk.list
+  (URI)
+  E: The list of sources could not be read.
+  E: Malformed entry 1 in list file /etc/apt/sources.list.d/google-cloud-sdk.list
+  (URI)
+  E: The list of sources could not be read.
+  Command 'gcloud' not found, but can be installed with:
+  sudo snap install google-cloud-cli
+  admin@alexander2-ThinkStation-P360-Tower:~$
+  E: Malformed entry 1 in list file /etc/apt/sources.list.d/google-cloud-sdk.list
+  (URI)
+  E: The list of sources could not be read.
+  E: Malformed entry 1 in list file /etc/apt/sources.list.d/google-cloud-sdk.list
+  (URI)
+  E: The list of sources could not be read.
+  Command 'gcloud' not found, but can be installed with:
+  sudo snap install google-cloud-cli
+  admin@alexander2-ThinkStation-P360-Tower:~$
+
+
+• Die neue APT-Quelldatei enthält offenbar einen beim Kopieren umgebrochenen oder
+  verfälschten Eintrag. Ich lese genau diese eine Datei aus, damit wir sie gezielt
+  korrigieren und nicht an den übrigen Paketquellen arbeiten.
+
+✔ You approved codex to run sed -n '1,10l' /etc/apt/sources.list.d/google-cloud-
+  sdk.list this time
+
+• Ran sed -n '1,10l' /etc/apt/sources.list.d/google-cloud-sdk.list
+  └ deb [signed-by=/usr/share/keyrings/cloud.google.gpg]$
+      https://packages.cloud.google.com/apt cloud-sdk main$
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Ursache ist gefunden: Der Repository-Eintrag wurde auf zwei Zeilen aufgeteilt.
+  Er muss vollständig in einer einzigen Zeile stehen.
+
+  Bitte exakt ausführen:
+
+  printf '%s\n' 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg]
+  https://packages.cloud.google.com/apt cloud-sdk main' \
+    | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
+
+  sudo apt update
+  sudo apt install -y google-cloud-cli
+
+  gcloud --version
+
+  Damit wird nur die fehlerhafte Google-Cloud-Quelldatei korrigiert. Die übrigen
+  APT-Quellen bleiben unverändert.
+
+────────────────────────────────────────────────────────────────────────────────────
+
+
+› admin@alexander2-ThinkStation-P360-Tower:~$ printf '%s\n' 'deb [signed-by=/usr/
+  share/keyrings/cloud.google.gpg]
+    https://packages.cloud.google.com/apt cloud-sdk main' \
+      | sudo tee /etc/apt/sources.list.d/google-cloud-sdk.list >/dev/null
+
+    sudo apt update
+    sudo apt install -y google-cloud-cli
+
+    gcloud --version
+  E: Malformed entry 1 in list file /etc/apt/sources.list.d/google-cloud-sdk.list
+  (URI)
+  E: The list of sources could not be read.
+  E: Malformed entry 1 in list file /etc/apt/sources.list.d/google-cloud-sdk.list
+  (URI)
+  E: The list of sources could not be read.
+  Command 'gcloud' not found, but can be installed with:
+  sudo snap install google-cloud-cli
+  admin@alexander2-ThinkStation-P360-Tower:~$
+
+
+• Beim Kopieren ist erneut ein Zeilenumbruch innerhalb des Eintrags gelandet. Ich
+  formuliere die Reparatur jetzt so, dass der Inhalt codiert übertragen wird;
+  dadurch kann die Darstellung im Chat keine zusätzliche Zeile in der APT-Adresse
+  erzeugen.
+
+✗ You canceled the request to run printf '%s\n' 'deb
+  [signed-by=/usr/share/keyrings/cloud.google.gpg] https://p...
+
+• Ran printf '%s\n' 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg]
+  │ https://packages.cloud.google.com/apt cloud-sdk main' | base64 -w0
+  └ (no output)
+
+■ Conversation interrupted - tell the model what to do differently. Something went
+wrong? Hit `/feedback` to report the issue.
+
+
+› admin@alexander2-ThinkStation-P360-Tower:~$ gcloud --version
+  Google Cloud SDK 576.0.0
+  alpha 2026.07.10
+  beta 2026.07.10
+  bq 2.1.34
+  bundled-python3-unix 3.14.6
+  core 2026.07.10
+  gcloud-crc32c 1.0.0
+  gsutil 5.37
+  preview 2026.07.10
+  admin@alexander2-ThinkStation-P360-Tower:~$
+
+
+• Die Google-Cloud-CLI ist erfolgreich installiert. Ich starte jetzt die Google-
+  Anmeldung und konfiguriere danach instandhaltung26 als aktives Projekt; die
+  Anmeldung muss einmal von dir im Browser bestätigt werden.
+
+✔ You approved codex to run gcloud auth login --no-launch-browser this time
+
+• Ran gcloud auth login --no-launch-browser
+  └ Go to the following link in your browser, and complete the sign-in prompts:
+
+    … +2 lines (ctrl + t to view transcript)
+
+    Once finished, enter the verification code provided in your browser:
+
+• Bitte öffne diesen Google-Anmeldelink im Browser:
+
+  Google-Cloud-Anmeldung öffnen
+  (https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=3255594055
+9.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fsdk.cloud.google.com%2Fauthc
+ode.html&scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https
+%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com
+%2Fauth%2Fappengine.admin+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login
++https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcompute+https%3A%2F%2Fwww.googleapis.com%
+2Fauth%2Faccounts.reauth&state=MUp1Wxdy52QBMueyrr8xTFGkGJfp4e&prompt=consent&token_u
+sage=remote&access_type=offline&code_challenge=L7Eeqt4Tp049qdwgynF1be6QCQUtlyIBbQCsy
+WRflZ4&code_challenge_method=S256)
+
+  Melde dich an, bestätige den Zugriff und sende mir anschließend den angezeigten
+  einmaligen Bestätigungscode. Dieser Code ist nur für diesen Anmeldevorgang gültig.
+
+
+› 4/0AXEQxIAnw1wtk9IAfrkPY0pt3BYdBurxtpH5Q9etjPTe8J6XIR1AXPrgJd0cvNTra8p_sw
+
+
+• Ich übergebe den einmaligen Code jetzt an den bereits wartenden Anmeldevorgang.
+  Danach prüfe ich das angemeldete Konto und setze Projekt sowie Frankfurt-Region
+  als Standard.
+
+↳ Interacted with background terminal
+  └ 4/0AXEQxIAnw1wtk9IAfrkPY0pt3BYdBurxtpH5Q9etjPTe8J6XIR1AXPrgJd0cvNTra8p_sw
+
+• Ran gcloud auth login --no-launch-browser
+  └ Go to the following link in your browser, and complete the sign-in prompts:
+
+    … +7 lines (ctrl + t to view transcript)
+    Your current project is [None].  You can change this setting by running:
+      $ gcloud config set project PROJECT_ID
+
+✔ You approved codex to run gcloud config set project instandhaltung26 && gcloud
+  config set run/region eu... this time
+
+• Ran gcloud config set project instandhaltung26 && gcloud config set run/region
+  │ europe-west3 && gcloud config set artifacts/location europe-west3 && gcloud
+  │ projects describe instandhaltung26
+  │ … +2 lines
+  └ Updated property [core/project].
+    Updated property [run/region].
+    Updated property [artifacts/location].
+    instandhaltung26    844558361522    instandhaltung26    ACTIVE
+    False
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Anmeldung und lokale Konfiguration sind erfolgreich:
+
+  - Konto: wladimir.stoll.bayern@gmail.com
+  - Projekt: instandhaltung26
+  - Projektnummer: 844558361522
+  - Cloud-Run-Region: europe-west3 (Frankfurt)
+  - Projektstatus: ACTIVE
+
+  Aktueller Blocker: Für das Projekt ist noch keine Abrechnung aktiviert
+  (billingEnabled: False). Cloud Run und Artifact Registry lassen sich deshalb noch
+  nicht bereitstellen.
+
+  Öffne die Google-Cloud-Abrechnung für das Projekt
+  (https://console.cloud.google.com/billing/linkedaccount?project=instandhaltung26)
+  und verknüpfe ein Abrechnungskonto. Dabei entstehen nicht automatisch Kosten; wir
+  konfigurieren Cloud Run anschließend sparsam.
+
+  Antworte danach nur mit „Abrechnung aktiviert“. Dann prüfe ich den Status und
+  richte die erforderlichen APIs und Artifact Registry ein.
+
+────────────────────────────────────────────────────────────────────────────────────
+
+
+› Wladimir Stoll
+  Natürliche Person • Wird auch im Zusammenhang mit Google Play Apps genutzt •
+  Deutschland • ID: 1004-5696-5716
+
+
+• Das ist dein Google-Zahlungsprofil, aber daraus geht noch nicht hervor, ob es mit
+  dem Cloud-Projekt verknüpft wurde. Ich prüfe den Projektstatus direkt; dabei
+  werden keine Zahlungsdaten ausgelesen.
+
+✔ You approved codex to run gcloud billing projects describe instandhaltung26
+  --format='yaml(projectId,bi... this time
+
+• Ran gcloud billing projects describe instandhaltung26
+  │ --format='yaml(projectId,billingAccountName,billingEnabled)'
+  └ billingAccountName: billingAccounts/01F561-85E92F-15F2CF
+    billingEnabled: true
+    projectId: instandhaltung26
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Verknüpfung ist erfolgreich: Abrechnung ist jetzt aktiviert. Ich aktiviere nun
+  die für unser Deployment nötigen Dienste und lege anschließend ein Docker-
+  Repository in Frankfurt an. Das verändert nur die Infrastruktur innerhalb des von
+  dir angegebenen Projekts.
+
+✔ You approved codex to run gcloud services enable run.googleapis.com
+  artifactregistry.googleapis.com sec... this time
+
+• Ran gcloud services enable run.googleapis.com artifactregistry.googleapis.com
+  │ secretmanager.googleapis.com cloudbuild.googleapis.com
+  └ Operation "operations/acf.p2-844558361522-3a331633-dbbe-4962-98e3-dbc08458b9d5"
+    finished successfully.
+
+✔ You approved codex to run gcloud artifacts repositories describe instandhaltung26
+  --location=europe-wes... this time
+
+• Ran gcloud artifacts repositories describe instandhaltung26
+  │ --location=europe-west3 --format='value(name)'
+  └ ERROR: (gcloud.artifacts.repositories.describe) NOT_FOUND: Requested entity was
+    not found. This command is authenticated as wladimir.stoll.bayern@gmail.com
+    which is the active account specified by the [core/account] property.
+
+✔ You approved codex to run gcloud artifacts repositories create instandhaltung26
+  --repository-format=doc... this time
+
+• Ran gcloud artifacts repositories create instandhaltung26
+  │ --repository-format=docker --location=europe-west3
+  │ --description='Docker-Images der Anwendung Instandhaltung26'
+  └ Create request issued for: [instandhaltung26]
+    Waiting for operation [projects/instandhaltung26/locations/europe-west3/
+    operations/5f5ff8a3-3f8a-45b3-9b49-f5e41840e994] to complete...
+    ......................................................................done.
+    Created repository [instandhaltung26].
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die benötigten APIs sind aktiv und das private Docker-Repository europe-west3/
+  instandhaltung26 wurde angelegt. Als Nächstes übertrage ich ausschließlich das
+  TiDB-Passwort aus der git-ignorierten .env in Secret Manager; URL und Benutzername
+  bleiben normale Cloud-Run-Variablen. Der geheime Wert wird dabei nicht ausgegeben.
+
+✔ You approved codex to run gcloud secrets describe tidb-password
+  --format='value(name)' this time
+
+• Ran gcloud secrets describe tidb-password --format='value(name)'
+  └ ERROR: (gcloud.secrets.describe) NOT_FOUND: Secret [projects/844558361522/
+    secrets/tidb-password] not found. This command is authenticated as
+    wladimir.stoll.bayern@gmail.com which is the active account specified by the
+    [core/account] property.
+
+✔ You approved codex to run sed -n 's/^DB_PASSWORD=//p' .env | gcloud secrets create
+  tidb-password --repl... this time
+
+• Ran sed -n 's/^DB_PASSWORD=//p' .env | gcloud secrets create tidb-password
+  │ --replication-policy=automatic --data-file=-
+  └ Created version [1] of the secret [tidb-password].
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Das Secret tidb-password ist jetzt als Version 1 gespeichert. Ich verbinde Docker
+  mit Artifact Registry und lade das bereits lokal erfolgreich gegen TiDB getestete
+  Image hoch; .env wird weder Teil des Images noch übertragen.
+
+✔ You approved codex to run gcloud auth configure-docker europe-west3-docker.pkg.dev
+  --quiet this time
+
+• Ran gcloud auth configure-docker europe-west3-docker.pkg.dev --quiet
+  └ Adding credentials for: europe-west3-docker.pkg.dev
+    Docker configuration file updated.
+
+✔ You approved codex to run sg docker -c 'docker image inspect
+  instandhaltung26:local --format={{.Id}}' this time
+
+• Ran sg docker -c 'docker image inspect instandhaltung26:local --format={{.Id}}'
+  └ sha256:6a610c68845db4ea01274b9343c69ef0ebc1343b1f1f69946e9c6bd9c3683f20
+
+✔ You approved codex to run sg docker -c 'docker tag instandhaltung26:local
+  europe-west3-docker.pkg.dev/i... this time
+
+• Ran sg docker -c 'docker tag instandhaltung26:local
+  │ europe-west3-docker.pkg.dev/instandhaltung26/instandhaltung26/app:7dc574b' &&
+  │ sg docker -c 'docker push
+  │ … +1 lines
+  └ The push refers to repository
+    [europe-west3-docker.pkg.dev/instandhaltung26/instandhaltung26/app]
+    … +129 lines (ctrl + t to view transcript)
+    e6f31ffc071e: Pushed
+    37871e84e40a: Pushed
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Der Upload läuft; die meisten Image-Schichten sind bereits in Frankfurt
+  angekommen. Ich warte noch auf den endgültigen Digest, bevor ich das Image für
+  Cloud Run verwende.
+
+• Ran sg docker -c 'docker tag instandhaltung26:local
+  │ europe-west3-docker.pkg.dev/instandhaltung26/instandhaltung26/app:7dc574b' &&
+  │ sg docker -c 'docker push
+  │ … +1 lines
+  └ The push refers to repository
+    [europe-west3-docker.pkg.dev/instandhaltung26/instandhaltung26/app]
+    … +134 lines (ctrl + t to view transcript)
+    sha256:6a610c68845db4ea01274b9343c69ef0ebc1343b1f1f69946e9c6bd9c3683f20 size:
+    856
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Das Image ist vollständig hochgeladen und per Digest bestätigt. Ich erteile jetzt
+  ausschließlich dem standardmäßigen Cloud-Run-Laufzeitkonto Leserechte auf tidb-
+  password und deploye anschließend die Anwendung öffentlich über HTTPS mit maximal
+  einer Instanz und ohne dauerhaft laufende Mindestinstanz.
+
+✔ You approved codex to run gcloud secrets add-iam-policy-binding tidb-password
+  --member=serviceAccount:8... this time
+
+• Ran gcloud secrets add-iam-policy-binding tidb-password
+  │ --member=serviceAccount:844558361522-compute@developer.gserviceaccount.com
+  │ --role=roles/secretmanager.secretAccessor --quiet
+  └ Updated IAM policy for secret [tidb-password].
+    bindings:
+    … +3 lines (ctrl + t to view transcript)
+    etag: BwZWqwbyopo=
+    version: 1
+
+✔ You approved codex to run gcloud run deploy instandhaltung26 --image=europe-west3-
+  docker.pkg.dev/instan... this time
+
+• Ran gcloud run deploy instandhaltung26 --image=europe-west3-docker.pkg.dev/
+  │ instandhaltung26/instandhaltung26/app:7dc574b --region=europe-west3
+  │ --platform=managed --allow-unauthenticated --port=8080 --cpu=1 --memory=1Gi
+  │ … +6 lines
+  └ Deploying container to Cloud Run service [instandhaltung26] in project
+    [instandhaltung26] region [europe-west3]
+    Deploying new service...
+    Setting IAM Policy.................done
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Cloud Run hat den Dienst angelegt und den öffentlichen HTTPS-Zugriff gesetzt. Die
+  neue Revision startet noch; ich warte auf die endgültige Service-URL und teste
+  danach Frontend, REST und Actuator direkt in Google Cloud.
+
+• Ran gcloud run deploy instandhaltung26 --image=europe-west3-docker.pkg.dev/
+  │ instandhaltung26/instandhaltung26/app:7dc574b --region=europe-west3
+  │ --platform=managed --allow-unauthenticated --port=8080 --cpu=1 --memory=1Gi
+  │ … +6 lines
+  └ Deploying container to Cloud Run service [instandhaltung26] in project
+    [instandhaltung26] region [europe-west3]
+    … +19 lines (ctrl + t to view transcript)
+    For more troubleshooting guidance, see
+    https://cloud.google.com/run/docs/troubleshooting#container-failed-to-start
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die erste Revision wurde erstellt, aber der Containerstart ist fehlgeschlagen. Da
+  derselbe Container lokal lief, prüfe ich jetzt die Cloud-Run-Startprotokolle;
+  typische Ursachen sind Secret-Berechtigung, TiDB-Erreichbarkeit oder eine Cloud-
+  spezifische Umgebungsvariable. Ich ändere noch nichts, bis die konkrete Ursache
+  belegt ist.
+
+✔ You approved codex to run gcloud logging read 'resource.type="cloud_run_revision"
+  AND resource.labels.s... this time
+
+• Running gcloud logging read 'resource.type="cloud_run_revision" AND
+  │ resource.labels.service_name="instandhaltung26" AND
+  │ resource.labels.revision_name="instandhaltung26-00001-tw9"' --limit=100
+  │ … +2 lines
+
+• Ran gcloud logging read 'resource.type="cloud_run_revision" AND
+  │ resource.labels.service_name="instandhaltung26" AND
+  │ resource.labels.revision_name="instandhaltung26-00001-tw9"' --limit=100
+  │ … +2 lines
+  └ 2026-07-15T19:07:26.934677Z    INFO    Starting new instance. Reason:
+    DEPLOYMENT_ROLLOUT - Instance started due to traffic shifting between revisions
+    … +106 lines (ctrl + t to view transcript)
+    Source) ~[na:na]
+    2026-07-15T19:08:07.339297083Z    WARNING    Container called exit(1).
+
+✔ You approved codex to run gcloud run revisions describe instandhaltung26-00001-tw9
+  --region=europe-west... this time
+
+• Ran gcloud run revisions describe instandhaltung26-00001-tw9 --region=europe-west3
+  │ --format='yaml(status.conditions,spec.containers)'
+  └ spec:
+      containers:
+    … +66 lines (ctrl + t to view transcript)
+        status: 'True'
+        type: ResourcesAvailable
+
+✔ You approved codex to run gcloud run services logs read instandhaltung26
+  --region=europe-west3 --limit=... this time
+
+• Ran gcloud run services logs read instandhaltung26 --region=europe-west3
+  │ --limit=100
+  │ --log-filter='resource.labels.revision_name="instandhaltung26-00001-tw9"'
+  └ 2026-07-15 19:07:30   .   ____          _            __ _ _
+    2026-07-15 19:07:30  /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+    … +101 lines (ctrl + t to view transcript)
+    2026-07-15 19:08:06     at java.base/java.lang.Thread.run(Unknown Source)
+    ~[na:na]
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Ursache ist eindeutig: TiDB ist erreichbar, lehnt aber das Secret ab. Beim
+  Übertragen wurde durch die Text-Pipeline ein abschließender Zeilenumbruch als Teil
+  des Passworts gespeichert. Ich füge eine korrigierte Secret-Version ohne
+  Zeilenumbruch hinzu und deploye dieselbe Revision erneut; das Passwort selbst
+  bleibt verborgen.
+
+✔ You approved codex to run sed -n 's/^DB_PASSWORD=//p' .env | tr -d '\n' | gcloud
+  secrets versions add t... this time
+
+• Ran sed -n 's/^DB_PASSWORD=//p' .env | tr -d '\n' | gcloud secrets versions add
+  │ tidb-password --data-file=-
+  └ Created version [2] of the secret [tidb-password].
+
+✔ You approved codex to run gcloud run deploy instandhaltung26 --image=europe-west3-
+  docker.pkg.dev/instan... this time
+
+• Ran gcloud run deploy instandhaltung26 --image=europe-west3-docker.pkg.dev/
+  │ instandhaltung26/instandhaltung26/app:7dc574b --region=europe-west3
+  │ --platform=managed --allow-unauthenticated --port=8080 --cpu=1 --memory=1Gi
+  │ … +6 lines
+  └ Deploying container to Cloud Run service [instandhaltung26] in project
+    [instandhaltung26] region [europe-west3]
+    … +8 lines (ctrl + t to view transcript)
+    deployed and is serving 100 percent of traffic.
+    Service URL: https://instandhaltung26-844558361522.europe-west3.run.app
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die zweite Revision ist erfolgreich gestartet und erhält 100 % des Traffics. Ich
+  teste jetzt die öffentliche HTTPS-Adresse, Angular, REST, Actuator und bestätige
+  anschließend in den Logs, dass TiDB/Flyway sauber gestartet sind.
+
+✔ You approved codex to run curl -fsS -o /tmp/instandhaltung26-root.html -w 'root
+  %{http_code} %{content_... this time
+
+• Ran curl -fsS -o /tmp/instandhaltung26-root.html -w 'root %{http_code}
+  │ %{content_type}\n' https://instandhaltung26-844558361522.europe-west3.run.app/
+  │ && curl -fsS -w '\napi %{http_code}\n'
+  │ … +4 lines
+  └ root 200 text/html;charset=UTF-8
+    {"time":"2026-07-15T19:12:22.864219767Z","status":"UP"}
+    … +2 lines (ctrl + t to view transcript)
+    actuator 200
+    <title>Instandhaltung
+
+✔ You approved codex to run gcloud run services logs read instandhaltung26
+  --region=europe-west3 --limit=... this time
+
+• Ran gcloud run services logs read instandhaltung26 --region=europe-west3
+  │ --limit=80
+  │ --log-filter='resource.labels.revision_name="instandhaltung26-00002-4nn"' | rg
+  │ … +2 lines
+  └ 2026-07-15 19:11:48 2026-07-15T19:11:48.712Z  INFO 1 --- [instandhaltung26] [
+    main] org.flywaydb.core.FlywayExecutor         : Database:
+    … +12 lines (ctrl + t to view transcript)
+    [           main] d.k.i.InstandhaltungApplication          : Started
+    InstandhaltungApplication in 8.896 seconds (process running for 10.562)
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Alle öffentlichen Tests sind erfolgreich, und die Logs bestätigen die TLS-
+  Verbindung sowie den aktuellen Flyway-Stand. Ich deaktiviere noch die fehlerhafte
+  Secret-Version 1 mit dem zusätzlichen Zeilenumbruch; Cloud Run verwendet
+  ausdrücklich die korrekte Version 2.
+
+✔ You approved codex to run gcloud secrets versions disable 1 --secret=tidb-password
+  --quiet this time
+
+• Ran gcloud secrets versions disable 1 --secret=tidb-password --quiet
+  └ Disabled version [1] of the secret [tidb-password].
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Anwendung läuft jetzt erfolgreich auf Google Cloud Run:
+
+  Instandhaltung26 öffnen
+  (https://instandhaltung26-844558361522.europe-west3.run.app)
+
+  Erfolgreich geprüft:
+
+  - Angular-Startseite: 200 OK
+  - REST /api/health: UP
+  - Actuator /actuator/health: UP
+  - Spring Boot und Embedded Tomcat gestartet
+  - TiDB-Verbindung über TLS erfolgreich
+  - Flyway: Schema aktuell, keine Migration erforderlich
+  - Region: europe-west3 (Frankfurt)
+  - Cloud Run: maximal eine Instanz, keine Mindestinstanz
+  - TiDB-Passwort liegt im Secret Manager
+  - Fehlerhafte Secret-Version 1 deaktiviert; Cloud Run nutzt Version 2
+
+  Das private Container-Image liegt in der Artifact Registry unter dem Tag 7dc574b.
+  Es waren keine weiteren lokalen Codeänderungen oder Commits erforderlich.
+
+
+Perfekt – genau diese Anzeige bestätigt, dass die vollständige Zielkette
+  funktioniert:
+
+  - Angular wird aus dem Spring-Boot-JAR ausgeliefert.
+  - Embedded Tomcat läuft in Cloud Run.
+  - Angular erreicht das REST-Backend.
+  - Das Backend meldet UP.
+  - Cloud Run liefert alles öffentlich über HTTPS aus.
+  - Das Backend ist per TLS mit TiDB verbunden.
+  - Flyway erkennt Schema-Version 1.
+
+  Damit ist das technische Fundament produktionsnah lauffähig.
+
+  Als nächster sinnvoller Schritt sollten wir nicht weiter an der Infrastruktur
+  arbeiten, sondern das erste echte Fachmodul aus der Legacy-Anwendung migrieren.
+  Vorher würde ich noch eine kleine Deployment-Dokumentation und reproduzierbare
+  Konfiguration ins Repository aufnehmen. Danach können wir beispielsweise mit
+  Anmeldung/Benutzerverwaltung oder einem überschaubaren Stammdatenmodul beginnen.
+
+  Die ausführliche Deployment-Dokumentation ist fertig:
+
+    - instandhaltung26/docs/DEPLOYMENT.md
+    - instandhaltung26/README.md:29
+
+    Dokumentiert sind unter anderem:
+
+    - heutige Google-Cloud- und CLI-Einrichtung
+    - behobener APT-Zeilenumbruchfehler
+    - Projekt, Region und aktivierte APIs
+    - Artifact Registry und Image-Upload
+    - Secret Manager und IAM-Berechtigung
+    - TiDB-Verbindung über TLS
+    - vollständiger Cloud-Run-Deploymentbefehl
+    - fehlgeschlagene erste Revision samt Ursache
+    - Korrektur des Passwort-Zeilenumbruchs
+    - erfolgreiche Revision und Abnahmetests
+    - Anleitung für spätere Deployments
+    - Sicherheits-, Kosten- und Betriebshinweise
+
+    Die Format- und Secret-Prüfung war erfolgreich. Passwörter und OAuth-Codes sind
+    nicht enthalten.
+
+    Die Dokumentation ist lokal noch nicht committed; .tools/ bleibt davon getrennt
+    und unversioniert.
