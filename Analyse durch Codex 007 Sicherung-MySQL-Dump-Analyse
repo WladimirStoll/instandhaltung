@@ -1,0 +1,1598 @@
+curl -fsS -o /dev/null -w '%{http_code}\n' \
+    +  https://instandhaltung26-844558361522.europe-west3.run.app/
+    +
+    +curl -fsS \
+    +  https://instandhaltung26-844558361522.europe-west3.run.app/api/health
+    +
+    +curl -fsS \
+    +  https://instandhaltung26-844558361522.europe-west3.run.app/actuator/health
+    +```
+    +
+    +Ergebnisse:
+    +
+    +- Angular-Startseite: HTTP 200, Titel `Instandhaltung`,
+    +- REST `/api/health`: HTTP 200 und `UP`,
+    +- Actuator `/actuator/health`: HTTP 200 und `UP`,
+    +- Flyway: eine Migration erfolgreich validiert,
+    +- Schema `Instandhaltung26`: aktuell, keine Migration erforderlich,
+    +- Embedded Tomcat: erfolgreich auf Port 8080 gestartet,
+    +- TiDB: JDBC-Verbindung mit `sslMode=VERIFY_IDENTITY` erfolgreich.
+    +
+    +Die Startseite zeigte `Backend UP`. Damit ist belegt, dass das von Spring Boot
+    +ausgelieferte Angular-Frontend die REST-API im selben Cloud-Run-Dienst
+    erreicht.
+    +
+    +## 10. Spätere Deployments
+    +
+    +Zuerst Tests und Git-Status prüfen. Geheimnisse dürfen nicht als Git-Änderung
+    +erscheinen:
+    +
+    +```bash
+    +git status --short --branch
+    +git rev-parse --short HEAD
+    +```
+    +
+    +`<TAG>` wird durch den kurzen Git-Commit ersetzt:
+    +
+    +```bash
+    +docker build -t instandhaltung26:<TAG> .
+    +
+    +docker tag instandhaltung26:<TAG> \
+    +  europe-west3-docker.pkg.dev/instandhaltung26/instandhaltung26/app:<TAG>
+    +
+    +docker push \
+    +  europe-west3-docker.pkg.dev/instandhaltung26/instandhaltung26/app:<TAG>
+    +```
+    +
+    +Danach wird der Befehl aus Abschnitt 7 mit dem neuen Image-Tag ausgeführt. Das
+    +Passwort muss nicht erneut übertragen werden, solange es unverändert ist. Nach
+    +einer Passwortänderung wird eine neue Secret-Version erzeugt und diese Version
+    +im Deployment ausgewählt. Abschließend werden Startseite, beide Health-
+    Endpunkte
+    +und die Cloud-Run-Logs erneut geprüft.
+    +
+    +## 11. Betriebshinweise
+    +
+    +- Fachliche Endpunkte benötigen vor echten Daten Authentifizierung und Rollen.
+    +- `min=0` spart Leerlaufkosten, kann aber Kaltstarts verursachen.
+    +- `max=1` begrenzt Kosten und TiDB-Verbindungen, aber auch Skalierung und
+    +  Ausfallsicherheit. Dies gilt für die aktuelle Fundamentphase.
+    +- Jede Instanz hat einen eigenen Hikari-Pool; `DB_POOL_SIZE=3` bleibt deshalb
+    +  bewusst klein.
+    +- Flyway läuft beim Start. Migrationen müssen vorab geprüft werden.
+    +- Secrets dürfen niemals in Logs ausgegeben werden.
+    +- SMTP ist noch nicht produktiv eingerichtet.
+    +- Budgets und Kostenwarnungen sollten in Google Cloud eingerichtet werden.
+    *** End Patch
+
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: README.md
+    … +97 lines (ctrl + t to view transcript)
+    A docs/DEPLOYMENT.md
+    M README.md
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Dokumentation ist jetzt geschrieben. Ich prüfe noch den Diff, die Verlinkung
+  und dass weder das frühere Passwort noch lokale .env-Werte versehentlich in die
+  versionierten Dateien gelangt sind.
+
+✔ You approved codex to run git diff --check && git diff --stat && git status
+  --short --branch && rg -n '... this time
+
+• Ran git diff --check && git diff --stat && git status --short --branch && rg -n
+  │ 'u52zHNWtPekuYRwZ|4/0AXE|DB_PASSWORD=' README.md docs/DEPLOYMENT.md && test -f
+  │ docs/DEPLOYMENT.md && rg -n 'docs/DEPLOYMENT.md' README.md
+  └  README.md | 7 +++++++
+     1 file changed, 7 insertions(+)
+    … +8 lines (ctrl + t to view transcript)
+    33:[`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) dokumentiert. Die Anleitung
+    enthält
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Sicherheitsprüfung ist sauber: Es erscheinen nur Platzhalter und
+  Variablennamen, keine Secret-Werte oder OAuth-Codes. Für die gewünschte genaue
+  Nachvollziehbarkeit ergänze ich noch den heute tatsächlich aufgetretenen APT-
+  Fehler: Der Google-Repository-Eintrag war durch einen Zeilenumbruch ungültig und
+  musste einzeilig korrigiert werden.
+
+✔ You approved codex to run apply_patch this time
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: docs/DEPLOYMENT.md
+    … +20 lines (ctrl + t to view transcript)
+    Success. Updated the following files:
+    M docs/DEPLOYMENT.md
+
+↳ Interacted with background terminal
+  └ *** Begin Patch
+    *** Update File: docs/DEPLOYMENT.md
+    @@
+     Die Google Cloud CLI wurde aus Googles APT-Repository installiert. Am
+     15.07.2026 war Google Cloud SDK `576.0.0` installiert. Danach erfolgte die
+     Browseranmeldung:
+    +
+    +Beim ersten Einrichten war der Inhalt von
+    +`/etc/apt/sources.list.d/google-cloud-sdk.list` versehentlich nach
+    +`signed-by=...` umgebrochen. `apt` meldete deshalb `Malformed entry ...`.
+    +Der Repository-Eintrag muss vollständig in einer Zeile stehen:
+    +
+    +```text
+    +deb [signed-by=/usr/share/keyrings/cloud.google.gpg]
+    https://packages.cloud.google.com/apt cloud-sdk main
+    +```
+    +
+    +Nach der einzeiligen Korrektur konnten `apt update` und die Installation von
+    +`google-cloud-cli` erfolgreich ausgeführt werden.
+
+     ```bash
+     gcloud auth login --no-launch-browser
+    *** End Patch
+
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: docs/DEPLOYMENT.md
+    … +20 lines (ctrl + t to view transcript)
+    Success. Updated the following files:
+    M docs/DEPLOYMENT.md
+
+✔ You approved codex to run git diff --check && wc -l README.md docs/DEPLOYMENT.md
+  && git status --short ... this time
+
+• Ran git diff --check && wc -l README.md docs/DEPLOYMENT.md && git status --short
+  │ --branch && if DB_SECRET=$(sed -n 's/^DB_PASSWORD=//p' .env); then if test -n
+  │ "$DB_SECRET" && rg -Fq "$DB_SECRET" README.md docs/DEPLOYMENT.md; then echo
+  │ … +2 lines
+  └    34 README.md
+      305 docs/DEPLOYMENT.md
+    … +4 lines (ctrl + t to view transcript)
+    ?? docs/
+    Secret-Pruefung: OK
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die ausführliche Deployment-Dokumentation ist fertig:
+
+  - instandhaltung26/docs/DEPLOYMENT.md
+  - instandhaltung26/README.md:29
+
+  Dokumentiert sind unter anderem:
+
+  - heutige Google-Cloud- und CLI-Einrichtung
+  - behobener APT-Zeilenumbruchfehler
+  - Projekt, Region und aktivierte APIs
+  - Artifact Registry und Image-Upload
+  - Secret Manager und IAM-Berechtigung
+  - TiDB-Verbindung über TLS
+  - vollständiger Cloud-Run-Deploymentbefehl
+  - fehlgeschlagene erste Revision samt Ursache
+  - Korrektur des Passwort-Zeilenumbruchs
+  - erfolgreiche Revision und Abnahmetests
+  - Anleitung für spätere Deployments
+  - Sicherheits-, Kosten- und Betriebshinweise
+
+  Die Format- und Secret-Prüfung war erfolgreich. Passwörter und OAuth-Codes sind
+  nicht enthalten.
+
+  Die Dokumentation ist lokal noch nicht committed; .tools/ bleibt davon getrennt
+  und unversioniert.
+
+─ Worked for 6m 47s ────────────────────────────────────────────────────────────────
+
+
+› ich werde Dir jetzt eine Datei geben. Dort ist die gesamte MySQL-Datenbank
+  hinterlegt, welche von dem Original-Projekt gesichert worden ist. Ich möchte dass
+  Du diese analysierst und mir sagst, wie gut sie sich in TiDB abbilden lässt. Am
+  besten ohne änderungen, denn wir wollen ja das original Projekt stück für stück
+  migrieren. Erinnerst Du dich noch an das Original-Projekt, oder soll ich Dich
+  erinnern?
+
+
+• Model interrupted to submit steer instructions.
+
+
+› Codex-Prompt: Ermittle und dokumentiere:
+
+
+  ich gebe dir jetzt alle Infos, damit Du dir überlegen kannst wie wir die aktuelle
+  Sicherung für MySQL nach TiDB migrieren, and zwar im Rahmen des aktuellen
+  Projekts. Hier zuerst, damit Du dich erinnerst alles, was wir mit Dir bereits
+  gemacht haben:  /home/admin/IdeaProjects/instandhaltung/Analyse durch Codex 001
+  Init' '/home/admin/IdeaProjects/instandhaltung/Analyse durch Codex 002' '/home/
+  admin/IdeaProjects/instandhaltung/Analyse durch Codex 003 Bauen der ersten
+  Version der App' '/home/admin/IdeaProjects/instandhaltung/Analyse durch Codex 004
+  Propmt' '/home/admin/IdeaProjects/instandhaltung/Analyse durch Codex 005 TiDB
+  erstellt' '/home/admin/IdeaProjects/instandhaltung/Analyse durch Codex 006 Google
+  Run einrichten'
+
+
+• Ja, ich kann an den bisherigen Stand anknüpfen. Ich lese jetzt die sechs Codex-
+  Protokolle vollständig und ordne daraus Legacy-Datenbank, TiDB-Ziel und Cloud-Run-
+  Stand ein. Danach suche ich im Legacy-Projekt nach der aktuellen MySQL-Sicherung
+  und dokumentiere zunächst nur die Migrationsbewertung – ohne Datenbank oder Dump
+  zu verändern.
+
+• Die lokale Bubblewrap-Isolation ist erneut vor dem Dateizugriff ausgefallen. Ich
+  wiederhole dieselbe rein lesende Bestandsaufnahme außerhalb dieser defekten
+  Isolation; es werden weder Sicherungen noch Projekte verändert.
+
+✔ You approved codex to run for f in 'Analyse durch Codex 001 Init' 'Analyse durch
+  Codex 002' 'Analyse du... this time
+
+• Ran for f in 'Analyse durch Codex 001 Init' 'Analyse durch Codex 002' 'Analyse
+  │ durch Codex 003 Bauen der ersten Version der App' 'Analyse durch Codex 004
+  │ Propmt' 'Analyse durch Codex 005 TiDB erstellt' 'Analyse durch Codex 006
+  │ … +3 lines
+  └ Analyse durch Codex 001 Init
+    Analyse durch Codex 001 Init: Java source, Unicode text, UTF-8 text
+    … +156 lines (ctrl + t to view transcript)
+    src/de/keag/lager/db/DbChangeHistory.sql
+    src/src/de/keag/lager/db/DbChangeHistory.sql
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die aktuelle Sicherung ist sehr wahrscheinlich sicherungen/Produktion2026/
+  backup_16.07.2026_ 8-16-08.zip. Ich lese nun die sechs Protokolle vollständig und
+  untersuche anschließend das ZIP zunächst nur strukturell (Dateiliste, Größen, SQL-
+  Dialektmerkmale). Die Sicherung wird nicht importiert und TiDB bleibt unverändert.
+
+✔ You approved codex to run cat 'Analyse durch Codex 001 Init'; cat 'Analyse durch
+  Codex 002' this time
+
+✔ You approved codex to run cat 'Analyse durch Codex 003 Bauen der ersten Version
+  der App'; cat 'Analyse ... this time
+
+✔ You approved codex to run cat 'Analyse durch Codex 005 TiDB erstellt'; cat
+  'Analyse durch Codex 006 Goo... this time
+
+• Explored
+  └ Read Analyse durch Codex 001 Init, Analyse durch Codex 002, Analyse durch Codex
+  005
+         TiDB erstellt, Analyse durch Codex 006 Google Run einrichten, Analyse durch
+         Codex 003 Bauen der ersten Version der App, Analyse durch Codex 004 Propmt
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Der bisherige Verlauf ist konsistent: Das Greenfield-Fundament läuft bereits auf
+  Cloud Run, TiDB ist per TLS angebunden, und Flyway enthält bislang nur die
+  technische Marker-Tabelle. Jetzt untersuche ich die Sicherung vom 16.07.2026
+  isoliert unter /tmp und ermittle Tabellen, Views, Routinen, Trigger,
+  Fremdschlüssel, Engines, Zeichensätze, problematische Datentypen und Datenmengen.
+
+✗ You canceled the request to run archive='sicherungen/Produktion2026/
+  backup_16.07.2026_ 8-16-08.zip' ...
+
+• Ran archive='sicherungen/Produktion2026/backup_16.07.2026_ 8-16-08.zip'
+  │ sha256sum "$archive"
+  │ unzip -Z -v "$archive" | sed -n '1,120p'
+  │ … +1 lines
+  └ (no output)
+
+■ Conversation interrupted - tell the model what to do differently. Something went
+wrong? Hit `/feedback` to report the issue.
+
+
+› nimm die bereits entpackte version hier:  '/home/admin/Downloads/backup.bat' '/
+  home/admin/Downloads/backup_16.07.2026_ 8-16-08.sql'
+
+
+• Verstanden. Ich verwende ausschließlich die bereits entpackten Dateien in
+  Downloads; das ZIP bleibt unberührt. backup.bat zeigt den Erzeugungsbefehl, die
+  SQL-Datei ist die eigentliche Grundlage. Ich lese keine Zugangsdaten in die
+  Dokumentation und importiere weiterhin nichts nach TiDB.
+
+✔ You approved codex to run file '/home/admin/Downloads/backup.bat' '/home/admin/
+  Downloads/backup_16.07.2... this time
+
+• Ran file '/home/admin/Downloads/backup.bat' '/home/admin/Downloads/
+  │ backup_16.07.2026_ 8-16-08.sql'
+  │ wc -l -c '/home/admin/Downloads/backup.bat' '/home/admin/Downloads/
+  │ … +6 lines
+  └ /home/admin/Downloads/backup.bat:                     ISO-8859 text, with CRLF
+    line terminators
+    … +113 lines (ctrl + t to view transcript)
+      CONSTRAINT `FK_artikel_kostenstelle` FOREIGN KEY (`fk_kostenstelle`)
+    REFERENCES `kostenstelle` (`id`),
+
+✔ You approved codex to run sql='/home/admin/Downloads/backup_16.07.2026_ 8-16-
+  08.sql' ... this time
+
+• Ran sql='/home/admin/Downloads/backup_16.07.2026_ 8-16-08.sql'
+  │ printf 'CREATE TABLE: '; rg -c '^CREATE TABLE ' "$sql"
+  │ printf 'INSERT: '; rg -c '^INSERT INTO ' "$sql"
+  │ … +29 lines
+  └ 205
+    zero dates: 21
+    … +69 lines (ctrl + t to view transcript)
+        216 set
+        316 text
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die erste statische Bilanz ist günstig: 51 Tabellen, keine Views, Trigger,
+  Routinen oder Events; 49 Tabellen sind InnoDB. Die größten erwartbaren
+  Importhürden sind nicht das Fachschema selbst, sondern Dump-Steuerbefehle (LOCK
+  TABLES, DISABLE KEYS), zwei MyISAM-Tabellen, 21 Null-Datumswerte, gemischte
+  Zeichensätze und 287 deklarierte Fremdschlüssel. Ich ermittle jetzt exakt, welche
+  Tabellen betroffen sind und ob der Dump intern konsistent ist.
+
+✔ You approved codex to run sql='/home/admin/Downloads/backup_16.07.2026_ 8-16-
+  08.sql' ... this time
+
+• Ran sql='/home/admin/Downloads/backup_16.07.2026_ 8-16-08.sql'
+  │ awk '
+  │   /^CREATE TABLE / {name=$3; gsub(/`/,"",name); pk=0; ai=0; fk=0}
+  │ … +24 lines
+  └ fehler: ) ENGINE=MyISAM AUTO_INCREMENT=537014 DEFAULT CHARSET=utf8 COMMENT='Kein
+    Commit-Controll! ';
+    … +468 lines (ctrl + t to view transcript)
+    1690:/*!40000 ALTER TABLE `zugriftsrechtt` ENABLE KEYS */;
+    1691:UNLOCK TABLES;
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Um Datenmengen und interne Konsistenz belastbar zu beurteilen, importiere ich den
+  Dump jetzt in einen vollständig temporären, nicht veröffentlichten MySQL-8.4-
+  Container ohne Host-Port. Das verändert weder TiDB noch das Projekt; der Container
+  wird nach der Analyse entfernt. So erkennen wir zusätzlich, ob der alte MySQL-5.5-
+  Dump überhaupt noch von einem modernen MySQL-Parser akzeptiert wird.
+
+✔ You approved codex to run sg docker -c 'docker rm -f instandhaltung26-dump-
+  analysis' 2>/dev/null || tru... this time
+
+• Ran sg docker -c 'docker rm -f instandhaltung26-dump-analysis' 2>/dev/null || true
+  │ sg docker -c 'docker run --name instandhaltung26-dump-analysis -e
+  │ MYSQL_ALLOW_EMPTY_PASSWORD=yes -d mysql:8.4 --sql-mode=NO_AUTO_VALUE_ON_ZERO'
+  │ … +4 lines
+  └ 6fe05c2228efd4a2ba3f708854d709e3c4471d6d7813aeb0d55ffe7adb642778
+    MySQL analysis container: ready
+
+✔ You approved codex to run sg docker -c 'docker exec -i instandhaltung26-dump-
+  analysis mysql -uroot --sh... this time
+
+• Ran sg docker -c 'docker exec -i instandhaltung26-dump-analysis mysql -uroot
+  │ --show-warnings' < '/home/admin/Downloads/backup_16.07.2026_ 8-16-08.sql'
+  └ Warning (Code 3719): 'utf8' is currently an alias for the character set UTF8MB3,
+    but will be an alias for UTF8MB4 in a future release. Please consider using
+    … +480 lines (ctrl + t to view transcript)
+    Warning (Code 1287): 'utf8mb3' is deprecated and will be removed in a future
+    release. Please use utf8mb4 instead
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Der vollständige 78-MB-Dump wurde von MySQL 8.4 ohne Fehler importiert. Es gab nur
+  Modernisierungswarnungen zu utf8/UTF8MB3 und veralteten Integer-Anzeigebreiten.
+  Das ist ein starkes Kompatibilitätssignal. Ich ermittle nun exakte Zeilenzahlen,
+  größte Tabellen sowie potenzielle Fremdschlüsselverletzungen, weil der Dump die
+  Prüfungen während des Datenladens deaktiviert.
+
+✔ You approved codex to run printf 'Schema summary:\n' ... this time
+
+• Ran printf 'Schema summary:\n'
+  │ sg docker -c 'docker exec instandhaltung26-dump-analysis mysql -uroot -N -e
+  │ "SELECT COUNT(*), SUM(TABLE_ROWS),
+  │ … +26 lines
+  └ 51    357793    80.32
+    60
+    … +12 lines (ctrl + t to view transcript)
+    Zero-date counts by date/datetime column:
+    sh: 1: Syntax error: Unterminated quoted string
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die erste Statistikabfrage hat zwei wichtige Dinge gezeigt: 51 Tabellen mit
+  insgesamt ungefähr 357.793 Datensätzen und rund 80 MiB belegtem Speicher.
+  Tatsächlich existieren 60 Fremdschlüssel, nicht 287 – die höhere Textfundzahl kam
+  zustande, weil die Tabelle fehler alte SQL-/Fehlermeldungstexte enthält. Zwei
+  Detailabfragen sind nur an Shell-Quoting gescheitert; der Import selbst ist
+  vollständig. Ich wiederhole diese Details robuster.
+
+✔ You approved codex to run printf 'Exact row counts:\n' ... this time
+
+• Ran printf 'Exact row counts:\n'
+  │ while IFS= read -r table; do count=$(sg docker -c "docker exec
+  │ instandhaltung26-dump-analysis mysql -uroot -N -e 'SELECT COUNT(*) FROM lager.
+  │ … +16 lines
+  └ fehler    329505
+    bericht_inventur_position    4680
+    … +155 lines (ctrl + t to view transcript)
+    near 'WHERE  = '0000-00-00 00:00:00'' at line 1
+    wartungsmitarbeiter.aenderungsdatum
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die exakten Zeilenzahlen sind jetzt da: 350.586 Datensätze, davon allein 329.505
+  in der historischen Fehlertabelle fehler; die fachlichen Tabellen sind
+  überschaubar. Die Null-Datumsabfrage wurde erneut durch Shell-Backticks
+  verfälscht, nicht durch SQL. Da alle betroffenen Bezeichner einfache Namen sind,
+  wiederhole ich sie ohne Backticks und prüfe zugleich die 60 Fremdschlüssel auf
+  verwaiste Datensätze.
+
+✔ You approved codex to run printf 'Zero-date counts:\n' ... this time
+
+• Ran printf 'Zero-date counts:\n'
+  │ while IFS=$'\t' read -r table column datatype; do
+  │   if test "$datatype" = date; then zero=0000-00-00; else zero='0000-00-00
+  │ … +17 lines
+  └ bestellanforderung.erstellungsdatum    16
+    entnahmeposition.erstellungsdatum    2
+    … +62 lines (ctrl + t to view transcript)
+    FK_zeile_etage    zeile    fk_etage    etage    id
+    FK_zeile_halle    zeile    fk_halle    halle    id
+
+✔ You approved codex to run printf 'Foreign-key orphan counts (only violations):
+  \n' ... this time
+
+• Ran printf 'Foreign-key orphan counts (only violations):\n'
+  │ while IFS=$'\t' read -r constraint child childcols parent parentcols; do
+  │   IFS=',' read -ra cc <<< "$childcols"
+  │ … +20 lines
+  └ (no output)
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Datenintegrität ist überraschend gut: Alle 60 Fremdschlüssel sind erfüllt,
+  einschließlich des einen zusammengesetzten Schlüssels; es gibt keine verwaisten
+  Kinddatensätze. Nur 19 echte Null-Datumswerte verteilen sich auf drei Spalten. Für
+  die endgültige TiDB-Bewertung gleiche ich diese Befunde jetzt mit der aktuellen
+  offiziellen TiDB-8.5-/Cloud-Dokumentation ab und prüfe außerdem sensible Spalten,
+  die vor einem produktiven Import besondere Behandlung benötigen.
+
+• Searching the web
+
+• Running sg docker -c 'docker exec instandhaltung26-dump-analysis mysql -uroot -N
+  │ -e "SELECT TABLE_NAME,COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE FROM
+  │ information_schema.COLUMNS WHERE TABLE_SCHEMA=\"lager\" AND (COLUMN_NAME
+  │ … +7 lines
+
+• Searched the web for site:docs.pingcap.com/tidb/stable MySQL compatibility storage
+  engines MyISAM LOCK TABLES foreign keys zero date ...
+
+✔ You approved codex to run sg docker -c 'docker exec instandhaltung26-dump-analysis
+  mysql -uroot -N -e "... this time
+
+• Ran sg docker -c 'docker exec instandhaltung26-dump-analysis mysql -uroot -N -e
+  │ "SELECT TABLE_NAME,COLUMN_NAME,COLUMN_TYPE,IS_NULLABLE FROM
+  │ information_schema.COLUMNS WHERE TABLE_SCHEMA=\"lager\" AND (COLUMN_NAME
+  │ … +7 lines
+  └ abteilungbenutzer    fk_benutzer    int unsigned    NO
+    baugruppe    erfassungsbenutzer    int unsigned    YES
+    … +54 lines (ctrl + t to view transcript)
+    wartungsmitarbeiter    aenderungsbenutzer    int unsigned    YES
+    wartungsmitarbeiter    fk_benutzer    int unsigned    YES
+
+• Searching the web
+
+• Searched the web for site:docs.pingcap.com/tidb/stable "LOCK TABLES"
+  unsupported ...
+
+• Searching the web
+
+• Searched the web for site:docs.pingcap.com/tidb "DISABLE KEYS" TiDB ...
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Ein unveränderter fachlicher Zuschnitt ist grundsätzlich realistisch, aber „Dump
+  1:1 ausführen“ und „Schema/Daten unverändert erhalten“ sind zwei verschiedene
+  Ziele. Auf Starter sind Tabellenlocks nicht aktivierbar; MyISAM wird nur
+  syntaktisch akzeptiert und intern als InnoDB behandelt. Ich prüfe noch die beiden
+  MyISAM-Tabellen, den selbstgebauten Sequenzmechanismus und die zwei Tabellen ohne
+  Primärschlüssel, weil dort das größte semantische Risiko für die schrittweise
+  Legacy-Migration liegt.
+
+✔ You approved codex to run sg docker -c 'docker exec instandhaltung26-dump-analysis
+  mysql -uroot -N -e "... this time
+
+• Ran sg docker -c 'docker exec instandhaltung26-dump-analysis mysql -uroot -N -e
+  │ "SHOW CREATE TABLE lager.fehler; SHOW CREATE TABLE lager.sequence; SHOW CREATE
+  │ TABLE lager.bericht_mindestbestand_artikel; SHOW CREATE TABLE
+  │ … +13 lines
+  └ fehler    CREATE TABLE `fehler` (\n  `id` int NOT NULL AUTO_INCREMENT,\n
+    `fehler` varchar(1000) DEFAULT NULL,\n  PRIMARY KEY (`id`)\n) ENGINE=MyISAM
+    … +65 lines (ctrl + t to view transcript)
+    LagerConnection.java:344:            rs = stmt.executeQuery("SELECT
+    LAST_INSERT_ID()");
+
+• Searching the web
+
+• Searched the web for site:docs.pingcap.com/tidb/stable LAST_INSERT_ID(expr) TiDB
+  support ...
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Legacy-Sequenzlogik ist TiDB-kompatibel: TiDB unterstützt ausdrücklich
+  LAST_INSERT_ID(expr) als MySQL-kompatiblen Sequenzmechanismus. Das MyISAM-Attribut
+  selbst bleibt allerdings nicht erhalten; TiDB behandelt alternative Engine-Angaben
+  intern als InnoDB. Vor der Dokumentation prüfe ich noch den aktuellen,
+  unveränderten TiDB-Zielstand sowie Gesamtzahlen und Versionsmetadaten. Das sind
+  ausschließlich Leseabfragen.
+
+✔ You approved codex to run total=0 ... this time
+
+• Ran total=0
+  │ while IFS= read -r table; do count=$(sg docker -c "docker exec
+  │ instandhaltung26-dump-analysis mysql -uroot -N -e 'SELECT COUNT(*) FROM lager.
+  │ … +16 lines
+  └ Exact total rows: 359702
+    fehler share: 91.60%
+    … +35 lines (ctrl + t to view transcript)
+    ERROR 2026 (HY000): SSL connection error: CA certificate is required if ssl-mode
+    is VERIFY_CA or VERIFY_IDENTITY
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Sicherung enthält exakt 359.702 Zeilen; 91,6 % davon entfallen auf fehler. Der
+  temporäre MySQL-Import ist vollständig und wird jetzt entfernt. Die direkte TiDB-
+  Leseprobe mit dem MySQL-8.4-CLI scheiterte nur daran, dass VERIFY_IDENTITY dort
+  explizit eine CA-Datei verlangt; an TiDB wurde nichts geändert. Die bereits
+  laufende Cloud-Run-Anwendung belegt weiterhin die erfolgreiche TLS-Verbindung. Ich
+  schreibe nun die Migrationsanalyse ins neue Projekt.
+
+✔ You approved codex to run sg docker -c 'docker rm -f instandhaltung26-dump-
+  analysis' this time
+
+• Ran sg docker -c 'docker rm -f instandhaltung26-dump-analysis'
+  └ instandhaltung26-dump-analysis
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Dokumentation erhält bewusst zwei Aussagen nebeneinander: Das fachliche Schema
+  kann nahezu unverändert übernommen werden; der historische Dump muss für einen
+  sicheren Starter-Import dennoch minimal technisch bereinigt werden. Ich
+  dokumentiere exakt, welche Zeilen entfernt oder umgebogen werden müssen und welche
+  ausdrücklich unverändert bleiben.
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Das Patch-Werkzeug wurde wieder von der bekannten Bubblewrap-Loopback-Störung
+  blockiert, bevor es schreiben konnte. Es ist nichts verändert worden. Ich führe
+  denselben geprüften Patch wie bei der Deployment-Dokumentation außerhalb dieser
+  defekten Isolation aus.
+
+✔ You approved codex to run apply_patch this time
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: README.md
+    … +87 lines (ctrl + t to view transcript)
+    A docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    M README.md
+
+↳ Interacted with background terminal
+  └ *** Begin Patch
+    *** Update File: README.md
+    @@
+     auch den Ablauf für spätere Deployments und die durchgeführten Funktionstests.
+    +
+    +Die Bewertung der produktiven MySQL-Sicherung vom 16.07.2026 und der geplante
+    +Weg nach TiDB stehen in
+    +[`docs/MYSQL_TIDB_MIGRATIONSANALYSE.md`](docs/MYSQL_TIDB_MIGRATIONSANALYSE.md).
+    *** Add File: docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    +# Migrationsanalyse: Legacy-MySQL nach TiDB
+    +
+    +Stand: 17.07.2026
+    +
+    +## Kurzfazit
+    +
+    +Die produktive MySQL-Sicherung lässt sich **sehr gut** nach TiDB 8.5
+    +übertragen. Das Fachschema kann nahezu unverändert bleiben. Alle 51 Tabellen,
+    +Spalten, Primär- und Unique-Schlüssel sowie die 60 tatsächlichen
+    +Fremdschlüssel sind grundsätzlich kompatibel. Der alte tabellenbasierte
+    +Sequenzmechanismus mit `LAST_INSERT_ID(expr)` wird von TiDB ausdrücklich
+    +unterstützt.
+    +
+    +Ein blindes Ausführen der Sicherungsdatei ist trotzdem nicht empfehlenswert.
+    +Für TiDB Cloud Starter sind wenige technische Anpassungen am Transportdump
+    +nötig:
+    +
+    +1. Ziel-Datenbank eindeutig festlegen (`Instandhaltung26` oder bewusst
+    +   `lager`).
+    +2. `LOCK TABLES` und `UNLOCK TABLES` entfernen; Tabellenlocks können auf
+    +   Starter nicht aktiviert werden.
+    +3. MyISAM-Angaben akzeptieren oder auf InnoDB normalisieren; TiDB speichert
+    +   ohnehin nicht als MyISAM.
+    +4. Null-Datumswerte unter einem passenden Session-`sql_mode` importieren.
+    +5. Zugangsdaten in `benutzer`, `provider` und Fehlertexten schützen.
+    +
+    +Diese Anpassungen ändern keine fachlichen Daten und keine Tabellen- oder
+    +Spaltennamen. Sie machen nur den alten MySQL-5.5-Dump für TiDB Starter
+    +deterministisch.
+    +
+    +## 1. Analysierte Dateien
+    +
+    +| Datei | Zweck |
+    +|---|---|
+    +| `/home/admin/Downloads/backup.bat` | historischer Sicherungsbefehl |
+    +| `/home/admin/Downloads/backup_16.07.2026_ 8-16-08.sql` | vollständiger Dump |
+    +
+    +Eigenschaften der SQL-Datei:
+    +
+    +- Erzeuger: `mysqldump 10.13`, MySQL `5.5.25a`, Windows x86-64
+    +- Quelldatenbank: `lager`
+    +- Größe: 77.920.280 Byte
+    +- Zeilen: 1.702, mit langen Multi-Row-INSERT-Zeilen
+    +- Kodierung: UTF-8, CRLF
+    +- SHA-256:
+    +  `9ad69cd21b9e5d44d3b2b817e00a0a294493587b3ddd651df08d2404804761ec`
+    +- Optionen: `--single-transaction --flush-logs --databases lager`
+    +
+    +Die Batchdatei enthält historische Zugangsdaten und darf nicht in das neue
+    +Repository übernommen werden. Diese Zugangsdaten sollten nicht
+    +weiterverwendet werden.
+    +
+    +## 2. Validierungsmethode
+    +
+    +Die Sicherung wurde statisch ausgewertet und vollständig in einen isolierten,
+    +temporären MySQL-8.4-Container importiert:
+    +
+    +- kein veröffentlichter Netzwerkport,
+    +- keine Verbindung und keine Änderung an TiDB,
+    +- keine Änderung an den beiden Projekten,
+    +- Container anschließend entfernt.
+    +
+    +Der Import war vollständig erfolgreich. Es gab keine Syntax- oder
+    +Integritätsfehler, nur Modernisierungswarnungen:
+    +
+    +- `utf8` ist das historische UTF8MB3 und langfristig veraltet,
+    +- `utf8_unicode_ci` wird als `utf8mb3_unicode_ci` geführt,
+    +- Integer-Anzeigebreiten wie `int(10)` sind veraltet.
+    +
+    +Damit ist belegt, dass der Dump nicht beschädigt ist und von einem modernen
+    +MySQL-Parser vollständig verarbeitet wird.
+    +
+    +## 3. Umfang und Integrität
+    +
+    +| Merkmal | Ergebnis |
+    +|---|---:|
+    +| Tabellen | 51 |
+    +| Datensätze insgesamt | 359.702 |
+    +| Fremdschlüssel | 60 |
+    +| Fremdschlüsselverletzungen | 0 |
+    +| Tabellen ohne Primärschlüssel | 2 |
+    +| InnoDB-Tabellen | 49 |
+    +| MyISAM-Tabellen | 2 |
+    +| Views/Trigger/Routinen/Events | 0 |
+    +| FULLTEXT-Indizes | 0 |
+    +| AUTO_INCREMENT-Spalten | 18 |
+    +| Null-Datumswerte in Daten | 19 |
+    +
+    +Der Testimport belegte einschließlich Indizes ungefähr 80 MiB. Das liegt weit
+    +unter dem kostenlosen Row-Storage-Kontingent der Starter-Instanz. Die
+    +endgültige TiDB-Größe kann wegen anderer Speicherung abweichen.
+    +
+    +## 4. Zeilenzahlen je Tabelle
+    +
+    +| Tabelle | Zeilen | Tabelle | Zeilen |
+    +|---|---:|---|---:|
+    +| `fehler` | 329.505 | `bericht_inventur_position` | 4.680 |
+    +| `bericht_inventur_bestandspackstueck` | 3.375 |
+    `bericht_bestellanforderungsposition` | 2.622 |
+    +| `bestellanforderungsposition` | 2.422 | `artikel` | 1.907 |
+    +| `wartungsmitarbeiter` | 1.548 | `bericht_inventur_ebene` | 1.300 |
+    +| `baugruppe` | 1.256 | `baugruppeartikel` | 1.244 |
+    +| `bericht` | 983 | `wartung` | 947 |
+    +| `position` | 940 | `bericht_mindestbestand` | 906 |
+    +| `bestellanforderung` | 840 | `bericht_bestellanforderung` | 821 |
+    +| `lieferantenartikelbestellnummer` | 619 | `bericht_wartung` | 474 |
+    +| `bericht_inventur_saeule` | 454 | `bericht_mindestbestand_artikel` | 422 |
+    +| `herstellerlieferant` | 328 | `ebene` | 320 |
+    +| `wartungsartikel` | 298 | `bestandspackstueck` | 283 |
+    +| `bericht_inventur_etage` | 234 | `katalog` | 204 |
+    +| `bericht_inventur_zeile` | 126 | `saeule` | 80 |
+    +| `unterartikel` | 77 | `abteilungbenutzer` | 71 |
+    +| `bericht_inventur_halle` | 65 | `benutzerzugrifsrechtecht` | 55 |
+    +| `herstellerlieferantkatalog` | 49 | `benutzer` | 47 |
+    +| `kostenstelle` | 45 | `halle` | 32 |
+    +| `sequence` | 25 | `zeile` | 19 |
+    +| `entnahmeposition` | 17 | `etage` | 17 |
+    +| `abteilung` | 16 | `wartungstyp` | 7 |
+    +| `mengeneinheit` | 6 | `einlagerungposition` | 3 |
+    +| `wartungsart` | 3 | `zugriftsrechtt` | 3 |
+    +| `bestellung` | 2 | `bestellungsposition` | 2 |
+    +| `provider` | 2 | `version` | 1 |
+    +| `bericht_wartung_ids` | 0 |  |  |
+    +
+    +`fehler` enthält 91,6 % aller Datensätze. Für die erste originalgetreue
+    +Migration kann sie mitgenommen werden. Später sollte eine Aufbewahrungs- und
+    +Löschregel festgelegt werden.
+    +
+    +## 5. MyISAM und Legacy-Sequenz
+    +
+    +Zwei Tabellen deklarieren MyISAM:
+    +
+    +- `fehler`
+    +- `sequence`
+    +
+    +TiDB akzeptiert alternative Engine-Angaben aus Kompatibilitätsgründen,
+    +beschreibt und speichert die Tabellen jedoch als InnoDB. Tabellenname,
+    +Spalten und Daten können bleiben; die nicht-transaktionale MyISAM-Semantik
+    +bleibt nicht erhalten.
+    +
+    +Die Legacy-Anwendung verwendet atomar:
+    +
+    +```sql
+    +UPDATE sequence
+    +SET id = LAST_INSERT_ID(id + 1)
+    +WHERE tablefield = ?;
+    +
+    +SELECT LAST_INSERT_ID();
+    +```
+    +
+    +TiDB unterstützt `LAST_INSERT_ID(expr)` als MySQL-kompatiblen
+    +Sequenzmechanismus. Die Logik kann zunächst bestehen bleiben, muss aber mit
+    +parallelen Zugriffen getestet werden.
+    +
+    +`--single-transaction` garantiert eine konsistente Momentaufnahme nur für
+    +transaktionale Tabellen. Die beiden MyISAM-Tabellen waren davon nicht
+    +vollständig erfasst. Für den finalen Cutover sollte die Altanwendung während
+    +der letzten Sicherung angehalten werden.
+    +
+    +## 6. Schlüssel
+    +
+    +Alle 60 Fremdschlüssel wurden nach dem Testimport auf verwaiste Kindzeilen
+    +geprüft: Es gibt keine Verletzungen. Darunter ist ein zusammengesetzter
+    +Fremdschlüssel in `bericht_bestellanforderungsposition`.
+    +
+    +TiDB 8.5 unterstützt Fremdschlüssel allgemein verfügbar. Der Dump schaltet
+    +`FOREIGN_KEY_CHECKS` für den Import aus. Nach dem Import müssen die Prüfungen
+    +wieder aktiv sein und die Beziehungen separat validiert werden; das bloße
+    +Wiedereinschalten prüft alte Zeilen nicht nachträglich.
+    +
+    +Ohne Primärschlüssel sind nur:
+    +
+    +- `bericht_mindestbestand_artikel`
+    +- `bericht_wartung_ids`
+    +
+    +TiDB kann diese über `_tidb_rowid` speichern. Für die unveränderte
+    +Erstübernahme ist keine sofortige Änderung nötig. Vor Replikation oder
+    +gezielten Updates ist ein zusammengesetzter Schlüssel zu prüfen.
+    +
+    +`wartung.fk_wartungsart` besitzt zwei verschieden benannte, aber fachlich
+    +gleiche Constraints. Das ist redundant, wird von MySQL aber akzeptiert und
+    +kann zunächst bestehen bleiben.
+    +
+    +## 7. Zeichensätze
+    +
+    +Der Dump verwendet 38 InnoDB-Tabellen mit `utf8`, 11 InnoDB-Tabellen mit
+    +`latin1` und zwei MyISAM-Tabellen mit `utf8`. `utf8` bedeutet im alten MySQL
+    +UTF8MB3. TiDB verwendet standardmäßig UTF8MB4, akzeptiert aber die alten
+    +Definitionen.
+    +
+    +Für eine verhaltensgleiche Erstübernahme werden Zeichensätze und Kollationen
+    +nicht pauschal geändert. Sie können Unique-Schlüssel, Sortierung und
+    +Groß-/Kleinschreibung beeinflussen. Umlaute, Sonderzeichen und Sortierung sind
+    +nach dem Import stichprobenartig zu prüfen. Eine UTF8MB4-Umstellung ist eine
+    +spätere, eigene Migration.
+    +
+    +## 8. Datentypen und Null-Daten
+    +
+    +Das Schema verwendet überwiegend `INT UNSIGNED`, `VARCHAR`, `DATETIME` und
+    +`DOUBLE`. Es enthält keine BLOB-/TEXT-Fremdschlüssel, Partitionen, Generated
+    +Columns, ENUMs, SETs, JSON- oder räumliche Typen. TiDB-Grenzen für Bezeichner,
+    +Zeilengröße und Indizes werden deutlich unterschritten.
+    +
+    +Es existieren 19 echte Null-Datumswerte:
+    +
+    +| Spalte | Anzahl |
+    +|---|---:|
+    +| `baugruppe.erfassungsdatum` | 1 |
+    +| `bestellanforderung.erstellungsdatum` | 16 |
+    +| `entnahmeposition.erstellungsdatum` | 2 |
+    +
+    +`einlagerungposition.erstellungsdatum` und
+    +`entnahmeposition.erstellungsdatum` haben außerdem den Default
+    +`'0000-00-00 00:00:00'`.
+    +
+    +Der Dump setzt `SQL_MODE='NO_AUTO_VALUE_ON_ZERO'`; damit sind die strikten
+    +Null-Datumsmodi während des Imports nicht aktiv. TiDB unterstützt diesen
+    +Modus. Die Werte können zunächst bleiben. Die neue Anwendung muss sie wie die
+    +Legacy-Anwendung als fehlendes Datum behandeln. Eine spätere Umstellung auf
+    +`NULL` wäre fachlich sauberer, gehört aber nicht in die originalgetreue
+    +Übernahme.
+    +
+    +## 9. Dump-Steuerbefehle
+    +
+    +Jede Tabelle wird ungefähr so geladen:
+    +
+    +```sql
+    +LOCK TABLES `tabelle` WRITE;
+    +ALTER TABLE `tabelle` DISABLE KEYS;
+    +INSERT INTO `tabelle` VALUES (...);
+    +ALTER TABLE `tabelle` ENABLE KEYS;
+    +UNLOCK TABLES;
+    +```
+    +
+    +Auf TiDB Cloud Starter können Tabellenlocks nicht aktiviert werden. Für einen
+    +kontrollierten Einmalimport ohne parallele Schreiber sind sie unnötig.
+    +`DISABLE/ENABLE KEYS` hat dort ebenfalls keinen sinnvollen
+    +MyISAM-Optimierungseffekt.
+    +
+    +Im abgeleiteten Importdump werden deshalb nur diese Transportanweisungen
+    +entfernt. DDL, Schlüssel und Datenwerte bleiben unverändert.
+    +
+    +## 10. Wahl des Datenbanknamens
+    +
+    +Der Dump erstellt und verwendet `lager`. Das neue Projekt verwendet derzeit
+    +`Instandhaltung26`, wo bereits Flyway-Metadaten und `schema_marker` liegen.
+    +
+    +### Strategie A: `lager`
+    +
+    +- Datenbankname im Dump bleibt unverändert.
+    +- Alte Annahmen bleiben maximal originalgetreu.
+    +- Spring Boot/Cloud Run müssen anschließend auf `/lager` zeigen.
+    +- Die bisherige Flyway-Baseline bleibt getrennt.
+    +
+    +### Strategie B: `Instandhaltung26`
+    +
+    +- `CREATE DATABASE lager` und `USE lager` werden entfernt oder umgebogen.
+    +- Alle 51 Originaltabellen bleiben ansonsten unverändert.
+    +- Flyway und Fachtabellen liegen im aktuellen Zielschema.
+    +- Dies entspricht der Cloud-Run-Konfiguration.
+    +
+    +**Empfehlung: Strategie B.** Sie ändert nur den Datenbank-Container, nicht das
+    +Fachschema. Vorher ist ein Backup-/Rollbackplan für das Zielschema nötig.
+    +
+    +## 11. Sensible Daten
+    +
+    +Der Dump enthält personenbezogene und geheime Altbestände:
+    +
+    +- `benutzer.password` ist nur `VARCHAR(4)`,
+    +- Loginnamen und E-Mail-Adressen,
+    +- `provider.mail_smtp_user` und `provider.mail_smtp_pwd`,
+    +- historische Empfänger- und Lieferantendaten,
+    +- `fehler` kann SQL-, System- oder Fehlermeldungstexte enthalten.
+    +
+    +Folgerungen:
+    +
+    +1. Keine öffentliche REST-Ausgabe dieser Tabellen.
+    +2. Vor produktiver Anmeldung neue Passwort-Hashes und ein
+    +   Migrationsverfahren einführen.
+    +3. Historische SMTP-Zugangsdaten nicht aktivieren; Secret Manager verwenden.
+    +4. Fehlertexte auf Zugangsdaten und personenbezogene Daten untersuchen.
+    +5. Dump und abgeleitete Dateien niemals nach GitHub committen.
+    +
+    +## 12. Flyway
+    +
+    +Der aktuelle Flyway-Stand enthält nur `V1__baseline.sql` mit
+    +`schema_marker`. Der 78-MB-Produktivdump gehört nicht als Flyway-Migration in
+    +das Anwendungs-JAR: Er ist groß, sensibel und enthält Transportanweisungen.
+    +
+    +Empfohlene Trennung:
+    +
+    +1. Einmaliger kontrollierter Basisimport außerhalb des App-Starts.
+    +2. Struktur- und Datenvergleich.
+    +3. Flyway-Baseline auf den übernommenen Ist-Zustand ausrichten.
+    +4. Künftige Schemaänderungen nur über neue Flyway-Versionen.
+    +
+    +Während des Basisimports dürfen Cloud Run und andere Clients nicht parallel
+    +schreiben.
+    +
+    +## 13. Empfohlener Ablauf
+    +
+    +### Phase 1: Reproduzierbaren Importdump erzeugen
+    +
+    +Das Original bleibt unverändert und wird per SHA-256 referenziert. Ein
+    +versioniertes Skript erzeugt eine lokale, nicht versionierte Ableitung:
+    +
+    +1. Ziel auf `Instandhaltung26` setzen.
+    +2. `LOCK/UNLOCK TABLES` entfernen.
+    +3. `DISABLE/ENABLE KEYS` entfernen.
+    +4. MyISAM optional explizit zu InnoDB normalisieren.
+    +5. Sonstige DDL-, Schlüssel- und Datenwerte unverändert lassen.
+    +
+    +### Phase 2: Probelauf und Validierung
+    +
+    +1. Transformierten Dump in eine leere Testdatenbank importieren.
+    +2. Tabellenzahl = 51 prüfen.
+    +3. Gesamtzeilen = 359.702 und Einzelzahlen vergleichen.
+    +4. 60 Fremdschlüssel und 0 Verletzungen prüfen.
+    +5. Sequenzmechanismus parallel testen.
+    +6. Umlaute und `latin1`-Tabellen stichprobenartig prüfen.
+    +7. 19 Null-Datumswerte bestätigen.
+    +
+    +### Phase 3: Kontrollierter TiDB-Basisimport
+    +
+    +1. Backup des aktuellen TiDB-Ziels erstellen.
+    +2. Cloud-Run-Traffic und DB-Schreibzugriffe stoppen.
+    +3. Transformierten Dump per MySQL-CLI/TLS importieren.
+    +4. Importprotokoll sichern.
+    +5. Struktur, Zeilenzahlen und Fremdschlüssel vergleichen.
+    +6. `SHOW WARNINGS` und `SHOW CREATE TABLE` für Risikotabellen auswerten.
+    +7. Anwendung zunächst nur lesend testen.
+    +
+    +### Phase 4: Module schrittweise migrieren
+    +
+    +1. Benutzer/Rollen erst nach Sicherheitskonzept.
+    +2. Stammdaten: Abteilungen, Kostenstellen, Einheiten, Hersteller, Kataloge.
+    +3. Lagerstruktur: Halle, Etage, Zeile, Säule, Ebene, Position.
+    +4. Artikel, Bestände und Baugruppen.
+    +5. Bestellanforderungen und Bestellungen.
+    +6. Wartungen, Mitarbeiter und Wartungsartikel.
+    +7. Berichts-Snapshots und JasperReports.
+    +8. Fehlerprotokoll und Aufbewahrungsregeln.
+    +
+    +## 14. Entscheidungsvorlage
+    +
+    +| Frage | Bewertung |
+    +|---|---|
+    +| Kann TiDB das Schema abbilden? | Ja, sehr gut |
+    +| Können Tabellen- und Spaltennamen bleiben? | Ja |
+    +| Können Datenwerte zunächst bleiben? | Ja, einschließlich Null-Daten |
+    +| Können Fremdschlüssel bleiben? | Ja, mit TiDB 8.5 |
+    +| Bleibt MyISAM semantisch erhalten? | Nein, TiDB behandelt es als InnoDB |
+    +| Kann die Sequenzlogik bleiben? | Voraussichtlich ja; Test nötig |
+    +| Soll der Dump bytegenau ausgeführt werden? | Nein |
+    +| Ist minimale technische Transformation nötig? | Ja |
+    +| Muss das Fachmodell vorher neu entworfen werden? | Nein |
+    +| Passt die Datenmenge zu Starter? | Ja |
+    +
+    +## 15. Bewusst nicht ausgeführt
+    +
+    +- kein Import nach TiDB,
+    +- keine Änderung am Schema `Instandhaltung26`,
+    +- keine Änderung an Cloud Run,
+    +- keine Änderung am Originaldump,
+    +- keine Verwendung historischer Zugangsdaten,
+    +- kein Commit oder Push.
+    +
+    +Der nächste sichere Schritt ist ein versioniertes Transformationsskript plus
+    +automatischer Validierungsbericht. Erst nach dessen lokalem Probelauf sollte
+    +ein TiDB-Import freigegeben werden.
+    +
+    +## 16. Offizielle TiDB-Bezugspunkte
+    +
+    +- Foreign Keys ab TiDB 8.5:
+    +  <https://docs.pingcap.com/tidb/stable/foreign-key/>
+    +- MySQL-Kompatibilität und Storage Engines:
+    +  <https://docs.pingcap.com/tidbcloud/mysql-compatibility/>
+    +- SQL-Modi und Null-Datumswerte:
+    +  <https://docs.pingcap.com/tidb/stable/sql-mode/>
+    +- Import per MySQL-CLI auf Starter:
+    +
+    <https://docs.pingcap.com/tidbcloud/import-with-mysql-cli-serverless/?plan=start
+er>
+    +- Starter-Limits:
+    +  <https://docs.pingcap.com/tidbcloud/serverless-limitations/>
+    *** End Patch
+
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: README.md
+    … +87 lines (ctrl + t to view transcript)
+    A docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    M README.md
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Analyse ist geschrieben. Ich führe jetzt eine Schlussprüfung gegen den
+  Originaldump durch, insbesondere für automatisch gezählte Merkmale, Markdown-
+  Format und Secret-Leaks. Dabei ist mir aufgefallen, dass AUTO_INCREMENT im Dump
+  jeweils in Spaltendefinition und Tabellenoption vorkommen kann; diese Zahl prüfe
+  ich gesondert, damit die Dokumentation exakt bleibt.
+
+✔ You approved codex to run sql='/home/admin/Downloads/backup_16.07.2026_ 8-16-
+  08.sql' ... this time
+
+• Ran sql='/home/admin/Downloads/backup_16.07.2026_ 8-16-08.sql'
+  │ printf 'AUTO_INCREMENT columns: '; rg -c '^  `[^`]+` .*AUTO_INCREMENT' "$sql"
+  │ printf 'CREATE TABLE: '; rg -c '^CREATE TABLE ' "$sql"
+  │ … +10 lines
+  └ AUTO_INCREMENT columns: 9
+    CREATE TABLE: 51
+    … +10 lines (ctrl + t to view transcript)
+    124:`fehler` enthält 91,6 % aller Datensätze. Für die erste originalgetreue
+    316:3. Gesamtzeilen = 359.702 und Einzelzahlen vergleichen.
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Schlussprüfung hat genau eine Zählkorrektur ergeben: Es gibt 9 AUTO_INCREMENT-
+  Spalten; die Rohtextzählung 18 hatte jeweils Spaltendefinition und Tabellenoption
+  doppelt erfasst. Ich korrigiere diese eine Zahl und prüfe den finalen Diff erneut.
+
+✗ You canceled the request to run apply_patch
+
+• Ran apply_patch
+  └ (no output)
+
+■ Conversation interrupted - tell the model what to do differently. Something went
+wrong? Hit `/feedback` to report the issue.
+
+
+› bevor du weiter machst, möchte ich folgendes sagen. Fehler möchte ich nicht
+  übernehmen. Nimm die Fehlersätze der letzten Woche mit, aber nicht mehr, prüfe
+  dabei, ob das auslassen der alten Fehler problematisch sein könnte. Falls
+  "nicht", so nimmt nur die Fehler aus letzter Woche in die neue Datenbank.
+  Zweitens >> den Schemanamen "lager" kannst Du gerne durch "Instandhaltun26"
+  austauschen(Strategie B hast Du es genannt). Bitte weitermachen unter
+  Berücksichtung dessen was ich geschrieben habe
+
+
+• Berücksichtigt:
+
+  - Ziel bleibt das vorhandene Schema Instandhaltung26 – ich verwende die korrekte
+    bestehende Schreibweise mit „g“.
+
+  - Die Tabelle fehler wird nicht vollständig übernommen.
+  - Zuerst kläre ich belastbar, ob „letzte Woche“ technisch bestimmbar ist und ob
+    alte Fehlerdatensätze von Fachlogik, Fremdschlüsseln, Reports oder Sequenzen
+    abhängen.
+
+  Wichtiger Vorbefund: fehler besitzt nur id und fehler, keine Datumsspalte. Deshalb
+  darf ich nicht einfach anhand eines Datums filtern, bevor wir geprüft haben, ob
+  Zeitangaben im Fehlertext stecken oder über andere Quellen rekonstruierbar sind.
+
+• Exploring
+  └ Search (INSERT INTO fehler|insert into fehler|UPDATE fehler|DELETE FROM fehler|
+  FROM
+           fehler|fehler\s*\() in de
+    Search \bfehler\b in eigeneReports
+
+✗ You canceled the request to run rg -n --glob '*.java' --glob '!src/src/**'
+  '(INSERT INTO fehler|insert into f...
+
+• Explored
+  └ Search (INSERT INTO fehler|insert into fehler|UPDATE fehler|DELETE FROM fehler|
+  FROM
+           fehler|fehler\s*\() in de
+    Search \bfehler\b in eigeneReports
+
+• Ran sql='/home/admin/Downloads/backup_16.07.2026_ 8-16-08.sql'
+  │ printf 'Foreign keys referencing fehler: '; awk '/^CREATE TABLE /,/^\) ENGINE=/'
+  │ "$sql" | rg -c 'REFERENCES `fehler`' || true
+  │ … +4 lines
+  └ (no output)
+
+■ Conversation interrupted - tell the model what to do differently. Something went
+wrong? Hit `/feedback` to report the issue.
+
+
+› ok, wenn die letzte Woche nicht bestimmbar ist, dann nimmt die letzten
+  Fehlermeldungen, maximal 5% oder 1000 Stück.
+
+
+• Dann gilt als klare Regel: höchstens 1.000 Fehlersätze, ausgewählt als die 1.000
+  Datensätze mit den höchsten fehler.id-Werten. Das sind 0,30 % der Fehlertabelle
+  und damit deutlich weniger als 5 %.
+
+  Ich prüfe jetzt noch, ob fehler irgendwo gelesen oder referenziert wird. Wenn
+  nicht, ist das Weglassen der älteren 328.505 Fehler fachlich unproblematisch.
+  Danach aktualisiere ich die Dokumentation, korrigiere die AUTO_INCREMENT-Zahl und
+  bereite die reproduzierbare Dump-Transformation für Strategie B vor – weiterhin
+  ohne TiDB-Import.
+
+✔ You approved codex to run printf 'Legacy code references:\n' ... this time
+
+• Ran printf 'Legacy code references:\n'
+  │ rg -n --glob '*.java' --glob '!src/src/**' '(INSERT INTO fehler|insert into
+  │ fehler|UPDATE fehler|DELETE FROM fehler|FROM fehler|INTO `?fehler)' /home/admin/
+  │ … +10 lines
+  └ Legacy code references:
+    /home/admin/IdeaProjects/instandhaltung/src/de/keag/lager/core/fehler/
+    … +12 lines (ctrl + t to view transcript)
+    ) ENGINE=MyISAM AUTO_INCREMENT=537014 DEFAULT CHARSET=utf8 COMMENT='Kein
+    Commit-Controll! ';
+
+✔ You approved codex to run sed -n '70,135p' /home/admin/IdeaProjects/
+  instandhaltung/src/de/keag/lager/co... this time
+
+• Explored
+  └ Read LagerLogDbHandler.java
+    Search LagerLogDbHandler|SELECT.*fehler|from fehler in de
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Prüfung ist eindeutig: fehler hat keine Fremdschlüssel, wird von keinem Report
+  gelesen und im Legacy-Code ausschließlich durch LagerLogDbHandler beschrieben. Das
+  Auslassen alter Fehler ist daher fachlich unproblematisch. Es gehen nur
+  historische Diagnoseinformationen verloren.
+
+  Ich aktualisiere die Analyse jetzt verbindlich auf:
+
+  - Ziel: Instandhaltung26 (Strategie B),
+  - fehler: exakt die 1.000 höchsten IDs,
+  - erwartete Gesamtzahl nach Filterung: 31.197 Datensätze,
+  - fehler bleibt mit AUTO_INCREMENT=537014, damit neue IDs nicht kollidieren,
+  - 9 statt zuvor doppelt gezählter AUTO_INCREMENT-Spalten.
+
+✔ You approved codex to run apply_patch this time
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    … +51 lines (ctrl + t to view transcript)
+    Success. Updated the following files:
+    M docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+
+↳ Interacted with background terminal
+  └ *** Begin Patch
+    *** Update File: docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    @@
+     4. Null-Datumswerte unter einem passenden Session-`sql_mode` importieren.
+     5. Zugangsdaten in `benutzer`, `provider` und Fehlertexten schützen.
+    +6. Aus `fehler` nur die 1.000 Datensätze mit den höchsten IDs übernehmen.
+    @@
+    -| AUTO_INCREMENT-Spalten | 18 |
+    +| AUTO_INCREMENT-Spalten | 9 |
+    @@
+    -`fehler` enthält 91,6 % aller Datensätze. Für die erste originalgetreue
+    -Migration kann sie mitgenommen werden. Später sollte eine Aufbewahrungs- und
+    -Löschregel festgelegt werden.
+    +`fehler` enthält 91,6 % aller Datensätze. Die Tabelle besitzt keine
+    +Fremdschlüssel, wird in keinem JasperReport gelesen und im Legacy-Code nur von
+    +`LagerLogDbHandler` beschrieben. Das Weglassen alter Fehler ist deshalb
+    +fachlich unproblematisch; verloren gehen ausschließlich historische
+    +Diagnoseinformationen.
+    +
+    +Da die Tabelle keine Datumsspalte besitzt, ist „letzte Woche“ nicht zuverlässig
+    +bestimmbar. Verbindliche Importregel ist daher: Es werden genau die 1.000
+    +Datensätze mit den höchsten `id`-Werten übernommen. Das sind nur 0,30 % der
+    +Fehlertabelle und somit weniger als die ebenfalls genannte Obergrenze von 5 %.
+    +Der vorhandene AUTO_INCREMENT-Fortschritt bleibt erhalten, damit neue Fehler
+    +keine alten IDs wiederverwenden.
+    +
+    +Die erwartete Gesamtzahl nach dieser Filterung beträgt 31.197 Datensätze.
+    @@
+    -**Empfehlung: Strategie B.** Sie ändert nur den Datenbank-Container, nicht das
+    -Fachschema. Vorher ist ein Backup-/Rollbackplan für das Zielschema nötig.
+    +**Festgelegte Strategie: Strategie B mit dem bestehenden Namen
+    +`Instandhaltung26`.** Sie ändert nur den Datenbank-Container, nicht das
+    +Fachschema. Die versehentliche Schreibweise `Instandhaltun26` ohne „g“ wird
+    +nicht verwendet. Vorher ist ein Backup-/Rollbackplan für das Zielschema nötig.
+    @@
+     3. `DISABLE/ENABLE KEYS` entfernen.
+     4. MyISAM optional explizit zu InnoDB normalisieren.
+    -5. Sonstige DDL-, Schlüssel- und Datenwerte unverändert lassen.
+    +5. Den Datenblock von `fehler` durch die 1.000 Zeilen mit den höchsten IDs
+    +   ersetzen; Tabellenstruktur und AUTO_INCREMENT-Fortschritt bleiben erhalten.
+    +6. Sonstige DDL-, Schlüssel- und Datenwerte unverändert lassen.
+    @@
+    -3. Gesamtzeilen = 359.702 und Einzelzahlen vergleichen.
+    +3. Gesamtzeilen = 31.197 prüfen; `fehler` muss exakt 1.000 Zeilen enthalten.
+     4. 60 Fremdschlüssel und 0 Verletzungen prüfen.
+    @@
+     | Kann die Sequenzlogik bleiben? | Voraussichtlich ja; Test nötig |
+     | Soll der Dump bytegenau ausgeführt werden? | Nein |
+     | Ist minimale technische Transformation nötig? | Ja |
+     | Muss das Fachmodell vorher neu entworfen werden? | Nein |
+     | Passt die Datenmenge zu Starter? | Ja |
+    +| Ist das Weglassen alter Fehler fachlich problematisch? | Nein |
+    *** End Patch
+
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    … +51 lines (ctrl + t to view transcript)
+    Success. Updated the following files:
+    M docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Entscheidung ist jetzt dokumentiert. Als nächsten sicheren Schritt erstelle
+  ich ein reproduzierbares Vorbereitungsskript: Es arbeitet ausschließlich mit einer
+  temporären lokalen MySQL-Instanz, behält die 1.000 höchsten Fehler-IDs, setzt das
+  Ziel auf Instandhaltung26, entfernt Starter-inkompatible Transportbefehle und
+  erzeugt eine neue lokale SQL-Datei. Das Original und TiDB bleiben unverändert.
+  Anschließend teste ich das erzeugte Ergebnis erneut in einem temporären Container.
+
+✔ You approved codex to run apply_patch this time
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: .gitignore
+    … +176 lines (ctrl + t to view transcript)
+    M .gitignore
+    M docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+
+↳ Interacted with background terminal
+  └ *** Begin Patch
+    *** Update File: .gitignore
+    @@
+     frontend/node_modules/
+    +migration-output/
+    *** Add File: scripts/prepare-legacy-dump.sh
+    +#!/usr/bin/env bash
+    +set -euo pipefail
+    +
+    +readonly
+    EXPECTED_SHA256="9ad69cd21b9e5d44d3b2b817e00a0a294493587b3ddd651df08d2404804761e
+    c"
+    +readonly TARGET_DATABASE="Instandhaltung26"
+    +readonly ERROR_ROWS_TO_KEEP=1000
+    +
+    +if [[ $# -ne 2 ]]; then
+    +  echo "Verwendung: $0 <original-dump.sql> <vorbereiteter-dump.sql>" >&2
+    +  exit 2
+    +fi
+    +
+    +readonly source_dump=$1
+    +readonly output_dump=$2
+    +
+    +if [[ ! -f "$source_dump" ]]; then
+    +  echo "Quelldatei fehlt: $source_dump" >&2
+    +  exit 2
+    +fi
+    +
+    +if [[ "$source_dump" == "$output_dump" ]]; then
+    +  echo "Quell- und Zieldatei dürfen nicht identisch sein." >&2
+    +  exit 2
+    +fi
+    +
+    +if [[ -e "$output_dump" ]]; then
+    +  echo "Zieldatei existiert bereits: $output_dump" >&2
+    +  exit 2
+    +fi
+    +
+    +for command in docker sha256sum awk; do
+    +  if ! command -v "$command" >/dev/null 2>&1; then
+    +    echo "Benötigtes Programm fehlt: $command" >&2
+    +    exit 2
+    +  fi
+    +done
+    +
+    +actual_sha256=$(sha256sum "$source_dump" | awk '{print $1}')
+    +if [[ "$actual_sha256" != "$EXPECTED_SHA256" ]]; then
+    +  echo "Unerwartete Quell-Prüfsumme: $actual_sha256" >&2
+    +  echo "Erwartet: $EXPECTED_SHA256" >&2
+    +  echo "Abbruch, damit nicht versehentlich eine andere Sicherung verarbeitet
+    wird." >&2
+    +  exit 1
+    +fi
+    +
+    +mkdir -p "$(dirname "$output_dump")"
+    +readonly work_dir=$(mktemp -d)
+    +readonly container_name="instandhaltung26-dump-prepare-$$"
+    +
+    +cleanup() {
+    +  docker rm -f "$container_name" >/dev/null 2>&1 || true
+    +  rm -rf "$work_dir"
+    +}
+    +trap cleanup EXIT
+    +
+    +echo "Starte temporären MySQL-Analysecontainer ..."
+    +docker run \
+    +  --name "$container_name" \
+    +  -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+    +  -d mysql:8.4 \
+    +  --sql-mode=NO_AUTO_VALUE_ON_ZERO >/dev/null
+    +
+    +for _ in $(seq 1 60); do
+    +  if docker exec "$container_name" mysqladmin ping -uroot --silent \
+    +      >/dev/null 2>&1; then
+    +    break
+    +  fi
+    +  sleep 2
+    +done
+    +
+    +if ! docker exec "$container_name" mysqladmin ping -uroot --silent \
+    +    >/dev/null 2>&1; then
+    +  echo "Der temporäre MySQL-Container wurde nicht rechtzeitig bereit." >&2
+    +  exit 1
+    +fi
+    +
+    +echo "Validiere und lade Originaldump lokal ..."
+    +docker exec -i "$container_name" mysql -uroot < "$source_dump"
+    +
+    +source_table_count=$(docker exec "$container_name" mysql -uroot -N -e \
+    +  "SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_SCHEMA='lager'")
+    +if [[ "$source_table_count" != "51" ]]; then
+    +  echo "Unerwartete Tabellenzahl im Original: $source_table_count" >&2
+    +  exit 1
+    +fi
+    +
+    +source_error_count=$(docker exec "$container_name" mysql -uroot -N -e \
+    +  "SELECT COUNT(*) FROM lager.fehler")
+    +if (( source_error_count < ERROR_ROWS_TO_KEEP )); then
+    +  echo "Die Fehlertabelle enthält nur $source_error_count Zeilen." >&2
+    +  exit 1
+    +fi
+    +
+    +echo "Behalte die $ERROR_ROWS_TO_KEEP höchsten Fehler-IDs ..."
+    +docker exec "$container_name" mysql -uroot -e "
+    +  CREATE TEMPORARY TABLE keep_error_ids (id INT PRIMARY KEY);
+    +  INSERT INTO keep_error_ids
+    +    SELECT id FROM lager.fehler ORDER BY id DESC LIMIT $ERROR_ROWS_TO_KEEP;
+    +  DELETE f
+    +    FROM lager.fehler f
+    +    LEFT JOIN keep_error_ids k ON k.id = f.id
+    +   WHERE k.id IS NULL;
+    +"
+    +
+    +kept_error_count=$(docker exec "$container_name" mysql -uroot -N -e \
+    +  "SELECT COUNT(*) FROM lager.fehler")
+    +if [[ "$kept_error_count" != "$ERROR_ROWS_TO_KEEP" ]]; then
+    +  echo "Fehlerfilter lieferte $kept_error_count statt $ERROR_ROWS_TO_KEEP
+    Zeilen." >&2
+    +  exit 1
+    +fi
+    +
+    +readonly error_rows="$work_dir/fehler-data.sql"
+    +docker exec "$container_name" mysqldump \
+    +  -uroot \
+    +  --no-create-info \
+    +  --skip-triggers \
+    +  --skip-add-locks \
+    +  --skip-disable-keys \
+    +  --skip-extended-insert \
+    +  --complete-insert \
+    +  --compact \
+    +  lager fehler > "$error_rows"
+    +
+    +echo "Erzeuge TiDB-Starter-Dump für $TARGET_DATABASE ..."
+    +awk -v error_rows="$error_rows" -v target="$TARGET_DATABASE" '
+    +  BEGIN { inserted_errors = 0 }
+    +
+    +  /^CREATE DATABASE / {
+    +    print "CREATE DATABASE IF NOT EXISTS `" target "` DEFAULT CHARACTER SET
+    utf8;"
+    +    next
+    +  }
+    +
+    +  /^USE `lager`;/ {
+    +    print "USE `" target "`;"
+    +    next
+    +  }
+    +
+    +  /^LOCK TABLES / { next }
+    +  /^UNLOCK TABLES;/ { next }
+    +  /ALTER TABLE .* (DISABLE|ENABLE) KEYS/ { next }
+    +  /^INSERT INTO `fehler`/ { next }
+    +
+    +  /^-- Dump completed/ && !inserted_errors {
+    +    while ((getline line < error_rows) > 0) {
+    +      print line
+    +    }
+    +    close(error_rows)
+    +    inserted_errors = 1
+    +  }
+    +
+    +  {
+    +    gsub(/ENGINE=MyISAM/, "ENGINE=InnoDB")
+    +    print
+    +  }
+    +
+    +  END {
+    +    if (!inserted_errors) {
+    +      exit 42
+    +    }
+    +  }
+    +' "$source_dump" > "$output_dump"
+    +
+    +echo "Vorbereiteter Dump: $output_dump"
+    +echo "Original SHA-256: $actual_sha256"
+    +echo "Zieldatenbank: $TARGET_DATABASE"
+    +echo "Übernommene Fehlerzeilen: $kept_error_count von $source_error_count"
+    *** Update File: docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    @@
+     Der nächste sichere Schritt ist ein versioniertes Transformationsskript plus
+     automatischer Validierungsbericht. Erst nach dessen lokalem Probelauf sollte
+     ein TiDB-Import freigegeben werden.
+    +
+    +Das Vorbereitungsskript liegt inzwischen unter
+    +`scripts/prepare-legacy-dump.sh`. Beispiel:
+    +
+    +```bash
+    +mkdir -p migration-output
+    +
+    +scripts/prepare-legacy-dump.sh \
+    +  '/home/admin/Downloads/backup_16.07.2026_ 8-16-08.sql' \
+    +  'migration-output/Instandhaltung26.sql'
+    +```
+    +
+    +`migration-output/` ist von Git ausgeschlossen. Das Skript prüft die
+    +Original-Prüfsumme, arbeitet über einen temporären MySQL-Container und bricht
+    +bei Abweichungen ab. Es führt keinen TiDB-Import aus.
+    *** End Patch
+
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: .gitignore
+    … +176 lines (ctrl + t to view transcript)
+    M .gitignore
+    M docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Das Skript ist angelegt und enthält keinerlei Zugangsdaten. Ich prüfe nun Syntax
+  und führe es gegen genau die Sicherung mit bekannter Prüfsumme aus. Das Ergebnis
+  landet im git-ignorierten migration-output/. Danach importiere ich diesen
+  vorbereiteten Dump nochmals in einen temporären MySQL-Container und verifiziere 51
+  Tabellen, 31.197 Zeilen, 1.000 Fehler, 60 Fremdschlüssel und Zielname
+  Instandhaltung26.
+
+✔ You approved codex to run chmod +x scripts/prepare-legacy-dump.sh ... this time
+
+• Ran chmod +x scripts/prepare-legacy-dump.sh
+  │ bash -n scripts/prepare-legacy-dump.sh
+  │ sg docker -c "./scripts/prepare-legacy-dump.sh '/home/admin/Downloads/
+  │ … +1 lines
+  └ Validiere und lade Originaldump lokal ...
+    Behalte die 1000 höchsten Fehler-IDs ...
+    ERROR 1046 (3D000) at line 2: No database selected
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Der erste Skriptlauf hat einen echten, klaren Skriptfehler gefunden: Die temporäre
+  Tabelle für die Fehler-IDs wurde ohne aktives Standardschema angelegt. Der
+  Sicherheitsabbruch und Cleanup haben funktioniert; es wurde kein Ergebnisdump
+  erzeugt und TiDB blieb unberührt. Ich ergänze USE lager; und wiederhole den Test.
+
+✔ You approved codex to run apply_patch this time
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: scripts/prepare-legacy-dump.sh
+    … +6 lines (ctrl + t to view transcript)
+    Success. Updated the following files:
+    M scripts/prepare-legacy-dump.sh
+
+↳ Interacted with background terminal
+  └ *** Begin Patch
+    *** Update File: scripts/prepare-legacy-dump.sh
+    @@
+     echo "Behalte die $ERROR_ROWS_TO_KEEP höchsten Fehler-IDs ..."
+     docker exec "$container_name" mysql -uroot -e "
+    +  USE lager;
+       CREATE TEMPORARY TABLE keep_error_ids (id INT PRIMARY KEY);
+    *** End Patch
+
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: scripts/prepare-legacy-dump.sh
+    … +6 lines (ctrl + t to view transcript)
+    Success. Updated the following files:
+    M scripts/prepare-legacy-dump.sh
+
+✔ You approved codex to run test ! -e migration-output/Instandhaltung26.sql ... this
+  time
+
+• Ran test ! -e migration-output/Instandhaltung26.sql
+  │ bash -n scripts/prepare-legacy-dump.sh
+  │ sg docker -c "./scripts/prepare-legacy-dump.sh '/home/admin/Downloads/
+  │ … +1 lines
+  └ Validiere und lade Originaldump lokal ...
+    Behalte die 1000 höchsten Fehler-IDs ...
+    … +4 lines (ctrl + t to view transcript)
+    Zieldatenbank: Instandhaltung26
+    Übernommene Fehlerzeilen: 1000 von 329505
+
+
+✔ You approved codex to run sg docker -c 'docker rm -f instandhaltung26-prepared-
+  validation' 2>/dev/null ... this time
+
+• Ran sg docker -c 'docker rm -f instandhaltung26-prepared-validation' 2>/dev/null
+  │ || true
+  │ sg docker -c 'docker run --name instandhaltung26-prepared-validation -e
+  │ … +41 lines
+  └ Prepared dump static checks:
+    LOCK statements: KEY toggles: lager create/use: target create/use: 2
+    … +7 lines (ctrl + t to view transcript)
+    Exact total rows: 31197
+    Import errors:
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Der vorbereitete Dump hat die vollständige zweite Validierung bestanden:
+
+  - Ziel ausschließlich Instandhaltung26
+  - 51 Tabellen
+  - 31.197 Datensätze
+  - fehler: exakt 1.000 Zeilen, IDs 536014 bis 537013
+  - AUTO_INCREMENT bleibt 537014
+  - 60 Fremdschlüssel
+  - 0 MyISAM-Tabellen
+  - keine Locks und keine KEY-Schalter
+  - keine Importfehler
+
+  Ich ergänze diese konkreten Testergebnisse in der Dokumentation und führe danach
+  die abschließende Git-/Secret-Prüfung durch.
+
+✔ You approved codex to run apply_patch this time
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    … +24 lines (ctrl + t to view transcript)
+    Success. Updated the following files:
+    M docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+
+↳ Interacted with background terminal
+  └ *** Begin Patch
+    *** Update File: docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    @@
+     `migration-output/` ist von Git ausgeschlossen. Das Skript prüft die
+     Original-Prüfsumme, arbeitet über einen temporären MySQL-Container und bricht
+     bei Abweichungen ab. Es führt keinen TiDB-Import aus.
+    +
+    +Der am 17.07.2026 erzeugte Dump wurde vollständig in einen zweiten temporären
+    +MySQL-8.4-Container importiert. Ergebnis:
+    +
+    +| Prüfung | Ergebnis |
+    +|---|---:|
+    +| Zielschema | `Instandhaltung26` |
+    +| Tabellen | 51 |
+    +| Zeilen insgesamt | 31.197 |
+    +| Zeilen in `fehler` | 1.000 |
+    +| kleinste übernommene Fehler-ID | 536014 |
+    +| größte übernommene Fehler-ID | 537013 |
+    +| nächster AUTO_INCREMENT-Wert | 537014 |
+    +| Fremdschlüssel | 60 |
+    +| MyISAM-Tabellen | 0 |
+    +| Importfehler | 0 |
+    +
+    +Der vorbereitete Dump enthält keine `LOCK/UNLOCK TABLES`, keine
+    +`DISABLE/ENABLE KEYS` und keine Erstellung oder Auswahl des Schemas `lager`.
+    *** End Patch
+
+
+• Ran apply_patch
+  └ *** Begin Patch
+    *** Update File: docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+    … +24 lines (ctrl + t to view transcript)
+    Success. Updated the following files:
+    M docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+
+✔ You approved codex to run git diff --check ... this time
+
+• Ran git diff --check
+  │ bash -n scripts/prepare-legacy-dump.sh
+  │ git check-ignore -v migration-output/Instandhaltung26.sql
+  │ … +9 lines
+  └ .gitignore:8:migration-output/    migration-output/Instandhaltung26.sql
+    prepared_dump_bytes=2465318
+    … +16 lines (ctrl + t to view transcript)
+    Secret-Pruefung: OK
+    Altes-Secret-Pruefung: OK
+
+────────────────────────────────────────────────────────────────────────────────────
+
+• Die Analyse und Vorbereitung sind abgeschlossen. Das Weglassen der alten Fehler
+  ist fachlich unproblematisch:
+
+  - fehler besitzt keine Fremdschlüssel.
+  - Kein JasperReport liest diese Tabelle.
+  - Der Legacy-Code schreibt ausschließlich neue Fehler hinein.
+  - Übernommen werden die 1.000 höchsten Fehler-IDs.
+  - Das entspricht 0,30 % statt maximal 5 %.
+  - AUTO_INCREMENT bleibt korrekt bei 537014.
+
+  Der vorbereitete Dump verwendet verbindlich das Schema Instandhaltung26 und wurde
+  vollständig lokal validiert:
+
+  - 51 Tabellen
+  - 31.197 Datensätze
+  - 1.000 Fehlermeldungen
+  - Fehler-IDs 536014 bis 537013
+  - 60 Fremdschlüssel
+  - 0 MyISAM-Tabellen
+  - 0 Importfehler
+  - keine Tabellenlocks
+  - keine DISABLE/ENABLE KEYS
+  - kein Schema lager
+
+  TiDB 8.5 unterstützt die vorhandenen Fremdschlüssel und LAST_INSERT_ID(expr);
+  alternative Storage-Engine-Angaben werden kompatibel als InnoDB behandelt. TiDB
+  Foreign Keys (https://docs.pingcap.com/tidb/stable/foreign-key/),
+  MySQL-Kompatibilität (https://docs.pingcap.com/tidbcloud/mysql-compatibility/)
+
+  Erstellt wurden:
+
+  - instandhaltung26/docs/MYSQL_TIDB_MIGRATIONSANALYSE.md
+  - instandhaltung26/scripts/prepare-legacy-dump.sh
+  - instandhaltung26/README.md
+  - instandhaltung26/.gitignore
+
+  Der erzeugte Dump liegt unter migration-output/Instandhaltung26.sql, ist nur etwa
+  2,47 MB groß und wird sicher von Git ausgeschlossen.
+
+  TiDB, Cloud Run und der Originaldump wurden nicht verändert. Die Änderungen sind
+  noch nicht committed.
+
